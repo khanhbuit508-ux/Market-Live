@@ -42,17 +42,20 @@ td{padding:7px 4px;border-bottom:1px solid #1c2438}
 tr.hot td{background:#1a2a1a}
 .foot{color:#8b93a7;font-size:12px;text-align:center;margin:16px 0;line-height:1.7}
 .err{background:#3a1010;border:1px solid #b91c1c;border-radius:10px;padding:10px;margin:10px 0;font-size:14px}
-.tag{font-size:11px;padding:2px 7px;border-radius:12px;background:#2a3550;color:#cbd5e1;white-space:nowrap}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid #2a3552;border-top-color:#f5c518;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
+.tag{font-size:11px;padding:2px 7px;border-radius:12px;background:#2a3352;color:#cbd5e1;white-space:nowrap}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #2a3352;border-top-color:#f5c518;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
 h3.sec{margin:14px 0 6px;font-size:16px}
 .ttl{font-size:16px;font-weight:700;margin:6px 0;line-height:1.5}
+.entry{font-size:15px;font-weight:800;color:#f5c518;margin:6px 0 2px;letter-spacing:.5px}
 #lock{position:fixed;inset:0;background:#0b0e1a;z-index:99;display:flex;align-items:center;justify-content:center}
 #topbtn{position:fixed;right:16px;bottom:16px;z-index:50;width:48px;height:48px;border-radius:50%;background:#1d2542;border:1px solid #f5c518;color:#f5c518;font-size:22px;cursor:pointer;display:none}
 #sharemenu{background:#161d33;border:1px solid #2a3352;border-radius:10px;padding:8px;margin-top:8px;display:none;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
+
+
 <div id="lock"><div style="text-align:center;padding:24px;max-width:320px">
 <div style="font-size:44px">🔒</div>
 <h2 style="margin:8px 0">MARKET LIVE — KHANH</h2>
@@ -71,10 +74,13 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <button class="btn" onclick="toggleShare(event)">📤 Chia sẻ</button>
 </div>
 <div id="sharemenu">
-<button class="btn" onclick="shareNative()">📱 Gửi qua app (tin nhắn/mail/discord…)</button>
-<button class="btn" onclick="shareCopy()">📋 Copy link</button>
-<button class="btn" onclick="shareMail()">✉️ Email</button>
-<button class="btn" onclick="shareSms()">💬 SMS</button>
+<button class="btn" id="sharenative" onclick="shareNative()">📱 Gửi qua app</button>
+<button class="btn" onclick="shareCopy()">📋 Copy link (dán Discord/chat…)</button>
+<button class="btn" onclick="shareTo('wa')">🟢 WhatsApp</button>
+<button class="btn" onclick="shareTo('tg')">✈️ Telegram</button>
+<button class="btn" onclick="shareTo('x')">𝕏 X</button>
+<button class="btn" onclick="shareTo('fb')">📘 Facebook</button>
+<button class="btn" onclick="shareTo('gm')">✉️ Gmail</button>
 </div>
 </div>
 <div id="cluster"></div>
@@ -83,26 +89,36 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <button class="tab" data-t="scan">🔥 Scanner</button>
 <button class="tab" data-t="watch">📋 Sổ anh</button>
 <button class="tab" data-t="sector">🗺️ Sector</button>
+<button class="tab" data-t="news">📰 Tin</button>
 </div>
 <div id="sec-shark"><div class="sub"><span class="spin"></span> Đang tải giá…</div></div>
 <div id="sec-scan" style="display:none"></div>
 <div id="sec-sector" style="display:none"></div>
 <div id="sec-watch" style="display:none"></div>
+<div id="sec-news" style="display:none"></div>
 <button id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="foot" id="updated"></div>
-<div class="foot">Giá live CNBC · tự tươi mỗi 2 phút · Tin nóng em báo riêng trong tin nhắn mỗi sáng<br>Vùng giá là tham chiếu kỹ thuật, không phải lệnh mua/bán.</div>
+<div class="foot">Giá live CNBC · tự tươi mỗi 2 phút · Tin tự cập nhật mỗi giờ trong phiên<br>Vùng giá là tham chiếu kỹ thuật, không phải lệnh mua/bán.</div>
 <script>
 function toggleShare(e){if(e)e.stopPropagation();var m=document.getElementById("sharemenu");m.style.display=(m.style.display==="none"||!m.style.display)?"flex":"none";}
 document.addEventListener("click",function(){var m=document.getElementById("sharemenu");if(m)m.style.display="none";});
 function shareNative(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.share){navigator.share({title:"Market Live — Khanh",url:u});}else{shareCopy();}}
-function shareCopy(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.clipboard){navigator.clipboard.writeText(u);}alert("Đã copy link: "+u);}
-function shareMail(){document.getElementById("sharemenu").style.display="none";location.href="mailto:?subject="+encodeURIComponent("Market Live — Khanh")+"&body="+encodeURIComponent(location.href);}
-function shareSms(){document.getElementById("sharemenu").style.display="none";location.href="sms:?&body="+encodeURIComponent("Market Live — Khanh "+location.href);}
+function shareCopy(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.clipboard){navigator.clipboard.writeText(u);}alert("Đã copy link — dán vào Discord/chat là xong: "+u);}
+function shareTo(net){var u=location.href,t="📊 Market Live — Khanh",url="";
+if(net==="x")url="https://twitter.com/intent/tweet?text="+encodeURIComponent(t)+"&url="+encodeURIComponent(u);
+else if(net==="fb")url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(u);
+else if(net==="tg")url="https://t.me/share/url?url="+encodeURIComponent(u)+"&text="+encodeURIComponent(t);
+else if(net==="wa")url="https://wa.me/?text="+encodeURIComponent(t+" "+u);
+else if(net==="gm")url="https://mail.google.com/mail/?view=cm&fs=1&su="+encodeURIComponent(t)+"&body="+encodeURIComponent(u);
+document.getElementById("sharemenu").style.display="none";if(url)window.open(url,"_blank");}
+(function(){try{if(!navigator.share){var b=document.getElementById("sharenative");if(b)b.style.display="none";}}catch(e){}})();
 function unlock(){var v=document.getElementById("pw").value;if(v==="1569"){try{localStorage.setItem("mlk","1");}catch(e){}document.getElementById("lock").style.display="none";}else{document.getElementById("pwerr").textContent="Sai mật khẩu.";}}
 (function(){try{if(localStorage.getItem("mlk")==="1"){var l=document.getElementById("lock");if(l)l.style.display="none";}}catch(e){}})();
 document.getElementById("pw").addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
 window.addEventListener("scroll",function(){var b=document.getElementById("topbtn");if(b)b.style.display=window.scrollY>400?"block":"none";});
-document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});b.classList.add("on");["shark","scan","watch","sector"].forEach(function(t){document.getElementById("sec-"+t).style.display=(t===b.dataset.t)?"":"none";});};});
+document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});b.classList.add("on");["shark","scan","watch","sector","news"].forEach(function(t){document.getElementById("sec-"+t).style.display=(t===b.dataset.t)?"":"none";});if(b.dataset.t==="news"){loadNews();}};});
+
+// ============ VÙNG CỦA ANH (hệ thống Khanh) ============
 var ZONES = [
   {t:"TSLA", lo:355, hi:365, stop:345, tgt:400},
   {t:"NVDA", lo:212, hi:216, stop:205, tgt:243},
@@ -131,12 +147,32 @@ var SECTORS = [["XLK","Big Tech"],["SOXX","Chip"],["XLF","Bank"],["XLV","Dược
 var CHIP = ["MU","SNDK","WDC","STX","NVDA","AMD","INTC","MRVL","AVGO","QCOM","COHR","ALAB","CRDO","SOXL"];
 var IDX = ["SPY","QQQ","DIA","IWM"];
 var ALL_SYMS = [];
-ZONES.forEach(function(z){ALL_SYMS.push(z.t);});
-EXTRA.forEach(function(s){ALL_SYMS.push(s);});
-SECTORS.forEach(function(s){ALL_SYMS.push(s);});
-IDX.forEach(function(s){ALL_SYMS.push(s);});
-ALL_SYMS.push(".VIX");
-ALL_SYMS = ALL_SYMS.filter(function(v,i){return ALL_SYMS.indexOf(v)===i;});
+function buildSyms(){
+  ALL_SYMS.length=0;
+  ZONES.forEach(function(z){ALL_SYMS.push(z.t);});
+  EXTRA.forEach(function(s){ALL_SYMS.push(s);});
+  SECTORS.forEach(function(s){ALL_SYMS.push(s[0]);});
+  IDX.forEach(function(s){ALL_SYMS.push(s);});
+  ALL_SYMS.push(".VIX");
+  var seen={};
+  ALL_SYMS=ALL_SYMS.filter(function(v){if(seen[v])return false;seen[v]=1;return true;});
+}
+buildSyms();
+// ---- BOARD.JSON: danh sách mã do hệ thống tự cập nhật (xóa mã rớt điều kiện, thêm mã mới) ----
+var boardCount=0;
+async function loadBoard(){
+  try{
+    var r=await fetch("board.json?t="+Date.now());
+    if(!r.ok)return;
+    var b=await r.json();
+    if(b.tickers&&b.tickers.length){
+      ZONES.length=0;
+      b.tickers.forEach(function(z){ZONES.push({t:z.t,lo:z.lo,hi:z.hi,stop:z.stop,tgt:z.tgt});});
+      buildSyms();
+    }
+  }catch(e){}
+}
+
 function num(v){
   if(v==null) return 0;
   var s=String(v).replace(/,/g,"").trim();
@@ -187,6 +223,8 @@ function volMult(q){
 }
 function fmt(n){if(n==null||isNaN(n))return "—";return n>=1000?n.toLocaleString("en-US"):Math.round(n*100)/100;}
 function chg(q){return (q.price-q.prev)/q.prev*100;}
+
+// ---- Thẻ CÁ MẬP — title kiểu Tom: [trạng thái] + [số liệu] + [R/đà] + [1 câu lệnh] ----
 function sharkTitle(z,q){
   var P=q.price,vm=volMult(q);
   var R=(z.tgt-P)/(P-z.stop),pct=(z.tgt-P)/P*100;
@@ -196,8 +234,8 @@ function sharkTitle(z,q){
   if(!z.sold&&P>z.stop&&P<=z.hi*1.02&&R>=1.5)sharks+="🦈";
   if(z.sold) return {t:"🔴 "+z.t+" ĐÃ BÁN "+z.sold+" — đang $"+fmt(P)+". Giữ kỷ luật, không bắt lại",cls:" dead",badge:'<span class="badge b-bad">🔴 ĐÃ BÁN</span>'};
   if(P<=z.stop) return {t:"💀 "+z.t+" THỦNG CẮT $"+fmt(z.stop)+" — đang $"+fmt(P)+". KHẨN: bán ngay, thủng là thủng",cls:" danger",badge:'<span class="badge b-bad blink">💀 THỦNG CẮT — KHẨN</span>'};
-  if(P<z.lo) return {t:sharks+" "+z.t+" VÙNG RẺ — $"+fmt(P)+" dưới vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+" — càng rẻ R càng ngon",cls:"",badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
-  if(P<=z.hi) return {t:sharks+" "+z.t+" VÀO VÙNG — $"+fmt(P)+", trong vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+", đà còn "+pctTxt+" tới chốt $"+fmt(z.tgt)+" — còn kịp",cls:"",badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(P<z.lo) return {t:sharks+" "+z.t+" VÙNG RẺ — $"+fmt(P)+" dưới vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+" — càng rẻ R càng ngon",cls:"",a:1,badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(P<=z.hi) return {t:sharks+" "+z.t+" VÀO VÙNG — $"+fmt(P)+", trong vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+", đà còn "+pctTxt+" tới chốt $"+fmt(z.tgt)+" — còn kịp",cls:"",a:1,badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(P<=z.hi*1.02) return {t:sharks+" "+z.t+" SÁT VÙNG — $"+fmt(P)+", trên vùng $"+fmt(z.hi)+" một chút. Đừng đuổi, chờ nó quay lại",cls:"",badge:'<span class="badge b-warn2">🟡 SÁT VÙNG</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(R>=2) return {t:sharks+" "+z.t+" CHỜ PULLBACK — $"+fmt(P)+", chạy xa vùng rồi. R "+R.toFixed(1)+" nhưng đuổi là dại",cls:"",badge:'<span class="badge b-warn2">🟡 CHỜ PULLBACK</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(R>=1) return {t:sharks+" "+z.t+" KHÔNG ĐUỔI — $"+fmt(P)+". R "+R.toFixed(1)+", đứng ngoài chờ",cls:"",badge:'<span class="badge b-warn2">🟡 KHÔNG ĐUỔI</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
@@ -211,6 +249,7 @@ function sharkCard(z,q){
     :'<div class="meta">Vùng <b>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</b> · 🎯 Chốt <b>$'+fmt(z.tgt)+'</b> · 🛑 Cắt <b>$'+fmt(z.stop)+'</b><br>'
     +'💓 Còn sống khi giá &gt; $'+fmt(z.stop)+' · Đà còn <b>'+((z.tgt-P)/P*100>=0?'+':'')+((z.tgt-P)/P*100).toFixed(1)+'%</b> tới chốt'+(vol?'<br>'+vol:'')+'</div>';
   return '<div class="card'+st.cls+'"><div>'+st.badge+'</div>'
+    +(st.a?'<div class="entry blink">⚡ TÍN HIỆU VÀO LỆNH</div>':"")
     +'<div class="ttl">'+st.t+' <span class="'+(up?"up":"dn")+'" style="font-size:13px">'+(up?"+":"")+c.toFixed(2)+'%</span></div>'
     +meta+'</div>';
 }
@@ -221,10 +260,32 @@ function sharkScore(z,q){
   if(P<=z.hi*1.02) return 1;
   return 2;
 }
+
+// ---- TIN SÁNG — nạp từ news.json (em cập nhật mỗi sáng ~6:30 PT) ----
+async function loadNews(){
+  var box=document.getElementById("sec-news");
+  try{
+    var r=await fetch("news.json?t="+Date.now());
+    if(!r.ok) throw 0;
+    var n=await r.json(),h="";
+    if(n.cudem) h+='<h3 class="sec">🌙 Cú đêm</h3><div class="card"><div class="meta">'+n.cudem+'</div></div>';
+    if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
+    if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';n.tin.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});}
+    if(!h) h='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
+    else if(n.updated) h+='<div class="sub">Cập nhật: '+n.updated+' PT</div>';
+    box.innerHTML=h;
+  }catch(e){
+    box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
+  }
+}
+
 async function render(){
   try{
+    if(boardCount++%15===0){await loadBoard();}
     document.getElementById("clock").textContent="Giờ PT: "+ptTime()+" · giá live mỗi 2 phút";
     var M=await loadQuotes();
+
+    // Chỉ số thị trường
     var ix="";
     IDX.forEach(function(s){
       var q=M[s];if(!q)return;
@@ -232,6 +293,8 @@ async function render(){
       ix+='<div class="c"><b>'+s+'</b> $'+fmt(q.price)+' <span class="'+(c>=0?"up":"dn")+'">'+(c>=0?"+":"")+c.toFixed(2)+'%</span></div>';
     });
     document.getElementById("idx").innerHTML=ix;
+
+    // VIX
     var vx=M[".VIX"]?M[".VIX"].price:null;
     if(vx){
       var vh;
@@ -240,6 +303,8 @@ async function render(){
       else vh='<div class="banner b-warn">🤑 <b>VIX '+vx.toFixed(1)+'</b> — hưng phấn → <b>chế độ THẬN TRỌNG</b></div>';
       document.getElementById("vix").innerHTML=vh;
     }
+
+    // CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
     var cards=[],okCount=0;
     ZONES.forEach(function(z){
       var q=M[z.t];
@@ -248,7 +313,19 @@ async function render(){
       cards.push({s:sharkScore(z,q),html:sharkCard(z,q)});
     });
     cards.sort(function(a,b){return a.s-b.s;});
-    document.getElementById("sec-shark").innerHTML=cards.map(function(x){return x.html;}).join("");
+    var entries=[];
+    ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop&&P<=z.hi)entries.push(z.t);});
+    var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+'</div>':"";
+    var sapcat=[];
+    ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop){var d=(P-z.stop)/z.stop*100;if(d<2)sapcat.push({t:z.t,d:d});}});
+    sapcat.sort(function(a,b){return a.d-b.d;});
+    var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+'</div>':"";
+    var hot=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(Boolean).sort(function(a,b){return Math.abs(b.c)-Math.abs(a.c);}).slice(0,5);
+    var hotstrip=hot.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔥 CHẠY MẠNH NHẤT: '+hot.map(function(h){return h.t+" "+(h.c>=0?"+":"")+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"";
+    document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
+    loadNews();
+
+    // SCANNER — top bounce toàn thị trường
     var rows=[];
     ZONES.map(function(z){return z.t;}).concat(EXTRA).forEach(function(t){
       var q=M[t];if(!q||!q.dayLow)return;
@@ -265,10 +342,12 @@ async function render(){
     var sc='<h3 class="sec">🔥 Top bounce lúc này</h3><div class="sub">% hồi từ đáy ngày + vol so bình thường · 🔥 bounce ≥5% & vol ≥1.5x · 🔄 rớt sâu rồi hồi</div>'
       +'<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
     rows.slice(0,12).forEach(function(r){
-      sc+='<tr'+(r.sig?' class="hot"':"")+'><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td><td>'+(r.sig||'<span class="tag">theo dõi</span>')+'</td></tr>';
+      sc+='<tr'+(r.sig?' class="hot"':"")+'><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td></tr>';
     });
     var deepest=rows.slice().sort(function(a,b){return a.dip-b.dip;}).slice(0,3).map(function(r){return r.t+" "+r.dip.toFixed(1)+"%";}).join(" · ");
     document.getElementById("sec-scan").innerHTML=sc+'</table><div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
+
+    // SỔ ANH — watchlist vs vùng
     var w='<h3 class="sec">📋 Sổ anh — giá vs vùng</h3><table><tr><th>Mã</th><th>Giá</th><th>Vùng</th><th>Trạng thái</th></tr>';
     ZONES.forEach(function(z){
       var q=M[z.t];if(!q)return;
@@ -281,6 +360,8 @@ async function render(){
       w+='<tr><td><b>'+z.t+'</b></td><td>$'+fmt(P)+'</td><td>$'+fmt(z.lo)+'–'+fmt(z.hi)+'</td><td>'+label+'</td></tr>';
     });
     document.getElementById("sec-watch").innerHTML=w+'</table>';
+
+    // SECTOR — tiền đang ở đâu
     var sx='<h3 class="sec">🗺️ Sector — tiền đang ở đâu</h3><table><tr><th>Sector</th><th>ETF</th><th>Hôm nay</th></tr>';
     var secRows=[];
     SECTORS.forEach(function(s){
@@ -292,6 +373,7 @@ async function render(){
       sx+='<tr><td>'+s.name+'</td><td><b>'+s.etf+'</b></td><td class="'+(s.c>=0?"up":"dn")+'">'+(s.c>=0?"+":"")+s.c.toFixed(2)+'%</td></tr>';
     });
     document.getElementById("sec-sector").innerHTML=sx+'</table>';
+
     document.getElementById("updated").textContent="Cập nhật: "+ptTime()+" PT · "+okCount+"/"+ZONES.length+" mã vùng có giá";
   }catch(e){
     document.getElementById("sec-shark").innerHTML='<div class="err">Không tải được giá: '+e.message+'. Kiểm tra mạng rồi bấm "Tải bản mới nhất".</div>';
@@ -299,6 +381,29 @@ async function render(){
 }
 render();
 setInterval(render,120000);
+setInterval(loadNews,600000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden){render();}});
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
