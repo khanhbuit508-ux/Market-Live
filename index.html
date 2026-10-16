@@ -262,18 +262,18 @@ function sharkScore(z,q){
 }
 
 // ---- TIN SÁNG — nạp từ news.json (em cập nhật mỗi sáng ~6:30 PT) ----
-async function loadNews(){
+var newsUpdatedAt=null; function tickNewsFresh(){ var el=document.getElementById("newsFresh");if(!el||!newsUpdatedAt)return; var ms=Date.now()-newsUpdatedAt.getTime();if(ms<0)ms=0; var m=Math.floor(ms/60000),t; if(m<1)t="vừa xong";else if(m<60)t="cách đây "+m+" phút";else{var hh=Math.floor(m/60);t=hh<24?"cách đây "+hh+" giờ":"ngày "+newsUpdatedAt.getDate()+"/"+(newsUpdatedAt.getMonth()+1);} el.textContent=t; } async function loadNews(){
   var box=document.getElementById("sec-news");
   try{
     var r=await fetch("news.json?t="+Date.now());
     if(!r.ok) throw 0;
-    var n=await r.json(),h="";
+    var n=await r.json(),h=""; try{var mt=(n.updated||"").match(/(\d+)\/(\d+)\s+(\d+):(\d+)/);if(mt){newsUpdatedAt=new Date(new Date().getFullYear(),parseInt(mt[2],10)-1,parseInt(mt[1],10),parseInt(mt[3],10),parseInt(mt[4],10));}}catch(e2){}
     if(n.cudem) h+='<h3 class="sec">🌙 Cú đêm</h3><div class="card"><div class="meta">'+n.cudem+'</div></div>';
     if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
     if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';n.tin.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});}
     if(!h) h='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
-    else if(n.updated) h+='<div class="sub">Cập nhật: '+n.updated+' PT</div>';
-    box.innerHTML=h;
+    else if(n.updated) h+='<div class="sub">🟢 Tin mới nhất: <b id="newsFresh">vừa xong</b> ('+n.updated+' PT)</div>';
+    box.innerHTML=h;tickNewsFresh();
   }catch(e){
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
   }
@@ -381,7 +381,7 @@ async function render(){
 }
 render();
 setInterval(render,120000);
-setInterval(loadNews,600000);
+setInterval(loadNews,600000); setInterval(tickNewsFresh,60000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden){render();loadNews();}});
 </script>
 </body>
