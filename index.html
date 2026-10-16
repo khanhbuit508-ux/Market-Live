@@ -112,7 +112,7 @@ ALL_SYMS = ALL_SYMS.filter(function(v,i){return ALL_SYMS.indexOf(v)===i;});
 function num(v){
   if(v==null) return 0;
   var s=String(v).replace(/,/g,"").trim();
-  var m=s.match(/^[\d.]+([KMB])?$/i);
+  var m=s.match(/^([\d.]+)([KMB])?$/i);
   if(!m) return parseFloat(s)||0;
   var u=(m[2]||"").toUpperCase();
   var mult=u==="K"?1e3:u==="M"?1e6:u==="B"?1e9:1;
@@ -126,24 +126,30 @@ function ptMin(){
 function ptTime(){
   return new Date().toLocaleTimeString("vi-VN",{timeZone:"America/Los_Angeles",hour:"2-digit",minute:"2-digit",second:"2-digit"});
 }
-async function loadQuotes(){
+async function fetchBatch(syms){
   var url="https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol"
-    +"?symbols="+encodeURIComponent(ALL_SYMS.join("|"))
+    +"?symbols="+encodeURIComponent(syms.join("|"))
     +"&noform=1&partnerId=2&fund=1&exthrs=1&output=json&requestMethod=quick&extendedMask=1";
   var ctl=new AbortController(),to=setTimeout(function(){ctl.abort();},20000);
   try{
     var r=await fetch(url,{signal:ctl.signal});
     clearTimeout(to);
-    if(!r.ok) throw new Error("HTTP "+r.status);
+    if(!r.ok) return [];
     var d=await r.json();
-    var list=(d.FormattedQuoteResult&&d.FormattedQuoteResult.FormattedQuote)||[];
-    var M={};
+    return (d.FormattedQuoteResult&&d.FormattedQuoteResult.FormattedQuote)||[];
+  }catch(e){clearTimeout(to);return [];}
+}
+async function loadQuotes(){
+  var M={},B=24,i,list;
+  for(i=0;i<ALL_SYMS.length;i+=B){
+    list=await fetchBatch(ALL_SYMS.slice(i,i+B));
     list.forEach(function(q){
       var px=num(q.last);
       if(px>0) M[q.symbol]={price:px,prev:num(q.previous_day_closing),dayLow:num(q.low),vol:num(q.volume),avgVol:num(q.tendayavgvol)};
     });
-    return M;
-  }catch(e){clearTimeout(to);throw e;}
+  }
+  if(Object.keys(M).length===0) throw new Error("CNBC trả rỗng");
+  return M;
 }
 function volMult(q){
   if(!q.vol||!q.avgVol) return null;
