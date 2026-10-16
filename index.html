@@ -382,7 +382,7 @@ async function render(){
 render();
 setInterval(render,120000);
 setInterval(loadNews,600000);
-document.addEventListener("visibilitychange",function(){if(!document.hidden){render();}});
+document.addEventListener("visibilitychange",function(){if(!document.hidden){render();loadNews();}});
 </script>
 </body>
 </html>
