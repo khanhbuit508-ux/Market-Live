@@ -284,7 +284,7 @@ var newsUpdatedAt=null;function newsItemAgeMin(t){try{var src=t.match(/\(nguồn
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
   }
 }
-
+    
 async function render(){
   try{
     if(boardCount++%15===0){await loadBoard();}
@@ -300,16 +300,33 @@ async function render(){
     });
     document.getElementById("idx").innerHTML=ix;
 
-    // TÂM LÝ THỊ TRƯỜNG — đo từ S&P/Nasdaq thật (VIX của CNBC sai số nên bỏ)
-    var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0, vh;
     
-      
+  }
+    // FEAR & GREED (CNN) — đồng hồ tâm lý thị trường, fallback S&P/Nasdaq nếu số liệu cũ
+    var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0;
+    function fgFallback(){
+      var vh;
       if(sq<=-2||sp<=-1.5) vh='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
       else if(sq>=1.5||sp>=1) vh='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
       else vh='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
       document.getElementById("vix").innerHTML=vh;
     }
-    // CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
+    function fgLabel(s){return s<=24?"CỰC KỲ SỢ HÃI":s<=44?"SỢ HÃI":s<=55?"TRUNG LẬP":s<=75?"THAM LAM":"CỰC KỲ THAM LAM";}
+    function fgColor(s){return s<=24?"#ff4444":s<=44?"#ff8844":s<=55?"#ffcc44":s<=75?"#88cc44":"#44dd44";}
+    fetch("feargreed.json?t="+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(fg){
+      var ageMin=9999;
+      try{var mt=(fg.updated||"").match(/(\d+)\/(\d+)\s+(\d+):(\d+)/);if(mt){var dt=new Date(new Date().getFullYear(),parseInt(mt[2],10)-1,parseInt(mt[1],10),parseInt(mt[3],10),parseInt(mt[4],10));ageMin=(Date.now()-dt.getTime())/60000;}}catch(e){}
+      if(ageMin>180||typeof fg.score!=="number")throw 0;
+      var s=Math.round(fg.score),c=fgColor(s),lb=fgLabel(s);
+      var pc=typeof fg.previous_close==="number"?Math.round(fg.previous_close):null;
+      var pctx=pc!==null?" · hôm qua: "+pc:"";
+      var warn="";
+      if(s<=24) warn='<div class="banner b-fear">⚠️ <b>CẢNH BÁO SỚM</b> — Thị trường đang CỰC KỲ SỢ HÃI ('+s+'/100). Cẩn thận: không mua đuổi, giữ tiền mặt, chờ tín hiệu rõ ràng mới vào.</div>';
+      else if(pc!==null&&pc-s>=10) warn='<div class="banner b-warn">⚠️ <b>TÂM LÝ XẤU ĐI NHANH</b> — Fear & Greed rớt từ '+pc+' xuống '+s+'. Cẩn thận, đừng vội bắt đáy.</div>';
+      var h=warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
+      document.getElementById("vix").innerHTML=h;
+    }).catch(function(){fgFallback();});
+// CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
     var cards=[],okCount=0;
     ZONES.forEach(function(z){
       var q=M[z.t];
