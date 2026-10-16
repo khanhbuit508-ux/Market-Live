@@ -42,13 +42,24 @@ td{padding:7px 4px;border-bottom:1px solid #1c2438}
 tr.hot td{background:#1a2a1a}
 .foot{color:#8b93a7;font-size:12px;text-align:center;margin:16px 0;line-height:1.7}
 .err{background:#3a1010;border:1px solid #b91c1c;border-radius:10px;padding:10px;margin:10px 0;font-size:14px}
-.tag{font-size:11px;padding:2px 7px;border-radius:12px;background:#2a3552;color:#cbd5e1;white-space:nowrap}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid #2a3352;border-top-color:#f5c518;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
+.tag{font-size:11px;padding:2px 7px;border-radius:12px;background:#2a3550;color:#cbd5e1;white-space:nowrap}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #2a3552;border-top-color:#f5c518;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
 h3.sec{margin:14px 0 6px;font-size:16px}
+.ttl{font-size:16px;font-weight:700;margin:6px 0;line-height:1.5}
+#lock{position:fixed;inset:0;background:#0b0e1a;z-index:99;display:flex;align-items:center;justify-content:center}
+#topbtn{position:fixed;right:16px;bottom:16px;z-index:50;width:48px;height:48px;border-radius:50%;background:#1d2542;border:1px solid #f5c518;color:#f5c518;font-size:22px;cursor:pointer;display:none}
 </style>
 </head>
 <body>
+<div id="lock"><div style="text-align:center;padding:24px;max-width:320px">
+<div style="font-size:44px">🔒</div>
+<h2 style="margin:8px 0">MARKET LIVE — KHANH</h2>
+<div class="sub" style="margin-bottom:12px">Nhập mật khẩu để xem bảng</div>
+<input id="pw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" style="background:#161d33;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:10px 14px;font-size:18px;text-align:center;width:140px;letter-spacing:6px">
+<div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div>
+<div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
+</div></div>
 <div class="hd">
 <h1>📊 MARKET LIVE — KHANH</h1>
 <div class="sub" id="clock">Đang tải…</div>
@@ -70,10 +81,15 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <div id="sec-scan" style="display:none"></div>
 <div id="sec-sector" style="display:none"></div>
 <div id="sec-watch" style="display:none"></div>
+<button id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="foot" id="updated"></div>
 <div class="foot">Giá live CNBC · tự tươi mỗi 2 phút · Tin nóng em báo riêng trong tin nhắn mỗi sáng<br>Vùng giá là tham chiếu kỹ thuật, không phải lệnh mua/bán.</div>
 <script>
 function share(){var u=location.href;if(navigator.share){navigator.share({title:"Market Live — Khanh",url:u});}else if(navigator.clipboard){navigator.clipboard.writeText(u);alert("Đã copy link: "+u);}else{alert(u);}}
+function unlock(){var v=document.getElementById("pw").value;if(v==="1569"){try{localStorage.setItem("mlk","1");}catch(e){}document.getElementById("lock").style.display="none";}else{document.getElementById("pwerr").textContent="Sai mật khẩu.";}}
+(function(){try{if(localStorage.getItem("mlk")==="1"){var l=document.getElementById("lock");if(l)l.style.display="none";}}catch(e){}})();
+document.getElementById("pw").addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
+window.addEventListener("scroll",function(){var b=document.getElementById("topbtn");if(b)b.style.display=window.scrollY>400?"block":"none";});
 document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});b.classList.add("on");["shark","scan","watch","sector"].forEach(function(t){document.getElementById("sec-"+t).style.display=(t===b.dataset.t)?"":"none";});};});
 var ZONES = [
   {t:"TSLA", lo:355, hi:365, stop:345, tgt:400},
@@ -112,7 +128,7 @@ ALL_SYMS = ALL_SYMS.filter(function(v,i){return ALL_SYMS.indexOf(v)===i;});
 function num(v){
   if(v==null) return 0;
   var s=String(v).replace(/,/g,"").trim();
-  var m=s.match(/^([\d.]+)([KMB])?$/i);
+  var m=s.match(/^([\\d.]+)([KMB])?$/i);
   if(!m) return parseFloat(s)||0;
   var u=(m[2]||"").toUpperCase();
   var mult=u==="K"?1e3:u==="M"?1e6:u==="B"?1e9:1;
@@ -159,29 +175,32 @@ function volMult(q){
 }
 function fmt(n){if(n==null||isNaN(n))return "—";return n>=1000?n.toLocaleString("en-US"):Math.round(n*100)/100;}
 function chg(q){return (q.price-q.prev)/q.prev*100;}
+function sharkTitle(z,q){
+  var P=q.price,vm=volMult(q);
+  var R=(z.tgt-P)/(P-z.stop),pct=(z.tgt-P)/P*100;
+  var pctTxt=pct>=0?'+'+pct.toFixed(1)+'%':pct.toFixed(1)+'%';
+  var sharks="🦈";
+  if(vm&&vm>=1.5)sharks+="🦈";
+  if(!z.sold&&P>z.stop&&P<=z.hi*1.02&&R>=1.5)sharks+="🦈";
+  if(z.sold) return {t:"🔴 "+z.t+" ĐÃ BÁN "+z.sold+" — đang $"+fmt(P)+". Giữ kỷ luật, không bắt lại",cls:" dead",badge:'<span class="badge b-bad">🔴 ĐÃ BÁN</span>'};
+  if(P<=z.stop) return {t:"💀 "+z.t+" THỦNG CẮT $"+fmt(z.stop)+" — đang $"+fmt(P)+". KHẨN: bán ngay, thủng là thủng",cls:" danger",badge:'<span class="badge b-bad blink">💀 THỦNG CẮT — KHẨN</span>'};
+  if(P<z.lo) return {t:sharks+" "+z.t+" VÙNG RẺ — $"+fmt(P)+" dưới vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+" — càng rẻ R càng ngon",cls:"",badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(P<=z.hi) return {t:sharks+" "+z.t+" VÀO VÙNG — $"+fmt(P)+", trong vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+", đà còn "+pctTxt+" tới chốt $"+fmt(z.tgt)+" — còn kịp",cls:"",badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(P<=z.hi*1.02) return {t:sharks+" "+z.t+" SÁT VÙNG — $"+fmt(P)+", trên vùng $"+fmt(z.hi)+" một chút. Đừng đuổi, chờ nó quay lại",cls:"",badge:'<span class="badge b-warn2">🟡 SÁT VÙNG</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(R>=2) return {t:sharks+" "+z.t+" CHỜ PULLBACK — $"+fmt(P)+", chạy xa vùng rồi. R "+R.toFixed(1)+" nhưng đuổi là dại",cls:"",badge:'<span class="badge b-warn2">🟡 CHỜ PULLBACK</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  if(R>=1) return {t:sharks+" "+z.t+" KHÔNG ĐUỔI — $"+fmt(P)+". R "+R.toFixed(1)+", đứng ngoài chờ",cls:"",badge:'<span class="badge b-warn2">🟡 KHÔNG ĐUỔI</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+  return {t:sharks+" "+z.t+" HẾT ĐÀ — $"+fmt(P)+", R chỉ còn "+R.toFixed(1)+". Tiền để dành kèo khác",cls:"",badge:'<span class="badge b-bad">🔴 HẾT ĐÀ</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
+}
 function sharkCard(z,q){
   var P=q.price,c=chg(q),up=c>=0,vm=volMult(q);
   var vol=vm==null?"":(vm>=1.5?"🔥 vol còn nóng "+vm.toFixed(1)+"x":vm<0.8?"🌫️ vol nguội "+vm.toFixed(1)+"x":"vol "+vm.toFixed(1)+"x");
-  if(z.sold){
-    return '<div class="card dead"><div><span class="badge b-bad">🔴 ĐÃ BÁN '+z.sold+'</span></div>'
-      +'<div class="price">🦈 '+z.t+' — $'+fmt(P)+'</div>'
-      +'<div class="meta">giữ kỷ luật, không bắt lại</div></div>';
-  }
-  var R=(z.tgt-P)/(P-z.stop),pct=(z.tgt-P)/P*100;
-  var badge,cls="";
-  if(P<=z.stop){badge='<span class="badge b-bad">💀 THỦNG CẮT $'+fmt(z.stop)+' — KHẨN</span>';cls=" danger";}
-  else if(P<z.lo){badge='<span class="badge b-ok blink">🟢 CÒN KỊP — dưới vùng</span>';}
-  else if(P<=z.hi){badge='<span class="badge b-ok blink">🟢 CÒN KỊP — trong vùng</span>';}
-  else if(P<=z.hi*1.02){badge='<span class="badge b-warn2">🟡 SÁT VÙNG</span>';}
-  else if(R>=2){badge='<span class="badge b-warn2">🟡 CHỜ PULLBACK</span>';}
-  else if(R>=1){badge='<span class="badge b-warn2">🟡 KHÔNG ĐUỔI</span>';}
-  else{badge='<span class="badge b-bad">🔴 HẾT ĐÀ</span>';}
-  var rB=P<=z.stop?'<span class="badge b-info">📈 R —</span>':'<span class="badge b-info">📈 R '+R.toFixed(1)+'</span>';
-  var pctTxt=pct>=0?'+'+pct.toFixed(1)+'%':pct.toFixed(1)+'%';
-  return '<div class="card'+cls+'"><div>'+badge+rB+'</div>'
-    +'<div class="price">🦈 '+z.t+' — $'+fmt(P)+' <span style="font-size:14px" class="'+(up?"up":"dn")+'">'+(up?"+":"")+c.toFixed(2)+'%</span></div>'
-    +'<div class="meta">Vùng <b>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</b> · 🎯 Chốt <b>$'+fmt(z.tgt)+'</b> · 🛑 Cắt <b>$'+fmt(z.stop)+'</b><br>'
-    +'💓 Còn sống khi giá &gt; $'+fmt(z.stop)+' · Đà còn <b>'+pctTxt+'</b> tới chốt<br>'+vol+'</div></div>';
+  var st=sharkTitle(z,q);
+  var meta=z.sold?'<div class="meta">không bắt lại dù nó hồi</div>'
+    :'<div class="meta">Vùng <b>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</b> · 🎯 Chốt <b>$'+fmt(z.tgt)+'</b> · 🛑 Cắt <b>$'+fmt(z.stop)+'</b><br>'
+    +'💓 Còn sống khi giá &gt; $'+fmt(z.stop)+' · Đà còn <b>'+((z.tgt-P)/P*100>=0?'+':'')+((z.tgt-P)/P*100).toFixed(1)+'%</b> tới chốt'+(vol?'<br>'+vol:'')+'</div>';
+  return '<div class="card'+st.cls+'"><div>'+st.badge+'</div>'
+    +'<div class="ttl">'+st.t+' <span class="'+(up?"up":"dn")+'" style="font-size:13px">'+(up?"+":"")+c.toFixed(2)+'%</span></div>'
+    +meta+'</div>';
 }
 function sharkScore(z,q){
   if(z.sold) return 3;
@@ -270,4 +289,4 @@ render();
 setInterval(render,120000);
 </script>
 </body>
-</html>
+  </html>
