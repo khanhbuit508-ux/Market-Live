@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📊 Market Live — Khanh</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0e1320;color:#e8ecf4;margin:0;padding:12px;max-width:760px;margin-left:auto;margin-right:auto}
+h2{margin:8px 0 2px;font-size:22px}
+h3{margin:16px 0 6px;font-size:17px;border-left:4px solid #22c55e;padding-left:8px}
+.sub{color:#8b93a7;font-size:13px;margin-bottom:6px}
+.banner{border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14px;line-height:1.5}
+.b-fear{background:#3a1010;border:1px solid #b91c1c}
+.b-calm{background:#10283a;border:1px solid #0369a1}
+.b-warn{background:#3a2a10;border:1px solid #a16207}
+.card{background:#161d2e;border:1px solid #2a3550;border-radius:12px;padding:12px;margin:10px 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tick{font-size:18px;font-weight:700}
+.badge{font-size:12px;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.ok{background:#14532d;color:#bbf7d0}
+.sold{background:#450a0a;color:#fca5a5}
+.price{font-size:22px;font-weight:700;margin:4px 0}
+.up{color:#4ade80}.dn{color:#f87171}
+.state{font-size:15px;font-weight:700;margin:8px 0;padding:8px 10px;border-radius:8px;background:#0e1320;border:1px solid #2a3550}
+.blink{animation:blink 1.1s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.bar{height:9px;background:#2a3550;border-radius:5px;overflow:hidden;margin:4px 0 8px}
+.bar>i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#22c55e,#a3e635)}
+.meta{font-size:13px;color:#aeb7cc;line-height:1.7}
+.meta b{color:#e8ecf4}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+th{color:#8b93a7;text-align:left;padding:6px 4px;border-bottom:1px solid #2a3550;font-weight:600}
+td{padding:7px 4px;border-bottom:1px solid #1c2438}
+tr.hot td{background:#14231a}
+.foot{color:#8b93a7;font-size:12px;text-align:center;margin:16px 0;line-height:1.7}
+.err{background:#3a1010;border:1px solid #b91c1c;border-radius:10px;padding:10px;margin:10px 0;font-size:14px}
+.tag{font-size:11px;padding:2px 7px;border-radius:12px;background:#2a3550;color:#cbd5e1;white-space:nowrap}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #2a3550;border-top-color:#22c55e;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<h2>📊 MARKET LIVE — KHANH</h2>
+<div class="sub" id="clock">Đang tải…</div>
+<div id="vix"></div>
+<div id="cluster"></div>
+<h3>🦈 SHARK PRO — vùng mua của anh</h3>
+<div class="sub">Vùng + cắt lỗ theo hệ thống của anh · 🟢 nhấp nháy = còn kịp vào · 🔴 ĐÃ BÁN = giữ kỷ luật, không bắt lại</div>
+<div id="shark"><div class="sub"><span class="spin"></span> Đang tải giá…</div></div>
+<h3>🔥 MÁY QUÉT — top bounce lúc này</h3>
+<div class="sub">Quét toàn sector: % hồi từ đáy ngày + vol so bình thường · 🔥 bounce ≥5% & vol ≥1.5x · 🔄 rớt sâu rồi hồi</div>
+<div id="scan"><div class="sub"><span class="spin"></span> Đang quét…</div></div>
+<h3>📋 WATCHLIST — giá vs vùng</h3>
+<div id="watch"><div class="sub"><span class="spin"></span> …</div></div>
+<h3>🗺️ SECTOR — tiền đang ở đâu</h3>
+<div id="sectors"><div class="sub"><span class="spin"></span> …</div></div>
+<div class="foot" id="updated"></div>
+<div class="foot">Giá live CNBC · tự tươi mỗi 2 phút<br>Vùng giá là tham chiếu kỹ thuật, không phải lệnh mua/bán.</div>
+<script>
+const ZONES = [
+  {t:"TSLA", lo:355, hi:365, stop:345, tgt:400},
+  {t:"NVDA", lo:212, hi:216, stop:205, tgt:243},
+  {t:"MRVL", lo:233, hi:238, stop:224, tgt:280},
+  {t:"AAPL", lo:330, hi:331, stop:319, tgt:360},
+  {t:"MSFT", lo:500, hi:500, stop:487, tgt:560},
+  {t:"PLTR", lo:163, hi:170, stop:157, tgt:200},
+  {t:"META", lo:680, hi:700, stop:665, tgt:780},
+  {t:"GOOGL",lo:338, hi:340, stop:330, tgt:380},
+  {t:"AMZN", lo:245, hi:248, stop:237, tgt:280},
+  {t:"CRM",  lo:211, hi:218, stop:204, tgt:260},
+  {t:"MRNA", lo:188, hi:192, stop:179, tgt:240},
+  {t:"ALAB", lo:310, hi:325, stop:300, tgt:360},
+  {t:"KLAC", lo:183, hi:186, stop:177, tgt:210},
+  {t:"MU",   lo:940, hi:1000, stop:915, tgt:983, sold:"14/10"},
+  {t:"AMD",  lo:599, hi:605, stop:584, tgt:658, sold:"14/10"},
+  {t:"COIN", lo:190, hi:190, stop:182, tgt:210, sold:"14/10"},
+  {t:"TSM",  lo:445, hi:448, stop:437, tgt:470, sold:"14/10"},
+  {t:"AMAT", lo:471, hi:475, stop:457, tgt:520, sold:"14/10"},
+  {t:"QCOM", lo:185, hi:190, stop:179, tgt:210, sold:"14/10"},
+  {t:"HOOD", lo:115, hi:117, stop:110, tgt:130, sold:"14/10"},
+  {t:"SNDK", lo:1520,hi:1634, stop:1475,tgt:1700,sold:"12/10"},
+];
+const EXTRA = ["ORCL","INTC","JPM","GS","XOM","LLY","UNH","WMT","NKE","WDC","STX","CRDO","COHR","ENTG","GEV","VST","HIMS","IREN","ASTS","RKLB","CRWV","SOXL","LAC","UUUU","OKLO","IONQ","MSTR","SHOP","MELI","ABNB","UBER","TMUS","NFLX","AVGO"];
+const SECTORS = [["XLK","Big Tech"],["SOXX","Chip"],["XLF","Bank"],["XLV","Dược"],["XLE","Năng lượng"],["XLI","Công nghiệp"],["XLB","Vật liệu"],["XLU","Tiện ích"],["XLRE","BĐS"],["XLC","Viễn thông"],["XLY","Tiêu dùng"],["XLP","Thiết yếu"]];
+const CHIP = ["MU","SNDK","WDC","STX","NVDA","AMD","INTC","MRVL","AVGO","QCOM","COHR","ALAB","CRDO","SOXL"];
+const ALL_SYMS = [...new Set([...ZONES.map(z=>z.t), ...EXTRA, ...SECTORS.map(s=>s[0]), ".VIX"])];
+function num(v){
+  if(v==null) return 0;
+  const s=String(v).replace(/,/g,"").trim();
+  const m=s.match(/^([\d.]+)([KMB])?$/i);
+  if(!m) return parseFloat(s)||0;
+  const mult={K:1e3,M:1e6,B:1e9}[(m[2]||"").toUpperCase()]||1;
+  return (parseFloat(m[1])||0)*mult;
+}
+function ptMin(){
+  const p=new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",hour:"numeric",minute:"numeric",hour12:false}).formatToParts(new Date());
+  let h=0,mi=0; p.forEach(x=>{ if(x.type==="hour")h=(+x.value)%24; if(x.type==="minute")mi=+x.value; });
+  return h*60+mi;
+}
+async function loadQuotes(){
+  const url = "https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol"
+    + "?symbols=" + encodeURIComponent(ALL_SYMS.join("|"))
+    + "&noform=1&partnerId=2&fund=1&exthrs=1&output=json&requestMethod=quick&extendedMask=1";
+  const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),20000);
+  try{
+    const r=await fetch(url,{signal:ctl.signal});
+    clearTimeout(to);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    const list=(d.FormattedQuoteResult&&d.FormattedQuoteResult.FormattedQuote)||[];
+    const M={};
+    list.forEach(q=>{
+      const px=num(q.last);
+      if(px>0) M[q.symbol]={ price:px, prev:num(q.previous_day_closing), dayLow:num(q.low),
+                             vol:num(q.volume), avgVol:num(q.tendayavgvol) };
+    });
+    return M;
+  }catch(e){ clearTimeout(to); throw e; }
+}
+function volMult(q){
+  if(!q.vol||!q.avgVol) return null;
+  const t=ptMin(), open=390, close=780;
+  let exp=q.avgVol;
+  if(t>=open&&t<=close) exp*=Math.max(.08,(t-open)/(close-open));
+  return q.vol/exp;
+}
+function fmt(n){ if(n==null||isNaN(n)) return "—"; return n>=1000?n.toLocaleString("en-US"):Math.round(n*100)/100; }
+function zoneState(z,P){
+  if(z.sold) return {icon:"🔴", label:"ĐÃ BÁN "+z.sold+" — giữ kỷ luật, không bắt lại", cls:""};
+  if(P<=z.stop) return {icon:"💀", label:"THỦNG CẮT $"+z.stop+" — bán ngay, không chờ", cls:""};
+  const R=(z.tgt-P)/(P-z.stop), r=R.toFixed(1);
+  if(P<z.lo)  return {icon:"🟢", label:"DƯỚI VÙNG — giá còn đẹp · R "+r, cls:"blink"};
+  if(P<=z.hi) return {icon:"🟢", label:"TRONG VÙNG — CÒN KỊP · R "+r, cls:"blink"};
+  if(P<=z.hi*1.02) return {icon:"🟡", label:"SÁT VÙNG (+"+((P-z.hi)/z.hi*100).toFixed(1)+"%) · R "+r, cls:""};
+  if(R>=2) return {icon:"🟡", label:"TRÊN VÙNG · R "+r+" — chờ pullback", cls:""};
+  if(R>=1) return {icon:"🟡", label:"TRÊN VÙNG · R "+r+" — không đuổi", cls:""};
+  return {icon:"🔴", label:"HẾT ĐÀ · R "+r+" — đứng ngoài", cls:""};
+}
+async function render(){
+  try{
+    document.getElementById("clock").textContent="Giờ PT: "+new Date().toLocaleTimeString("vi-VN",{timeZone:"America/Los_Angeles",hour:"2-digit",minute:"2-digit",second:"2-digit"})+" · tự tươi mỗi 2 phút";
+    const M=await loadQuotes();
+    const vx=M[".VIX"]?M[".VIX"].price:null;
+    if(vx){
+      let vh;
+      if(vx>=25)      vh=`<div class="banner b-fear">😱 <b>VIX ${vx.toFixed(1)}</b> — HOẢNG LOẠN → <b>chế độ SĂN ĐÁY</b></div>`;
+      else if(vx>=15) vh=`<div class="banner b-calm">😐 <b>VIX ${vx.toFixed(1)}</b> — bình tĩnh → đánh theo tín hiệu</div>`;
+      else            vh=`<div class="banner b-warn">🤑 <b>VIX ${vx.toFixed(1)}</b> — hưng phấn → <b>chế độ THẬN TRỌNG</b></div>`;
+      document.getElementById("vix").innerHTML=vh;
+    }
+    let sh="", okCount=0;
+    for(const z of ZONES){
+      const q=M[z.t];
+      if(!q){ sh+=`<div class="card"><div class="top"><span class="tick">${z.t}</span></div><div class="err">Chưa có giá ${z.t}.</div></div>`; continue; }
+      okCount++;
+      const P=q.price, ch=(P-q.prev)/q.prev*100, up=ch>=0, st=zoneState(z,P);
+      const badge=z.sold?`<span class="badge sold">🔴 ĐÃ BÁN</span>`:`<span class="badge ok">✅ THEO DÕI</span>`;
+      sh+=`<div class="card"><div class="top"><span class="tick">${z.t}</span>${badge}</div>`
+        +`<div class="price">$${fmt(P)} <span style="font-size:14px" class="${up?"up":"dn"}">${up?"+":""}${ch.toFixed(2)}%</span></div>`
+        +`<div class="state ${st.cls}">${st.icon} ${st.label}</div>`
+        +`<div class="meta">Vùng <b>$${fmt(z.lo)}–$${fmt(z.hi)}</b> · Chốt <b>$${fmt(z.tgt)}</b> · Cắt <b>$${fmt(z.stop)}</b>${z.sold?"":`<br>💓 Còn sống khi giá &gt; $${fmt(z.stop)}`}</div></div>`;
+    }
+    document.getElementById("shark").innerHTML=sh;
+    const rows=[];
+    for(const t of [...ZONES.map(z=>z.t), ...EXTRA]){
+      const q=M[t]; if(!q||!q.dayLow) continue;
+      const P=q.price, bounce=(P-q.dayLow)/q.dayLow*100, dip=(q.dayLow-q.prev)/q.prev*100, vm=volMult(q);
+      let sig="";
+      if(bounce>=5&&vm&&vm>=1.5) sig="🔥";
+      else if(bounce>=3&&dip<=-4) sig="🔄";
+      rows.push({t,P,bounce,dip,vm,sig,ch:(P-q.prev)/q.prev*100});
+    }
+    rows.sort((a,b)=>b.bounce-a.bounce);
+    const nChip=rows.slice(0,10).filter(r=>CHIP.includes(r.t)).length;
+    document.getElementById("cluster").innerHTML = nChip>=4
+      ? `<div class="banner b-warn">⚠️ <b>${nChip}/10 tín hiệu mạnh nhất là chip</b> — chung 1 sóng, đây là <b>1 kèo sector</b>. Chia tiền, đừng all-in từng con.</div>` : "";
+    let sc=`<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>`;
+    rows.slice(0,10).forEach(r=>{
+      sc+=`<tr${r.sig?' class="hot"':""}><td><b>${r.t}</b></td><td>$${fmt(r.P)} <span class="${r.ch>=0?"up":"dn"}">${r.ch>=0?"+":""}${r.ch.toFixed(1)}%</span></td><td>+${r.bounce.toFixed(1)}%</td><td>${r.vm?r.vm.toFixed(1)+"x":"—"}</td><td>${r.sig||'<span class="tag">theo dõi</span>'}</td></tr>`;
+    });
+    const deepest=rows.slice().sort((a,b)=>a.dip-b.dip).slice(0,3).map(r=>`${r.t} ${r.dip.toFixed(1)}%`).join(" · ");
+    document.getElementById("scan").innerHTML=sc+`</table><div class="sub">Đáy ngày rớt sâu nhất: ${deepest}</div>`;
+    let w=`<table><tr><th>Mã</th><th>Giá</th><th>Vùng</th><th>Trạng thái</th></tr>`;
+    for(const z of ZONES){
+      const q=M[z.t]; if(!q) continue;
+      const st=zoneState(z,q.price);
+      w+=`<tr><td><b>${z.t}</b></td><td>$${fmt(q.price)}</td><td>$${fmt(z.lo)}–${fmt(z.hi)}</td><td>${st.icon} ${st.label.split("—")[0]}</td></tr>`;
+    }
+    document.getElementById("watch").innerHTML=w+"</table>";
+    let sx=`<table><tr><th>Sector</th><th>ETF</th><th>Hôm nay</th></tr>`;
+    const secRows=[];
+    for(const [etf,name] of SECTORS){
+      const q=M[etf]; if(!q) continue;
+      secRows.push({etf,name,ch:(q.price-q.prev)/q.prev*100});
+    }
+    secRows.sort((a,b)=>b.ch-a.ch);
+    secRows.forEach(s=>{ sx+=`<tr><td>${s.name}</td><td><b>${s.etf}</b></td><td class="${s.ch>=0?"up":"dn"}">${s.ch>=0?"+":""}${s.ch.toFixed(2)}%</td></tr>`; });
+    document.getElementById("sectors").innerHTML=sx+"</table>";
+    document.getElementById("updated").textContent=`Cập nhật: ${new Date().toLocaleTimeString("vi-VN",{timeZone:"America/Los_Angeles",hour:"2-digit",minute:"2-digit",second:"2-digit"})} PT · ${okCount}/${ZONES.length} mã vùng có giá`;
+  }catch(e){
+    document.getElementById("shark").innerHTML=`<div class="err">Không tải được giá: ${e.message}. Kiểm tra mạng rồi kéo xuống tải lại trang.</div>`;
+  }
+}
+render();
+setInterval(render, 120000);
+</script>
+</body>
+</html>
