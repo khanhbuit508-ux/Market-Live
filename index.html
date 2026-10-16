@@ -49,6 +49,7 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 .ttl{font-size:16px;font-weight:700;margin:6px 0;line-height:1.5}
 #lock{position:fixed;inset:0;background:#0b0e1a;z-index:99;display:flex;align-items:center;justify-content:center}
 #topbtn{position:fixed;right:16px;bottom:16px;z-index:50;width:48px;height:48px;border-radius:50%;background:#1d2542;border:1px solid #f5c518;color:#f5c518;font-size:22px;cursor:pointer;display:none}
+#sharemenu{background:#161d33;border:1px solid #2a3352;border-radius:10px;padding:8px;margin-top:8px;display:none;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -67,7 +68,13 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <div id="vix"></div>
 <div class="btns">
 <button class="btn" onclick="location.reload()">🔄 Tải bản mới nhất</button>
-<button class="btn" onclick="share()">📤 Chia sẻ</button>
+<button class="btn" onclick="toggleShare(event)">📤 Chia sẻ</button>
+</div>
+<div id="sharemenu">
+<button class="btn" onclick="shareNative()">📱 Gửi qua app (tin nhắn/mail/discord…)</button>
+<button class="btn" onclick="shareCopy()">📋 Copy link</button>
+<button class="btn" onclick="shareMail()">✉️ Email</button>
+<button class="btn" onclick="shareSms()">💬 SMS</button>
 </div>
 </div>
 <div id="cluster"></div>
@@ -85,7 +92,12 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <div class="foot" id="updated"></div>
 <div class="foot">Giá live CNBC · tự tươi mỗi 2 phút · Tin nóng em báo riêng trong tin nhắn mỗi sáng<br>Vùng giá là tham chiếu kỹ thuật, không phải lệnh mua/bán.</div>
 <script>
-function share(){var u=location.href;if(navigator.share){navigator.share({title:"Market Live — Khanh",url:u});}else if(navigator.clipboard){navigator.clipboard.writeText(u);alert("Đã copy link: "+u);}else{alert(u);}}
+function toggleShare(e){if(e)e.stopPropagation();var m=document.getElementById("sharemenu");m.style.display=(m.style.display==="none"||!m.style.display)?"flex":"none";}
+document.addEventListener("click",function(){var m=document.getElementById("sharemenu");if(m)m.style.display="none";});
+function shareNative(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.share){navigator.share({title:"Market Live — Khanh",url:u});}else{shareCopy();}}
+function shareCopy(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.clipboard){navigator.clipboard.writeText(u);}alert("Đã copy link: "+u);}
+function shareMail(){document.getElementById("sharemenu").style.display="none";location.href="mailto:?subject="+encodeURIComponent("Market Live — Khanh")+"&body="+encodeURIComponent(location.href);}
+function shareSms(){document.getElementById("sharemenu").style.display="none";location.href="sms:?&body="+encodeURIComponent("Market Live — Khanh "+location.href);}
 function unlock(){var v=document.getElementById("pw").value;if(v==="1569"){try{localStorage.setItem("mlk","1");}catch(e){}document.getElementById("lock").style.display="none";}else{document.getElementById("pwerr").textContent="Sai mật khẩu.";}}
 (function(){try{if(localStorage.getItem("mlk")==="1"){var l=document.getElementById("lock");if(l)l.style.display="none";}}catch(e){}})();
 document.getElementById("pw").addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
@@ -121,14 +133,14 @@ var IDX = ["SPY","QQQ","DIA","IWM"];
 var ALL_SYMS = [];
 ZONES.forEach(function(z){ALL_SYMS.push(z.t);});
 EXTRA.forEach(function(s){ALL_SYMS.push(s);});
-SECTORS.forEach(function(s){ALL_SYMS.push(s[0]);});
+SECTORS.forEach(function(s){ALL_SYMS.push(s);});
 IDX.forEach(function(s){ALL_SYMS.push(s);});
 ALL_SYMS.push(".VIX");
 ALL_SYMS = ALL_SYMS.filter(function(v,i){return ALL_SYMS.indexOf(v)===i;});
 function num(v){
   if(v==null) return 0;
   var s=String(v).replace(/,/g,"").trim();
-  var m=s.match(/^([\\d.]+)([KMB])?$/i);
+  var m=s.match(/^([\d.]+)([KMB])?$/i);
   if(!m) return parseFloat(s)||0;
   var u=(m[2]||"").toUpperCase();
   var mult=u==="K"?1e3:u==="M"?1e6:u==="B"?1e9:1;
@@ -289,4 +301,4 @@ render();
 setInterval(render,120000);
 </script>
 </body>
-  </html>
+</html>
