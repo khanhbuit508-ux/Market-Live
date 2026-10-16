@@ -18,6 +18,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .b-fear{background:#3a1010;border:1px solid #b91c1c}
 .b-calm{background:#10283a;border:1px solid #0369a1}
 .b-warn{background:#3a2a10;border:1px solid #a16207}
+  
 .btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .btn{background:#1d2542;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:8px 14px;font-size:14px;cursor:pointer}
 .tabs{display:flex;gap:8px;overflow-x:auto;margin:12px 0;padding:6px 0;position:sticky;top:0;background:#0b0e1a;z-index:5}
@@ -61,8 +62,7 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <h2 style="margin:8px 0">MARKET LIVE — KHANH</h2>
 <div class="sub" style="margin-bottom:12px">Nhập mật khẩu để xem bảng</div>
 <input id="pw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" style="background:#161d33;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:10px 14px;font-size:18px;text-align:center;width:140px;letter-spacing:6px">
-<div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div>
-<div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
+<div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div><div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
 </div></div>
 <div class="hd">
 <h1>📊 MARKET LIVE — KHANH</h1>
@@ -81,6 +81,7 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <button class="btn" onclick="shareTo('x')">𝕏 X</button>
 <button class="btn" onclick="shareTo('fb')">📘 Facebook</button>
 <button class="btn" onclick="shareTo('gm')">✉️ Gmail</button>
+<button class="btn" onclick="shareTo('sms')">💬 SMS/Message</button>
 </div>
 </div>
 <div id="cluster"></div>
@@ -102,14 +103,19 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <script>
 function toggleShare(e){if(e)e.stopPropagation();var m=document.getElementById("sharemenu");m.style.display=(m.style.display==="none"||!m.style.display)?"flex":"none";}
 document.addEventListener("click",function(){var m=document.getElementById("sharemenu");if(m)m.style.display="none";});
-function shareNative(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.share){navigator.share({title:"Market Live — Khanh",url:u});}else{shareCopy();}}
-function shareCopy(){var u=location.href;document.getElementById("sharemenu").style.display="none";if(navigator.clipboard){navigator.clipboard.writeText(u);}alert("Đã copy link — dán vào Discord/chat là xong: "+u);}
-function shareTo(net){var u=location.href,t="📊 Market Live — Khanh",url="";
+var SHARE_URL="https://khanhbuit508-ux.github.io/Market-Live/";
+function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){fallback();});}else{fallback();}
+function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}}
+function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Market Live — Khanh",text:"📊 Market Live — Khanh",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
+function shareCopy(){document.getElementById("sharemenu").style.display="none";copyText(SHARE_URL);}
+function shareTo(net){var u=SHARE_URL,t="📊 Market Live — Khanh",url="";
 if(net==="x")url="https://twitter.com/intent/tweet?text="+encodeURIComponent(t)+"&url="+encodeURIComponent(u);
 else if(net==="fb")url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(u);
 else if(net==="tg")url="https://t.me/share/url?url="+encodeURIComponent(u)+"&text="+encodeURIComponent(t);
 else if(net==="wa")url="https://wa.me/?text="+encodeURIComponent(t+" "+u);
 else if(net==="gm")url="https://mail.google.com/mail/?view=cm&fs=1&su="+encodeURIComponent(t)+"&body="+encodeURIComponent(u);
+else if(net==="sms")url="sms:?&body="+encodeURIComponent(t+" "+u);
 document.getElementById("sharemenu").style.display="none";if(url)window.open(url,"_blank");}
 (function(){try{if(!navigator.share){var b=document.getElementById("sharenative");if(b)b.style.display="none";}}catch(e){}})();
 function unlock(){var v=document.getElementById("pw").value;if(v==="1569"){try{localStorage.setItem("mlk","1");}catch(e){}document.getElementById("lock").style.display="none";}else{document.getElementById("pwerr").textContent="Sai mật khẩu.";}}
