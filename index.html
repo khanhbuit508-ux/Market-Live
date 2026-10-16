@@ -300,16 +300,15 @@ async function render(){
     });
     document.getElementById("idx").innerHTML=ix;
 
-    // VIX
-    var vx=M[".VIX"]?M[".VIX"].price:null;
-    if(vx){
-      var vh;
-      if(vx>=25) vh='<div class="banner b-fear">😱 <b>VIX '+vx.toFixed(1)+'</b> — HOẢNG LOẠN → <b>chế độ SĂN ĐÁY</b></div>';
-      else if(vx>=15) vh='<div class="banner b-calm">😐 <b>VIX '+vx.toFixed(1)+'</b> — bình tĩnh → đánh theo tín hiệu</div>';
-      else vh='<div class="banner b-warn">🤑 <b>VIX '+vx.toFixed(1)+'</b> — hưng phấn → <b>chế độ THẬN TRỌNG</b></div>';
+    // TÂM LÝ THỊ TRƯỜNG — đo từ S&P/Nasdaq thật (VIX của CNBC sai số nên bỏ)
+    var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0, vh;
+    
+      
+      if(sq<=-2||sp<=-1.5) vh='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
+      else if(sq>=1.5||sp>=1) vh='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
+      else vh='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
       document.getElementById("vix").innerHTML=vh;
     }
-
     // CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
     var cards=[],okCount=0;
     ZONES.forEach(function(z){
