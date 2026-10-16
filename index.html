@@ -272,7 +272,7 @@ var newsUpdatedAt=null; function tickNewsFresh(){ var el=document.getElementById
     if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
     if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';n.tin.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});}
     if(!h) h='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
-    else if(n.updated) h+='<div class="sub">🟢 Tin mới nhất: <b id="newsFresh">vừa xong</b> ('+n.updated+' PT)</div>';
+    else if(n.updated) h+='<div class="sub">🟢 Tin mới nhất: <b id="newsFresh">vừa xong</b> ('+n.updated+')</div>';
     box.innerHTML=h;tickNewsFresh();
   }catch(e){
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
