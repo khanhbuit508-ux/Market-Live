@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<!-- v2.5.8: vá lỗi syntax (dấu } thừa) + chế độ ngoài giờ — cảnh báo TIN CŨ chỉ bật trong khung T2–T6 6:30–13:00 PT -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>📊 Market Live — Khanh</title>
@@ -18,7 +19,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .b-fear{background:#3a1010;border:1px solid #b91c1c}
 .b-calm{background:#10283a;border:1px solid #0369a1}
 .b-warn{background:#3a2a10;border:1px solid #a16207}
-  
 .btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .btn{background:#1d2542;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:8px 14px;font-size:14px;cursor:pointer}
 .tabs{display:flex;gap:8px;overflow-x:auto;margin:12px 0;padding:6px 0;position:sticky;top:0;background:#0b0e1a;z-index:5}
@@ -55,14 +55,13 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 </style>
 </head>
 <body>
-
-
 <div id="lock"><div style="text-align:center;padding:24px;max-width:320px">
 <div style="font-size:44px">🔒</div>
 <h2 style="margin:8px 0">MARKET LIVE — KHANH</h2>
 <div class="sub" style="margin-bottom:12px">Nhập mật khẩu để xem bảng</div>
 <input id="pw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" style="background:#161d33;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:10px 14px;font-size:18px;text-align:center;width:140px;letter-spacing:6px">
-<div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div><div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
+<div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div>
+<div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
 </div></div>
 <div class="hd">
 <h1>📊 MARKET LIVE — KHANH</h1>
@@ -182,7 +181,7 @@ async function loadBoard(){
 function num(v){
   if(v==null) return 0;
   var s=String(v).replace(/,/g,"").trim();
-  var m=s.match(/^([\d.]+)([KMB])?$/i);
+  var m=s.match(/^[\d.]+([KMB])?$/i);
   if(!m) return parseFloat(s)||0;
   var u=(m[2]||"").toUpperCase();
   var mult=u==="K"?1e3:u==="M"?1e6:u==="B"?1e9:1;
@@ -268,12 +267,39 @@ function sharkScore(z,q){
 }
 
 // ---- TIN SÁNG — nạp từ news.json (em cập nhật mỗi sáng ~6:30 PT) ----
-var newsUpdatedAt=null;function newsItemAgeMin(t){try{var src=t.match(/\(nguồn:[^)]*\)/);if(!src)return 0;var s=src[0];if(/sáng nay|tin sáng/.test(s)){var now6=new Date();var ref=new Date(now6.getFullYear(),now6.getMonth(),now6.getDate(),6,30,0);return Math.max(0,(Date.now()-ref.getTime())/60000);}var ms=s.match(/(\d{1,2}):(\d{2})/g);if(!ms||!ms.length)return 0;var last=ms[ms.length-1].split(":"),now=new Date();var ref2=new Date(now.getFullYear(),now.getMonth(),now.getDate(),parseInt(last[0],10),parseInt(last[1],10),0);return Math.max(0,(Date.now()-ref2.getTime())/60000);}catch(e){return 0;}} function tickNewsFresh(){ var el=document.getElementById("newsFresh");if(!el||!newsUpdatedAt)return; var ms=Date.now()-newsUpdatedAt.getTime();if(ms<0)ms=0; var m=Math.floor(ms/60000),t; if(m<1)t="vừa xong";else if(m<60)t="cách đây "+m+" phút";else{var hh=Math.floor(m/60);t=hh<24?"cách đây "+hh+" giờ":"ngày "+newsUpdatedAt.getDate()+"/"+(newsUpdatedAt.getMonth()+1);} el.textContent=t;var f=document.getElementById("newsFoot");if(f&&m>=60&&!f.dataset.warned){f.dataset.warned="1";f.style.color="#ff6b6b";f.style.fontWeight="800";f.innerHTML="🔴 TIN CŨ — hệ thống chưa đẩy được tin mới ("+t+"). Em đang xử lý, anh chờ chút.";} } async function loadNews(){
+var newsUpdatedAt=null;
+function newsItemAgeMin(t){
+  try{
+    var src=t.match(/\(nguồn:[^)]*\)/);if(!src)return 0;
+    var s=src[0];
+    if(/sáng nay|tin sáng/.test(s)){var now6=new Date();var ref=new Date(now6.getFullYear(),now6.getMonth(),now6.getDate(),6,30,0);return Math.max(0,(Date.now()-ref.getTime())/60000);}
+    var ms=s.match(/(\d{1,2}):(\d{2})/g);if(!ms||!ms.length)return 0;
+    var last=ms[ms.length-1].split(":"),now=new Date();
+    var ref2=new Date(now.getFullYear(),now.getMonth(),now.getDate(),parseInt(last[0],10),parseInt(last[1],10),0);
+    return Math.max(0,(Date.now()-ref2.getTime())/60000);
+  }catch(e){return 0;}
+}
+function ptParts(){try{var ps=new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());var o={};ps.forEach(function(x){o[x.type]=x.value;});return{dow:o.weekday,h:parseInt(o.hour,10)%24,m:parseInt(o.minute,10)};}catch(e){return null;}}
+function inNewsWin(){var p=ptParts();if(!p)return true;if(p.dow==="Sat"||p.dow==="Sun")return false;var mm=p.h*60+p.m;return mm>=390&&mm<=780;}
+function tickNewsFresh(){
+  var el=document.getElementById("newsFresh");if(!el||!newsUpdatedAt)return;
+  var ms=Date.now()-newsUpdatedAt.getTime();if(ms<0)ms=0;
+  var m=Math.floor(ms/60000),t;
+  if(m<1)t="vừa xong";else if(m<60)t="cách đây "+m+" phút";else{var hh=Math.floor(m/60);t=hh<24?"cách đây "+hh+" giờ":"ngày "+newsUpdatedAt.getDate()+"/"+(newsUpdatedAt.getMonth()+1);}
+  el.textContent=t;
+  var f=document.getElementById("newsFoot");
+  if(f&&m>=60){
+    if(inNewsWin()){f.style.color="#ff6b6b";f.style.fontWeight="800";f.innerHTML="🔴 TIN CŨ — hệ thống chưa đẩy được tin mới ("+t+"). Em đang xử lý, anh chờ chút.";}
+    else{f.style.color="#9aa3b2";f.style.fontWeight="400";f.innerHTML="🌙 Ngoài giờ cập nhật tin (T2–T6, 6:30–13:00 PT) — tin mới nhất: "+t+".";}
+  }
+}
+async function loadNews(){
   var box=document.getElementById("sec-news");
   try{
     var r=await fetch("news.json?t="+Date.now());
     if(!r.ok) throw 0;
-    var n=await r.json(),h=""; try{var mt=(n.updated||"").match(/(\d+)\/(\d+)\s+(\d+):(\d+)/);if(mt){newsUpdatedAt=new Date(new Date().getFullYear(),parseInt(mt[2],10)-1,parseInt(mt[1],10),parseInt(mt[3],10),parseInt(mt[4],10));}}catch(e2){}
+    var n=await r.json(),h="";
+    try{var mt=(n.updated||"").match(/(\d+)\/(\d+)\s+(\d+):(\d+)/);if(mt){newsUpdatedAt=new Date(new Date().getFullYear(),parseInt(mt[2],10)-1,parseInt(mt[1],10),parseInt(mt[3],10),parseInt(mt[4],10));}}catch(e2){}
     if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';var fresh=n.tin.filter(function(t){return newsItemAgeMin(t)<360;});var shown=fresh.length?fresh:n.tin.slice(0,3);shown.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});if(!fresh.length)h+='<div class="sub">Tin trong ngày đã cũ — đang chờ bản cập nhật mới.</div>';}
     if(n.cudem) h+='<h3 class="sec">🌙 Cú đêm</h3><div class="card"><div class="meta">'+n.cudem+'</div></div>';
     if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
@@ -284,7 +310,7 @@ var newsUpdatedAt=null;function newsItemAgeMin(t){try{var src=t.match(/\(nguồn
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
   }
 }
-    
+
 async function render(){
   try{
     if(boardCount++%15===0){await loadBoard();}
@@ -300,8 +326,6 @@ async function render(){
     });
     document.getElementById("idx").innerHTML=ix;
 
-    
-  }
     // FEAR & GREED (CNN) — đồng hồ tâm lý thị trường, fallback S&P/Nasdaq nếu số liệu cũ
     var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0;
     function fgFallback(){
@@ -320,13 +344,15 @@ async function render(){
       var s=Math.round(fg.score),c=fgColor(s),lb=fgLabel(s);
       var pc=typeof fg.previous_close==="number"?Math.round(fg.previous_close):null;
       var pctx=pc!==null?" · hôm qua: "+pc:"";
+      // CẢNH BÁO SỚM — khi thị trường cực kỳ sợ hãi hoặc tâm lý rớt nhanh
       var warn="";
       if(s<=24) warn='<div class="banner b-fear">⚠️ <b>CẢNH BÁO SỚM</b> — Thị trường đang CỰC KỲ SỢ HÃI ('+s+'/100). Cẩn thận: không mua đuổi, giữ tiền mặt, chờ tín hiệu rõ ràng mới vào.</div>';
       else if(pc!==null&&pc-s>=10) warn='<div class="banner b-warn">⚠️ <b>TÂM LÝ XẤU ĐI NHANH</b> — Fear & Greed rớt từ '+pc+' xuống '+s+'. Cẩn thận, đừng vội bắt đáy.</div>';
       var h=warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
       document.getElementById("vix").innerHTML=h;
     }).catch(function(){fgFallback();});
-// CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
+
+    // CÁ MẬP — thẻ tín hiệu, còn kịp lên trước
     var cards=[],okCount=0;
     ZONES.forEach(function(z){
       var q=M[z.t];
@@ -342,10 +368,10 @@ async function render(){
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop){var d=(P-z.stop)/z.stop*100;if(d<2)sapcat.push({t:z.t,d:d});}});
     sapcat.sort(function(a,b){return a.d-b.d;});
     var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+'</div>':"";
-        var ups=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c>0;}).sort(function(a,b){return b.c-a.c;}).slice(0,3);
+    var ups=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c>0;}).sort(function(a,b){return b.c-a.c;}).slice(0,3);
     var dns=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c<0;}).sort(function(a,b){return a.c-b.c;}).slice(0,3);
-    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"");
-document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
+    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"");
+    document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
     loadNews();
 
     // SCANNER — top bounce toàn thị trường
@@ -362,13 +388,15 @@ document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map
     var nChip=rows.slice(0,10).filter(function(r){return CHIP.indexOf(r.t)>=0;}).length;
     document.getElementById("cluster").innerHTML=nChip>=4
       ?'<div class="banner b-warn">⚠️ <b>'+nChip+'/10 tín hiệu mạnh nhất là chip</b> — chung 1 sóng, đây là <b>1 kèo sector</b>. Chia tiền, đừng all-in từng con.</div>':"";
-    var sc='<h3 class="sec">🔥 Top bounce lúc này</h3><div class="sub">% hồi từ đáy ngày + vol so bình thường · 🔥 bounce ≥5% & vol ≥1.5x · 🔄 rớt sâu rồi hồi</div>'
-      +'<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
-    rows.slice(0,12).forEach(function(r){
-      sc+='<tr'+(r.sig?' class="hot"':"")+'><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td></tr>';
-    });
+    var sc='<h3 class="sec">🔥 Top bounce lúc này</h3><div class="sub">% hồi từ đáy ngày + vol so bình thường · 🔥 bounce ≥5% & vol ≥1.5x · 🔄 rớt sâu rồi hồi</div>';
+    var sigRows=rows.filter(function(r){return r.sig;});
+    if(!sigRows.length){sc+='<div class="sub">Chưa có mã nào đủ tín hiệu bounce mạnh lúc này — có là hiện ngay.</div>';}
+    else{sc+='<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
+    sigRows.slice(0,8).forEach(function(r){
+      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td><td>'+r.sig+'</td></tr>';
+    });sc+='</table>';}
     var deepest=rows.slice().sort(function(a,b){return a.dip-b.dip;}).slice(0,3).map(function(r){return r.t+" "+r.dip.toFixed(1)+"%";}).join(" · ");
-    document.getElementById("sec-scan").innerHTML=sc+'</table><div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
+    document.getElementById("sec-scan").innerHTML=sc+'<div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
 
     // SỔ ANH — watchlist vs vùng
     var w='<h3 class="sec">📋 Sổ anh — giá vs vùng</h3><table><tr><th>Mã</th><th>Giá</th><th>Vùng</th><th>Trạng thái</th></tr>';
@@ -404,29 +432,9 @@ document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map
 }
 render();
 setInterval(render,120000);
-setInterval(loadNews,600000); setInterval(tickNewsFresh,60000);
+setInterval(loadNews,600000);
+setInterval(tickNewsFresh,60000);
 document.addEventListener("visibilitychange",function(){if(!document.hidden){render();loadNews();}});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
