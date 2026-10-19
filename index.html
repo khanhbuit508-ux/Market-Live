@@ -103,9 +103,9 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 function toggleShare(e){if(e)e.stopPropagation();var m=document.getElementById("sharemenu");m.style.display=(m.style.display==="none"||!m.style.display)?"flex":"none";}
 document.addEventListener("click",function(){var m=document.getElementById("sharemenu");if(m)m.style.display="none";});
 var SHARE_URL="https://khanhbuit508-ux.github.io/Market-Live/";
-function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}}
+function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){fallback();});}else{fallback();}
-function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}
+function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}}
 function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Đạo Pháp Trường Tồn",text:"Đạo Pháp Trường Tồn",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
 function shareCopy(){document.getElementById("sharemenu").style.display="none";copyText(SHARE_URL);}
 function shareTo(net){var u=SHARE_URL,t="Đạo Pháp Trường Tồn",url="";
@@ -329,11 +329,10 @@ async function render(){
     // FEAR & GREED (CNN) — đồng hồ tâm lý thị trường, fallback S&P/Nasdaq nếu số liệu cũ
     var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0;
     function fgFallback(){
-      var vx=(M[".VIX"]&&M[".VIX"].price)?("VIX: <b>"+fmt(M[".VIX"].price)+"</b>"):"VIX: --";
-      var vh='<div class="sub" style="font-size:15px;margin:4px 0">📊 '+vx+'</div>';
-      if(sq<=-2||sp<=-1.5) vh+='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
-      else if(sq>=1.5||sp>=1) vh+='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
-      else vh+='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
+      var vh;
+      if(sq<=-2||sp<=-1.5) vh='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
+      else if(sq>=1.5||sp>=1) vh='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
+      else vh='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
       document.getElementById("vix").innerHTML=vh;
     }
     function fgLabel(s){return s<=24?"CỰC KỲ SỢ HÃI":s<=44?"SỢ HÃI":s<=55?"TRUNG LẬP":s<=75?"THAM LAM":"CỰC KỲ THAM LAM";}
@@ -349,7 +348,7 @@ async function render(){
       var warn="";
       if(s<=24) warn='<div class="banner b-fear">⚠️ <b>CẢNH BÁO SỚM</b> — Thị trường đang CỰC KỲ SỢ HÃI ('+s+'/100). Cẩn thận: không mua đuổi, giữ tiền mặt, chờ tín hiệu rõ ràng mới vào.</div>';
       else if(pc!==null&&pc-s>=10) warn='<div class="banner b-warn">⚠️ <b>TÂM LÝ XẤU ĐI NHANH</b> — Fear & Greed rớt từ '+pc+' xuống '+s+'. Cẩn thận, đừng vội bắt đáy.</div>';
-      var h='<div class="sub" style="font-size:15px;margin:4px 0">😨 Fear & Greed: <b>'+s+'</b> ('+lb+')</div>'+warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
+      var h=warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
       document.getElementById("vix").innerHTML=h;
     }).catch(function(){fgFallback();});
 
@@ -394,7 +393,7 @@ async function render(){
     if(!sigRows.length){sc+='<div class="sub">Chưa có mã nào đủ tín hiệu bounce mạnh lúc này — có là hiện ngay.</div>';}
     else{sc+='<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
     sigRows.slice(0,8).forEach(function(r){
-      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td></tr>';
+      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td><td>'+r.sig+'</td></tr>';
     });sc+='</table>';}
     var deepest=rows.slice().sort(function(a,b){return a.dip-b.dip;}).slice(0,3).map(function(r){return r.t+" "+r.dip.toFixed(1)+"%";}).join(" · ");
     document.getElementById("sec-scan").innerHTML=sc+'<div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
@@ -409,7 +408,7 @@ async function render(){
       else if(P<z.lo)label="🟢 dưới vùng";
       else if(P<=z.hi)label="🟢 TRONG VÙNG";
       else label="🟡 trên vùng";
-      w+='<tr><td><b>'+z.t+'</b></td><td>$'+fmt(P)+'</td><td>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</td><td>'+label+'</td></tr>';
+      w+='<tr><td><b>'+z.t+'</b></td><td>$'+fmt(P)+'</td><td>$'+fmt(z.lo)+'–'+fmt(z.hi)+'</td><td>'+label+'</td></tr>';
     });
     document.getElementById("sec-watch").innerHTML=w+'</table>';
 
