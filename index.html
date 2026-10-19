@@ -32,8 +32,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .b-warn2{background:#713f12;color:#fde68a}
 .b-bad{background:#450a0a;color:#fca5a5}
 .b-info{background:#1e3a8a;color:#bfdbfe}
-.blink{animation:blink 1.1s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.blink{animation:blink 2.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.75}}
 .price{font-size:22px;font-weight:700;margin:6px 0}
 .meta{font-size:13px;color:#aeb7cc;line-height:1.8}
 .meta b{color:#e8ecf4}
@@ -103,7 +103,7 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 function toggleShare(e){if(e)e.stopPropagation();var m=document.getElementById("sharemenu");m.style.display=(m.style.display==="none"||!m.style.display)?"flex":"none";}
 document.addEventListener("click",function(){var m=document.getElementById("sharemenu");if(m)m.style.display="none";});
 var SHARE_URL="https://khanhbuit508-ux.github.io/Market-Live/";
-function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}
+function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){fallback();});}else{fallback();}
 function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}}
 function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Đạo Pháp Trường Tồn",text:"Đạo Pháp Trường Tồn",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
@@ -393,7 +393,7 @@ async function render(){
     if(!sigRows.length){sc+='<div class="sub">Chưa có mã nào đủ tín hiệu bounce mạnh lúc này — có là hiện ngay.</div>';}
     else{sc+='<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
     sigRows.slice(0,8).forEach(function(r){
-      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td><td>'+r.sig+'</td></tr>';
+      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td></tr>';
     });sc+='</table>';}
     var deepest=rows.slice().sort(function(a,b){return a.dip-b.dip;}).slice(0,3).map(function(r){return r.t+" "+r.dip.toFixed(1)+"%";}).join(" · ");
     document.getElementById("sec-scan").innerHTML=sc+'<div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
@@ -408,7 +408,7 @@ async function render(){
       else if(P<z.lo)label="🟢 dưới vùng";
       else if(P<=z.hi)label="🟢 TRONG VÙNG";
       else label="🟡 trên vùng";
-      w+='<tr><td><b>'+z.t+'</b></td><td>$'+fmt(P)+'</td><td>$'+fmt(z.lo)+'–'+fmt(z.hi)+'</td><td>'+label+'</td></tr>';
+      w+='<tr><td><b>'+z.t+'</b></td><td>$'+fmt(P)+'</td><td>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</td><td>'+label+'</td></tr>';
     });
     document.getElementById("sec-watch").innerHTML=w+'</table>';
 
