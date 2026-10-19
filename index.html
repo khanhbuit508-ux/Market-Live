@@ -4,7 +4,7 @@
 <!-- v2.5.8: vá lỗi syntax (dấu } thừa) + chế độ ngoài giờ — cảnh báo TIN CŨ chỉ bật trong khung T2–T6 6:30–13:00 PT -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>📊 Market Live — Khanh</title>
+<title>Đạo Pháp Trường Tồn — Long-term Investment System</title>
 <style>
 *{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0b0e1a;color:#e8ecf4;margin:0;padding:12px;max-width:840px;margin-left:auto;margin-right:auto}
@@ -57,14 +57,14 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <body>
 <div id="lock"><div style="text-align:center;padding:24px;max-width:320px">
 <div style="font-size:44px">🔒</div>
-<h2 style="margin:8px 0">MARKET LIVE — KHANH</h2>
+<h2 style="margin:8px 0">ĐẠO PHÁP TRƯỜNG TỒN</h2>
 <div class="sub" style="margin-bottom:12px">Nhập mật khẩu để xem bảng</div>
 <input id="pw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" style="background:#161d33;border:1px solid #33406b;color:#e8ecf4;border-radius:10px;padding:10px 14px;font-size:18px;text-align:center;width:140px;letter-spacing:6px">
 <div style="margin-top:10px"><button class="btn" onclick="unlock()">Mở bảng</button></div>
 <div id="pwerr" style="color:#f87171;font-size:13px;margin-top:8px;min-height:18px"></div>
 </div></div>
 <div class="hd">
-<h1>📊 MARKET LIVE — KHANH</h1>
+<img src="dao-phap-truong-ton.jpg" alt="Đạo Pháp Trường Tồn — Long-term Investment System" style="width:100%;max-width:560px;border-radius:14px;display:block;margin:0 auto 10px">
 <div class="sub" id="clock">Đang tải…</div>
 <div class="idx" id="idx"></div>
 <div id="vix"></div>
@@ -106,9 +106,9 @@ var SHARE_URL="https://khanhbuit508-ux.github.io/Market-Live/";
 function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){fallback();});}else{fallback();}
 function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}}
-function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Market Live — Khanh",text:"📊 Market Live — Khanh",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
+function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Đạo Pháp Trường Tồn",text:"Đạo Pháp Trường Tồn",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
 function shareCopy(){document.getElementById("sharemenu").style.display="none";copyText(SHARE_URL);}
-function shareTo(net){var u=SHARE_URL,t="📊 Market Live — Khanh",url="";
+function shareTo(net){var u=SHARE_URL,t="Đạo Pháp Trường Tồn",url="";
 if(net==="x")url="https://twitter.com/intent/tweet?text="+encodeURIComponent(t)+"&url="+encodeURIComponent(u);
 else if(net==="fb")url="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(u);
 else if(net==="tg")url="https://t.me/share/url?url="+encodeURIComponent(u)+"&text="+encodeURIComponent(t);
