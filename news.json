@@ -1,15 +1,17 @@
 {
- "updated": "19/10 8:26 PT",
+ "cudem": "🌙 Futures Mỹ xanh nhẹ sau tuần tệ nhất của Nasdaq kể từ tháng 4/2025: S&P ~+0,5–0,8%, Nasdaq ~+1,2–1,3% nhờ nhóm chip/AI bật lại; Dow đi ngang.<br>🌙 Dầu Brent hạ về ~$107–108 (từ đỉnh $110) sau khi Trump miễn một phần cấm vận Nga; lợi suất 10 năm hạ về ~5,08–5,10% — tin tốt cho cổ phiếu.<br>🌙 Châu Á trái chiều: Nikkei −0,8%, Kospi +0,5–1,8% nhờ chip, Thượng Hải đi ngang sau GDP TQ Q3 +4,5% vượt dự báo; châu Âu yếu vì bạo loạn Pháp. Bitcoin ~$82.500.",
+ "kehoach": "🎯 Canh vùng mua hôm nay: NVDA $212–216 (đang TRONG vùng, mép trên), FTNT $166–170 (rớt vào vùng), OKTA $185–195 (trong vùng, cách stop ~4,6%), XMTR $96–100 (TRONG vùng, BNP Paribas target $120), ADPT trong vùng — lên đỉnh 52 tuần.<br>🚨 HPE THỦNG CẮT LỖ $57,50 (đóng T6 $55,13, −6%; pre-market ~$56,5 vẫn dưới stop): BÁN theo kỷ luật, không bắt lại.<br>⚠️ TSLA $354,72 ngay dưới miệng vùng $355–365 — nhưng earnings THỨ TƯ 21/10: KHÔNG mua mới trước earnings.<br>🎯 Sự kiện hôm nay: 10:00 ET chỉ số nhà đất NAHB; FITB báo Q3 trước mở cửa, STLD sau đóng cửa; mai T4: TSLA + META + IBM earnings.",
  "tin": [
   "💾 WDC +6,2% ($352,63) — LẦN ĐẦU vượt +5% trong phiên, chip nhớ bật mạnh theo tin Samsung–TSMC–NVHBM; WDC đã bán theo kỷ luật 02/10 (thủng $418), giữ nguyên AVOID — KHÔNG FOMO mua lại (nguồn: scan 8:26).",
   "🛒 AMZN +5,1% ($262,81) — LẦN ĐẦU vượt +5% trong phiên (scan trước còn +4,6%); Morgan Stanley vừa nâng lên 'top pick', target $350; đã chạy xa vùng mua $245–248 — không đuổi (nguồn: scan 8:11).",
-  "🚀 MRVL +5,5% ($240,45) — LẦN ĐẦU vượt +5% trong phiên, bật KHỎI mép trên vùng mua $233–238 (giờ đầu đã vào vùng); Bernstein nâng hạng nhóm chip — cách cắt lỗ $224 xa, an toàn (nguồn: scan 7:56).",
-  "📈 DDOG +6,3% ($262,7) — LẦN ĐẦU vượt +5% trong phiên sau khi Bernstein nâng lên Outperform, target $350; đã bật khỏi vùng mua $245–255 — lỡ điểm mua đẹp, không đuổi (nguồn: scan 7:56).",
-  "🔥 MRNA đảo chiều cực mạnh: từ −2,2% pre-market bật lên +5,5% ($229,91, đỉnh $236,77) — mạnh nhất nhóm Nasdaq-100 giờ đầu, không có tin riêng (nguồn: scan 7:11).",
-  "⚠️ Nasdaq-100 vượt +1%: +1,59% — tech bật lại sau tuần giảm nặng nhất từ tháng 4; S&P 500 +0,7%, Dow đi ngang (nguồn: scan 7:26).",
-  "✅ TSLA $361,21 — CHUI LẠI VÀO vùng mua $355–365; nhưng earnings Thứ Tư 21/10: KHÔNG mua mới trước tin (nguồn: scan 7:11).",
-  "💰 Nhóm chip nhớ đồng loạt bật: SNDK +5,7%, MU +3,1%, WDC +3,1% — tin Samsung–TSMC–NVHBM; đã bán MU/SNDK theo kỷ luật nên đây chỉ là tín hiệu ngành tốt lên (nguồn: scan 7:11).",
-  "📉 MRNA −2,2% pre-market — đang rơi về phía vùng mua $188–192 nhưng còn cách ~11% ($213), chưa tới điểm mua (nguồn: scan pre-market).",
-  "📰 Tin chính sáng nay: Samsung–TSMC–NVHBM, JPM nâng INTC, Bernstein nâng DDOG, Morgan Stanley nâng AMZN (nguồn: tin sáng)."
- ]
+  "🚀 MRVL +5,5% ($240,45) — LẦN ĐẦU vượt +5% trong phiên, bật KHỎI mép trên vùng mua $233–238 (giờ đầu còn $236,4 trong vùng); đà hồi chip AI, cách cắt lỗ $224 vẫn xa — không đuổi (nguồn: scan 7:56).",
+  "📈 DDOG +6,3% ($262,7) — LẦN ĐẦU vượt +5% trong phiên sau khi Bernstein nâng lên Outperform, target $350 (sáng nay báo +4,7%); đã bật vượt khỏi vùng mua $245–255 — không đuổi (nguồn: scan 7:56).",
+  "🔥 MRNA đảo chiều cực mạnh: từ −2,2% pre-market bật lên +5,5% ($229,91, đỉnh $236,77) — mạnh nhất nhóm Nasdaq-100 giờ đầu, không thấy tin riêng; cách xa vùng mua $188–192 nên KHÔNG đuổi (nguồn: tin giờ đầu 7:11).",
+  "📈 DDOG +4,7% lên $258,8 — Bernstein nâng lên Outperform, target $350; bật VƯỢT khỏi vùng mua $245–255 (lỡ điểm mua đẹp, không đuổi) (nguồn: tin giờ đầu 7:11).",
+  "⚡ Nasdaq vọt trên +1% (~+1,6%) sau mở cửa — đà hồi công nghệ sau đợt bán tháo T6 đang mạnh dần; S&P +0,7%, Dow đi ngang. MRNA +~4%, DDOG +~4% dẫn dắt, chưa mã watchlist nào chạm ±5% (nguồn: scan 7:26).",
+  "🚨 HPE THỦNG CẮT LỖ $57,50 trong phiên Thứ Sáu (đóng $55,13, −6%; pre-market ~$56,5 vẫn dưới stop) — theo kỷ luật 'thủng là thủng': BÁN, không bắt lại (nguồn: tin thị trường sáng nay).",
+  "💰 NVDA ~$216,5 (+1,1%) — ĐANG TRONG vùng mua $212–216 (mép trên); hồi cùng nhóm chip, earnings Thứ Tư 21/10 (nguồn: tin thị trường sáng nay).",
+  "💰 FTNT $169,13 (T6 −7%) RỚT VÀO vùng mua $166–170 — bảo mật cho AI, earnings 28/10 (nguồn: tin thị trường sáng nay)."
+ ],
+ "updated": "19/10 8:26 PT"
 }
