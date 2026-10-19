@@ -105,7 +105,7 @@ document.addEventListener("click",function(){var m=document.getElementById("shar
 var SHARE_URL="https://khanhbuit508-ux.github.io/Market-Live/";
 function copyText(t){function done(s){if(s){alert("Đã copy link — dán vào Discord/chat là xong:\n"+t);}else{prompt("Máy chặn copy tự động, anh copy tay link này:",t);}}}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){fallback();});}else{fallback();}
-function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}}
+function fallback(){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var s=false;try{s=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);done(!!s);}catch(e){done(false);}}
 function shareNative(){var u=SHARE_URL;document.getElementById("sharemenu").style.display="none";if(navigator.share){try{navigator.share({title:"Đạo Pháp Trường Tồn",text:"Đạo Pháp Trường Tồn",url:u}).catch(function(){copyText(u);});}catch(e){copyText(u);}}else{copyText(u);}}
 function shareCopy(){document.getElementById("sharemenu").style.display="none";copyText(SHARE_URL);}
 function shareTo(net){var u=SHARE_URL,t="Đạo Pháp Trường Tồn",url="";
