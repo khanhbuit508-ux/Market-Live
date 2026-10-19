@@ -329,10 +329,11 @@ async function render(){
     // FEAR & GREED (CNN) — đồng hồ tâm lý thị trường, fallback S&P/Nasdaq nếu số liệu cũ
     var sq=M["QQQ"]?chg(M["QQQ"]):0, sp=M["SPY"]?chg(M["SPY"]):0;
     function fgFallback(){
-      var vh;
-      if(sq<=-2||sp<=-1.5) vh='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
-      else if(sq>=1.5||sp>=1) vh='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
-      else vh='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
+      var vx=(M[".VIX"]&&M[".VIX"].price)?("VIX: <b>"+fmt(M[".VIX"].price)+"</b>"):"VIX: --";
+      var vh='<div class="sub" style="font-size:15px;margin:4px 0">📊 '+vx+'</div>';
+      if(sq<=-2||sp<=-1.5) vh+='<div class="banner b-fear">😱 <b>HOẢNG LOẠN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ SĂN ĐÁY</b></div>';
+      else if(sq>=1.5||sp>=1) vh+='<div class="banner b-warn">🤑 <b>HƯNG PHẤN</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → <b>chế độ THẬN TRỌNG</b></div>';
+      else vh+='<div class="banner b-calm">😐 <b>BÌNH TĨNH</b> — S&P '+sp.toFixed(2)+'%, Nasdaq '+sq.toFixed(2)+'% → đánh theo tín hiệu</div>';
       document.getElementById("vix").innerHTML=vh;
     }
     function fgLabel(s){return s<=24?"CỰC KỲ SỢ HÃI":s<=44?"SỢ HÃI":s<=55?"TRUNG LẬP":s<=75?"THAM LAM":"CỰC KỲ THAM LAM";}
@@ -348,7 +349,7 @@ async function render(){
       var warn="";
       if(s<=24) warn='<div class="banner b-fear">⚠️ <b>CẢNH BÁO SỚM</b> — Thị trường đang CỰC KỲ SỢ HÃI ('+s+'/100). Cẩn thận: không mua đuổi, giữ tiền mặt, chờ tín hiệu rõ ràng mới vào.</div>';
       else if(pc!==null&&pc-s>=10) warn='<div class="banner b-warn">⚠️ <b>TÂM LÝ XẤU ĐI NHANH</b> — Fear & Greed rớt từ '+pc+' xuống '+s+'. Cẩn thận, đừng vội bắt đáy.</div>';
-      var h=warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
+      var h='<div class="sub" style="font-size:15px;margin:4px 0">😨 Fear & Greed: <b>'+s+'</b> ('+lb+')</div>'+warn+'<div class="card" style="border-left:4px solid '+c+'"><div style="display:flex;align-items:center;gap:12px"><div style="font-size:34px;font-weight:800;color:'+c+'">'+s+'</div><div style="flex:1"><div style="font-weight:800;color:'+c+'">CNN FEAR & GREED — '+lb+'</div><div class="sub" style="margin:2px 0 6px">S&P '+sp.toFixed(2)+'% · Nasdaq '+sq.toFixed(2)+'%'+pctx+' · cập nhật '+fg.updated+'</div><div style="height:10px;border-radius:5px;background:linear-gradient(90deg,#ff4444 0%,#ff8844 25%,#ffcc44 50%,#88cc44 75%,#44dd44 100%);position:relative"><div style="position:absolute;left:'+s+'%;top:-4px;width:3px;height:18px;background:#fff;border:1px solid #333;transform:translateX(-50%)"></div></div></div></div></div>';
       document.getElementById("vix").innerHTML=h;
     }).catch(function(){fgFallback();});
 
