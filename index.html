@@ -32,7 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .b-warn2{background:#713f12;color:#fde68a}
 .b-bad{background:#450a0a;color:#fca5a5}
 .b-info{background:#1e3a8a;color:#bfdbfe}
-.blink{animation:blink 2.8s ease-in-out infinite}
+.blink{animation:none}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.75}}
 .price{font-size:22px;font-weight:700;margin:6px 0}
 .meta{font-size:13px;color:#aeb7cc;line-height:1.8}
@@ -239,6 +239,7 @@ function sharkTitle(z,q){
   if(!z.sold&&P>z.stop&&P<=z.hi*1.02&&R>=1.5)sharks+="🦈";
   if(z.sold) return {t:"🔴 "+z.t+" ĐÃ BÁN "+z.sold+" — đang $"+fmt(P)+". Giữ kỷ luật, không bắt lại",cls:" dead",badge:'<span class="badge b-bad">🔴 ĐÃ BÁN</span>'};
   if(P<=z.stop) return {t:"💀 "+z.t+" THỦNG CẮT $"+fmt(z.stop)+" — đang $"+fmt(P)+". KHẨN: bán ngay, thủng là thủng",cls:" danger",badge:'<span class="badge b-bad blink">💀 THỦNG CẮT — KHẨN</span>'};
+  if(P<z.lo&&(P-z.stop)/z.stop<0.02) return {t:"⚠️ "+z.t+" SÁT CẮT LỖ — $"+fmt(P)+", chỉ còn cách cắt $"+fmt(z.stop)+" "+((P-z.stop)/z.stop*100).toFixed(1)+"%. KHÔNG vào lệnh — đóng dưới $"+fmt(z.stop)+" là bán",cls:" danger",badge:'<span class="badge b-bad blink">⚠️ SÁT CẮT LỖ</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(P<z.lo) return {t:sharks+" "+z.t+" VÙNG RẺ — $"+fmt(P)+" dưới vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+" — càng rẻ R càng ngon",cls:"",a:1,badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(P<=z.hi) return {t:sharks+" "+z.t+" VÀO VÙNG — $"+fmt(P)+", trong vùng $"+fmt(z.lo)+"–$"+fmt(z.hi)+". R "+R.toFixed(1)+", đà còn "+pctTxt+" tới chốt $"+fmt(z.tgt)+" — còn kịp",cls:"",a:1,badge:'<span class="badge b-ok blink">🟢 CÒN KỊP</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
   if(P<=z.hi*1.02) return {t:sharks+" "+z.t+" SÁT VÙNG — $"+fmt(P)+", trên vùng $"+fmt(z.hi)+" một chút. Đừng đuổi, chờ nó quay lại",cls:"",badge:'<span class="badge b-warn2">🟡 SÁT VÙNG</span><span class="badge b-info">📈 R '+R.toFixed(1)+'</span>'};
@@ -362,7 +363,7 @@ async function render(){
     });
     cards.sort(function(a,b){return a.s-b.s;});
     var entries=[];
-    ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop&&P<=z.hi)entries.push(z.t);});
+    ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop&&P<=z.hi&&(P-z.stop)/z.stop>=0.02)entries.push(z.t);});
     var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+"</div>":"";
     var sapcat=[];
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop){var d=(P-z.stop)/z.stop*100;if(d<2)sapcat.push({t:z.t,d:d});}});
@@ -370,7 +371,7 @@ async function render(){
     var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+"</div>":"";
     var ups=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c>0;}).sort(function(a,b){return b.c-a.c;}).slice(0,3);
     var dns=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c<0;}).sort(function(a,b){return a.c-b.c;}).slice(0,3);
-    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"");
+    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" "+"+"+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"");
     document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
     loadNews();
 
