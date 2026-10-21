@@ -1,1 +1,29 @@
-{"updated": "21/10 10:18 PT", "quotes": {"TSLA": {"price": 387.05, "prev": 373.71, "low": 380.51, "vol": "24,746,508", "avgVol": "32.23M"}, "NVDA": {"price": 221.78, "prev": 216.47, "low": 217.66, "vol": "45,942,734", "avgVol": "98.52M"}, "MRVL": {"price": 246.19, "prev": 240.42, "low": 237.8, "vol": "7,619,802", "avgVol": "21.19M"}, "AAPL": {"price": 344.41, "prev": 339.5, "low": 338.83, "vol": "15,826,072", "avgVol": "39.24M"}, "MSFT": {"price": 533.18, "prev": 531.87, "low": 525.02, "vol": "5,869,736", "avgVol": "20.16M"}, "PLTR": {"price": 200.15, "prev": 192.6, "low": 189.88, "vol": "9,541,511", "avgVol": "25.95M"}, "META": {"price": 707.35, "prev": 694.25, "low": 692.38, "vol": "8,786,511", "avgVol": "17.66M"}, "GOOGL": {"price": 334.51, "prev": 340.28, "low": 330.38, "vol": "15,340,390", "avgVol": "22.01M"}, "AMZN": {"price": 263.86, "prev": 262.63, "low": 259.29, "vol": "16,204,380", "avgVol": "36.25M"}, "CRM": {"price": 241.96, "prev": 242.43, "low": 237.23, "vol": "2,092,263", "avgVol": "7.24M"}, "MRNA": {"price": 248.67, "prev": 242.08, "low": 239.55, "vol": "8,330,262", "avgVol": "19.82M"}, "TWLO": {"price": 270.72, "prev": 258.69, "low": 260.15, "vol": "740,033", "avgVol": "2.49M"}, "OKTA": {"price": 209.54, "prev": 194.02, "low": 192.91, "vol": "1,942,194", "avgVol": "3.34M"}, "FTNT": {"price": 175.17, "prev": 170.93, "low": 166.22, "vol": "1,529,446", "avgVol": "3.83M"}, "DDOG": {"price": 276.59, "prev": 256.43, "low": 259.77, "vol": "1,599,908", "avgVol": "2.76M"}, "SWKS": {"price": 82.0, "prev": 81.3, "low": 81.02, "vol": "1,358,316", "avgVol": "6.08M"}, "APH": {"price": 79.99, "prev": 79.32, "low": 79.4, "vol": "3,817,403", "avgVol": "10.25M"}, "ADPT": {"price": 25.58, "prev": 24.42, "low": 24.25, "vol": "995,390", "avgVol": "1.94M"}, "GD": {"price": 345.46, "prev": 344.44, "low": 343.01, "vol": "477,759", "avgVol": "1.28M"}, "RTX": {"price": 189.76, "prev": 193.34, "low": 189.29, "vol": "2,952,571", "avgVol": "5.37M"}, "HWM": {"price": 205.99, "prev": 211.63, "low": 204.07, "vol": "2,734,310", "avgVol": "3.04M"}, ".VIX": {"price": 16.75, "prev": 17.31, "low": 16.51, "vol": "", "avgVol": ""}, "SPY": {"price": 774.13, "prev": 769.05, "low": 768.4, "vol": "12,656,911", "avgVol": "37.57M"}, "QQQ": {"price": 727.78, "prev": 717.63, "low": 719.71, "vol": "16,797,911", "avgVol": "38.71M"}}}
+{
+  "updated": "21/10 10:49 PT",
+  "quotes": {
+    "TSLA": {"price": 387.19, "prev": 373.71, "low": 380.51, "vol": "26,128,128", "avgVol": "32.23M"},
+    "NVDA": {"price": 221.76, "prev": 216.47, "low": 217.66, "vol": "48,336,210", "avgVol": "98.52M"},
+    "MRVL": {"price": 244.75, "prev": 240.42, "low": 237.8, "vol": "8,004,497", "avgVol": "21.19M"},
+    "AAPL": {"price": 344.61, "prev": 339.5, "low": 338.83, "vol": "16,831,468", "avgVol": "39.24M"},
+    "MSFT": {"price": 532.31, "prev": 531.87, "low": 525.02, "vol": "6,236,300", "avgVol": "20.16M"},
+    "PLTR": {"price": 199.67, "prev": 192.6, "low": 189.88, "vol": "9,998,418", "avgVol": "25.95M"},
+    "META": {"price": 708.13, "prev": 694.25, "low": 692.38, "vol": "9,891,450", "avgVol": "17.66M"},
+    "GOOGL": {"price": 335.08, "prev": 340.28, "low": 330.38, "vol": "16,210,497", "avgVol": "22.01M"},
+    "AMZN": {"price": 264.26, "prev": 262.63, "low": 259.29, "vol": "17,351,309", "avgVol": "36.25M"},
+    "CRM": {"price": 242.23, "prev": 242.43, "low": 237.23, "vol": "2,298,501", "avgVol": "7.24M"},
+    "MRNA": {"price": 249.84, "prev": 242.08, "low": 239.55, "vol": "9,092,626", "avgVol": "19.82M"},
+    "TWLO": {"price": 268.87, "prev": 258.69, "low": 260.15, "vol": "800,129", "avgVol": "2.49M"},
+    "OKTA": {"price": 208.45, "prev": 194.02, "low": 192.91, "vol": "2,272,126", "avgVol": "3.34M"},
+    "FTNT": {"price": 174.36, "prev": 170.93, "low": 166.22, "vol": "1,633,441", "avgVol": "3.83M"},
+    "DDOG": {"price": 275.75, "prev": 256.43, "low": 259.77, "vol": "1,719,186", "avgVol": "2.76M"},
+    "SWKS": {"price": 82.4, "prev": 81.3, "low": 81.02, "vol": "1,749,422", "avgVol": "6.08M"},
+    "APH": {"price": 79.86, "prev": 79.32, "low": 79.4, "vol": "4,218,958", "avgVol": "10.25M"},
+    "ADPT": {"price": 25.54, "prev": 24.42, "low": 24.25, "vol": "1,040,313", "avgVol": "1.94M"},
+    "GD": {"price": 345.13, "prev": 344.44, "low": 343.01, "vol": "526,647", "avgVol": "1.28M"},
+    "RTX": {"price": 189.66, "prev": 193.34, "low": 189.29, "vol": "3,183,202", "avgVol": "5.37M"},
+    "HWM": {"price": 206.14, "prev": 211.63, "low": 204.07, "vol": "2,929,393", "avgVol": "3.04M"},
+    ".VIX": {"price": 16.63, "prev": 17.31, "low": 16.51, "vol": "", "avgVol": ""},
+    "SPY": {"price": 774.03, "prev": 769.05, "low": 768.4, "vol": "13,627,755", "avgVol": "37.57M"},
+    "QQQ": {"price": 726.73, "prev": 717.63, "low": 719.71, "vol": "18,307,762", "avgVol": "38.71M"}
+  }
+}
