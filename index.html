@@ -86,14 +86,12 @@ h3.sec{margin:14px 0 6px;font-size:16px}
 <div id="cluster"></div>
 <div class="tabs">
 <button class="tab on" data-t="shark">🦈 Cá mập</button>
-<button class="tab" data-t="scan">🔥 Scanner</button>
+<button class="tab" data-t="chance">🎯 Cơ hội</button>
 <button class="tab" data-t="watch">📋 Sổ anh</button>
-<button class="tab" data-t="sector">🗺️ Sector</button>
 <button class="tab" data-t="news">📰 Tin</button>
 </div>
 <div id="sec-shark"><div class="sub"><span class="spin"></span> Đang tải giá…</div></div>
-<div id="sec-scan" style="display:none"></div>
-<div id="sec-sector" style="display:none"></div>
+<div id="sec-chance" style="display:none"></div>
 <div id="sec-watch" style="display:none"></div>
 <div id="sec-news" style="display:none"></div>
 <button id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
@@ -121,7 +119,7 @@ function unlock(){var v=document.getElementById("pw").value;if(v==="1569"){try{l
 (function(){try{if(localStorage.getItem("mlk")==="1"){var l=document.getElementById("lock");if(l)l.style.display="none";}}catch(e){}})();
 document.getElementById("pw").addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
 window.addEventListener("scroll",function(){var b=document.getElementById("topbtn");if(b)b.style.display=window.scrollY>400?"block":"none";});
-document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});b.classList.add("on");["shark","scan","watch","sector","news"].forEach(function(t){document.getElementById("sec-"+t).style.display=(t===b.dataset.t)?"":"none";});if(b.dataset.t==="news"){loadNews();}};});
+document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("on");});b.classList.add("on");["shark","chance","watch","news"].forEach(function(t){document.getElementById("sec-"+t).style.display=(t===b.dataset.t)?"":"none";});if(b.dataset.t==="news"){loadNews();}};});
 
 // ============ VÙNG CỦA ANH (hệ thống Khanh) ============
 var ZONES = [
@@ -221,10 +219,11 @@ var M={};try{var pr=await(await fetch("prices.json?t="+Date.now())).json();if(pr
   return M;
 }
 function volMult(q){
-  if(!q.vol||!q.avgVol) return null;
-  var t=ptMin(),open=390,close=780,exp=q.avgVol;
+  var v=num(q.vol),a=num(q.avgVol);
+  if(!v||!a) return null;
+  var t=ptMin(),open=390,close=780,exp=a;
   if(t>=open&&t<=close) exp*=Math.max(.08,(t-open)/(close-open));
-  return q.vol/exp;
+  return v/exp;
 }
 function fmt(n){if(n==null||isNaN(n))return "—";return n>=1000?n.toLocaleString("en-US"):Math.round(n*100)/100;}
 function chg(q){return (q.price-q.prev)/q.prev*100;}
@@ -296,6 +295,31 @@ function tickNewsFresh(){
     else{f.style.color="#9aa3b2";f.style.fontWeight="400";f.innerHTML="🌙 Ngoài giờ cập nhật tin (T2–T6, 6:30–13:00 PT) — tin mới nhất: "+t+".";}
   }
 }
+// ---- TIN NÓNG → MÃ ĂN THEO (tab Tin): gắn tin với mã trên bảng được nhắc trong tin ----
+function hotNewsSection(n){
+  try{
+    if(!n.tin||!n.tin.length) return "";
+    var out=[];
+    n.tin.forEach(function(t){
+      var hits=[];
+      ZONES.forEach(function(z){
+        var re=new RegExp("\\b"+z.t+"\\b");
+        if(re.test(t)) hits.push(z);
+      });
+      if(hits.length) out.push({txt:t,hits:hits});
+    });
+    var hh='<h3 class="sec">📰 Tin nóng → mã ăn theo</h3>';
+    if(!out.length) return hh+'<div class="sub">Chưa có tin nào nhắc mã trên bảng lúc này — xem danh sách tin bên dưới.</div>';
+    out.slice(0,3).forEach(function(o){
+      var tag=o.hits.map(function(z){
+        return z.sold?z.t+' 🔴 ĐÃ BÁN':z.t+' $'+fmt(z.lo)+'–'+fmt(z.hi)+' · cắt $'+fmt(z.stop);
+      }).join(" · ");
+      var txt=o.txt.length>140?o.txt.slice(0,140)+"…":o.txt;
+      hh+='<div class="card"><div class="meta">'+txt+'</div><div class="meta">👉 Ăn theo: <b>'+tag+'</b></div></div>';
+    });
+    return hh;
+  }catch(e){ return ""; }
+}
 async function loadNews(){
   var box=document.getElementById("sec-news");
   try{
@@ -306,9 +330,9 @@ async function loadNews(){
     if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';var fresh=n.tin.filter(function(t){return newsItemAgeMin(t)<360;});var shown=fresh.length?fresh:n.tin.slice(0,3);shown.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});if(!fresh.length)h+='<div class="sub">Tin trong ngày đã cũ — đang chờ bản cập nhật mới.</div>';}
     if(n.cudem) h+='<h3 class="sec">🌙 Cú đêm</h3><div class="card"><div class="meta">'+n.cudem+'</div></div>';
     if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
-    if(!h) h+='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
+    if(!h) h='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
     else if(n.updated) h+='<div class="sub" id="newsFoot">🟢 Tin mới nhất: <b id="newsFresh">vừa xong</b> ('+n.updated+')</div>';
-    box.innerHTML=h;tickNewsFresh();
+    box.innerHTML=hotNewsSection(n)+h;tickNewsFresh();
   }catch(e){
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
   }
@@ -417,42 +441,84 @@ async function render(){
     cards.sort(function(a,b){return a.s-b.s;});
     var entries=[];
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop&&P<=z.hi&&(P-z.stop)/z.stop>=0.02)entries.push(z.t);});
-    var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+'</div>':"";
+    var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+"</div>":"";
     var sapcat=[];
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop){var d=(P-z.stop)/z.stop*100;if(d<2)sapcat.push({t:z.t,d:d});}});
     sapcat.sort(function(a,b){return a.d-b.d;});
-    var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+'</div>':"";
+    var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+"</div>":"";
     var ups=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c>0;}).sort(function(a,b){return b.c-a.c;}).slice(0,3);
     var dns=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c<0;}).sort(function(a,b){return a.c-b.c;}).slice(0,3);
-    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"");
+    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"");
     var gapSec=await gapSection(M);
     var shkStrip=await sharkStrip();
     document.getElementById("sec-shark").innerHTML=gapSec+shkStrip+hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
     loadNews();
 
-    // SCANNER — top bounce toàn thị trường
-    var rows=[];
-    ZONES.map(function(z){return z.t;}).concat(EXTRA).forEach(function(t){
-      var q=M[t];if(!q||!q.dayLow)return;
-      var P=q.price,bounce=(P-q.dayLow)/q.dayLow*100,dip=(q.dayLow-q.prev)/q.prev*100,vm=volMult(q);
-      var sig="";
-      if(bounce>=5&&vm&&vm>=1.5)sig="🔥";
-      else if(bounce>=3&&dip<=-4)sig="🔄";
-      rows.push({t:t,P:P,bounce:bounce,dip:dip,vm:vm,sig:sig,c:chg(q)});
+    // CƠ HỘI — 3 mục thay Scanner/Sector: Radar sắp có chuyện + Top R + Dòng tiền
+    var chanceHtml="";
+    // 1) 🎯 SẮP CÓ CHUYỆN — mã trong vòng 2% của biên vùng (chưa vào vùng, sắp có alert)
+    var radar=[];
+    ZONES.forEach(function(z){
+      var q=M[z.t];if(!q||z.sold)return;
+      var P=q.price;
+      if(P>z.hi&&P<=z.hi*1.02)radar.push({t:z.t,P:P,kind:"SẮP VÀO VÙNG",d:(P-z.hi)/z.hi*100,stop:z.stop});
+      else if(P<z.lo&&P>z.stop&&P>=z.lo*0.98)radar.push({t:z.t,P:P,kind:"SẮP LẤY LẠI VÙNG",d:(z.lo-P)/z.lo*100,stop:z.stop});
     });
-    rows.sort(function(a,b){return b.bounce-a.bounce;});
-    var nChip=rows.slice(0,10).filter(function(r){return CHIP.indexOf(r.t)>=0;}).length;
-    document.getElementById("cluster").innerHTML=nChip>=4
-      ?'<div class="banner b-warn">⚠️ <b>'+nChip+'/10 tín hiệu mạnh nhất là chip</b> — chung 1 sóng, đây là <b>1 kèo sector</b>. Chia tiền, đừng all-in từng con.</div>':"";
-    var sc='<h3 class="sec">🔥 Top bounce lúc này</h3><div class="sub">% hồi từ đáy ngày + vol so bình thường · 🔥 bounce ≥5% & vol ≥1.5x · 🔄 rớt sâu rồi hồi</div>';
-    var sigRows=rows.filter(function(r){return r.sig;});
-    if(!sigRows.length){sc+='<div class="sub">Chưa có mã nào đủ tín hiệu bounce mạnh lúc này — có là hiện ngay.</div>';}
-    else{sc+='<table><tr><th>Mã</th><th>Giá</th><th>Hồi từ đáy</th><th>Vol</th><th>Tín hiệu</th></tr>';
-    sigRows.slice(0,8).forEach(function(r){
-      sc+='<tr class="hot"><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+' <span class="'+(r.c>=0?"up":"dn")+'">'+(r.c>=0?"+":"")+r.c.toFixed(1)+'%</span></td><td>+'+r.bounce.toFixed(1)+'%</td><td>'+(r.vm?r.vm.toFixed(1)+"x":"—")+'</td><td>'+r.sig+'</td></tr>';
-    });sc+='</table>';}
-    var deepest=rows.slice().sort(function(a,b){return a.dip-b.dip;}).slice(0,3).map(function(r){return r.t+" "+r.dip.toFixed(1)+"%";}).join(" · ");
-    document.getElementById("sec-scan").innerHTML=sc+'<div class="sub">Đáy ngày rớt sâu nhất: '+deepest+'</div>';
+    radar.sort(function(a,b){return a.d-b.d;});
+    chanceHtml+='<h3 class="sec">🎯 Sắp có chuyện — sắp chạm vùng</h3>';
+    if(!radar.length)chanceHtml+='<div class="sub">Lúc này không có mã nào trong vòng 2% của vùng mua — có là hiện ngay.</div>';
+    else{chanceHtml+='<table><tr><th>Mã</th><th>Giá</th><th>Còn cách vùng</th><th>Cắt</th></tr>';
+    radar.forEach(function(r){
+      chanceHtml+='<tr><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+'</td><td>'+r.kind+' ('+r.d.toFixed(1)+'%)</td><td>$'+fmt(r.stop)+'</td></tr>';
+    });chanceHtml+='</table>';}
+    // 2) 💰 KÈO CÒN ĂN NHIỀU NHẤT — xếp theo R còn lại từ giá hiện tại
+    var topR=[];
+    ZONES.forEach(function(z){
+      var q=M[z.t];if(!q||z.sold||z.tgt==null)return;
+      var P=q.price;
+      if(P>z.stop&&P<z.tgt)topR.push({t:z.t,P:P,R:(z.tgt-P)/(P-z.stop),stop:z.stop,tgt:z.tgt});
+    });
+    topR.sort(function(a,b){return b.R-a.R;});
+    var overTgt=[];
+    ZONES.forEach(function(z){
+      var q=M[z.t];if(!q||z.sold||z.tgt==null)return;
+      if(q.price>=z.tgt)overTgt.push(z.t+" $"+fmt(q.price)+" > chốt $"+fmt(z.tgt));
+    });
+    chanceHtml+='<h3 class="sec">💰 Kèo còn ăn nhiều nhất — R tính từ giá lúc này</h3>';
+    if(!topR.length)chanceHtml+='<div class="sub">Lúc này không còn mã nào dưới chốt và trên cắt — xem lại sau.</div>';
+    else{chanceHtml+='<table><tr><th>Mã</th><th>Giá</th><th>Ăn còn lại</th><th>Chốt / Cắt</th></tr>';
+    topR.slice(0,8).forEach(function(r){
+      chanceHtml+='<tr><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+'</td><td><b>'+r.R.toFixed(1)+' R</b></td><td>$'+fmt(r.tgt)+' / $'+fmt(r.stop)+'</td></tr>';
+    });chanceHtml+='</table>';}
+    if(overTgt.length)chanceHtml+='<div class="sub">Đã vượt chốt, hết đà, không đuổi: '+overTgt.join(" · ")+'</div>';
+    // 3) 💸 TIỀN ĐANG CHẢY VÀO ĐÂU — % tăng × độ nóng vol
+    var flow=[];
+    ZONES.forEach(function(z){
+      var q=M[z.t];if(!q||z.sold)return;
+      var vm=volMult(q);if(vm==null||!isFinite(vm))return;
+      var s=chg(q)*vm;if(!isFinite(s))return;
+      flow.push({t:z.t,P:q.price,c:chg(q),vm:vm,s:s});
+    });
+    flow.sort(function(a,b){return b.s-a.s;});
+    var flowIn=flow.filter(function(r){return r.s>0;});
+    var flowOut=flow.filter(function(r){return r.s<0;}).sort(function(a,b){return a.s-b.s;});
+    chanceHtml+='<h3 class="sec">💸 Tiền đang chảy vào đâu</h3>';
+    if(!flow.length||(!flowIn.length&&!flowOut.length))chanceHtml+='<div class="sub">Chưa đủ dữ liệu vol lúc này — xem lại sau.</div>';
+    else{
+      if(flowIn.length){chanceHtml+='<div class="sub">⬆️ Tiền vào:</div><table><tr><th>Mã</th><th>Giá</th><th>Tăng</th><th>Vol</th></tr>';
+      flowIn.slice(0,5).forEach(function(r){
+        chanceHtml+='<tr><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+'</td><td class="up">+'+r.c.toFixed(1)+'%</td><td>'+r.vm.toFixed(1)+'x</td></tr>';
+      });chanceHtml+='</table>';}
+      if(flowOut.length){chanceHtml+='<div class="sub">⬇️ Tiền ra:</div><table><tr><th>Mã</th><th>Giá</th><th>Giảm</th><th>Vol</th></tr>';
+      flowOut.slice(0,3).forEach(function(r){
+        chanceHtml+='<tr><td><b>'+r.t+'</b></td><td>$'+fmt(r.P)+'</td><td class="dn">'+r.c.toFixed(1)+'%</td><td>'+r.vm.toFixed(1)+'x</td></tr>';
+      });chanceHtml+='</table>';}
+    }
+    // Banner tập trung chip — tính từ top tiền vào thay vì scanner cũ
+    var nChip=flowIn.slice(0,5).filter(function(r){return CHIP.indexOf(r.t)>=0;}).length;
+    document.getElementById("cluster").innerHTML=nChip>=3
+      ?'<div class="banner b-warn">⚠️ <b>'+nChip+'/5 mã tiền vào mạnh nhất là chip</b> — chung 1 sóng, đây là <b>1 kèo sector</b>. Chia tiền, đừng all-in từng con.</div>':"";
+    document.getElementById("sec-chance").innerHTML=chanceHtml;
 
     // SỔ ANH — watchlist vs vùng
     var w='<h3 class="sec">📋 Sổ anh — giá vs vùng</h3><table><tr><th>Mã</th><th>Giá</th><th>Vùng</th><th>Trạng thái</th></tr>';
@@ -468,18 +534,7 @@ async function render(){
     });
     document.getElementById("sec-watch").innerHTML=w+'</table>';
 
-    // SECTOR — tiền đang ở đâu
-    var sx='<h3 class="sec">🗺️ Sector — tiền đang ở đâu</h3><table><tr><th>Sector</th><th>ETF</th><th>Hôm nay</th></tr>';
-    var secRows=[];
-    SECTORS.forEach(function(s){
-      var q=M[s[0]];if(!q)return;
-      secRows.push({etf:s[0],name:s[1],c:chg(q)});
-    });
-    secRows.sort(function(a,b){return b.c-a.c;});
-    secRows.forEach(function(s){
-      sx+='<tr><td>'+s.name+'</td><td><b>'+s.etf+'</b></td><td class="'+(s.c>=0?"up":"dn")+'">'+(s.c>=0?"+":"")+s.c.toFixed(2)+'%</td></tr>';
-    });
-    document.getElementById("sec-sector").innerHTML=sx+'</table>';
+
 
     document.getElementById("updated").textContent="Cập nhật: "+ptTime()+" PT · "+okCount+"/"+ZONES.length+" mã vùng có giá";
   }catch(e){
