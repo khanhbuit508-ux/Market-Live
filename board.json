@@ -1,9 +1,9 @@
 {
  "removed": [
   {
+   "date": "22/10",
    "t": "MRVL",
-   "why": "thủng stop $224 (giá live $223.82, thấp nhất $222.94)",
-   "date": "22/10"
+   "why": "thủng stop $224 (giá live $223.82, thấp nhất $222.94)"
   },
   {
    "date": "22/10",
@@ -195,19 +195,26 @@
    "tgt": 223
   },
   {
-   "t": "LMT",
-   "lo": 505,
    "hi": 520,
+   "lo": 505,
    "stop": 493,
+   "t": "LMT",
    "tgt": 624
   },
   {
-   "t": "BIIB",
-   "lo": 228,
    "hi": 235,
+   "lo": 228,
    "stop": 220,
+   "t": "BIIB",
    "tgt": 300
+  },
+  {
+   "hi": 420,
+   "lo": 407,
+   "stop": 396,
+   "t": "FFIV",
+   "tgt": 504
   }
  ],
- "updated": "27/10 12:40 PT"
+ "updated": "28/10 6:43 PT"
 }
