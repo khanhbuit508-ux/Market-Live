@@ -251,8 +251,10 @@ function sharkCard(z,q){
   var P=q.price,c=chg(q),up=c>=0,vm=volMult(q);
   var vol=vm==null?"":(vm>=1.5?"🔥 vol còn nóng "+vm.toFixed(1)+"x":vm<0.8?"🌫️ vol nguội "+vm.toFixed(1)+"x":"vol "+vm.toFixed(1)+"x");
   var st=sharkTitle(z,q);
+  var entryMid=(z.lo+z.hi)/2, rEntry=(z.tgt!=null&&entryMid>z.stop)?(z.tgt-entryMid)/(entryMid-z.stop):null;
+  var rLine=(z.sold||rEntry==null)?'':'<br>📏 Vào $'+fmt(z.lo)+'–'+fmt(z.hi)+' · Cắt $'+fmt(z.stop)+' · Chốt $'+fmt(z.tgt)+' → Ăn '+rEntry.toFixed(1)+' R';
   var meta=z.sold?'<div class="meta">không bắt lại dù nó hồi</div>'
-    :'<div class="meta">Vùng <b>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</b> · 🎯 Chốt <b>$'+fmt(z.tgt)+'</b> · 🛑 Cắt <b>$'+fmt(z.stop)+'</b><br>'
+    :'<div class="meta">Vùng <b>$'+fmt(z.lo)+'–$'+fmt(z.hi)+'</b> · 🎯 Chốt <b>$'+fmt(z.tgt)+'</b> · 🛑 Cắt <b>$'+fmt(z.stop)+'</b>'+rLine+'<br>'
     +'💓 Còn sống khi giá &gt; $'+fmt(z.stop)+' · Đà còn <b>'+((z.tgt-P)/P*100>=0?'+':'')+((z.tgt-P)/P*100).toFixed(1)+'%</b> tới chốt'+(vol?'<br>'+vol:'')+'</div>';
   return '<div class="card'+st.cls+'"><div>'+st.badge+'</div>'
     +(st.a?'<div class="entry blink">⚡ TÍN HIỆU VÀO LỆNH</div>':"")
@@ -304,12 +306,63 @@ async function loadNews(){
     if(n.tin&&n.tin.length){h+='<h3 class="sec">📰 Tin mới</h3>';var fresh=n.tin.filter(function(t){return newsItemAgeMin(t)<360;});var shown=fresh.length?fresh:n.tin.slice(0,3);shown.forEach(function(t){h+='<div class="card"><div class="meta">'+t+'</div></div>';});if(!fresh.length)h+='<div class="sub">Tin trong ngày đã cũ — đang chờ bản cập nhật mới.</div>';}
     if(n.cudem) h+='<h3 class="sec">🌙 Cú đêm</h3><div class="card"><div class="meta">'+n.cudem+'</div></div>';
     if(n.kehoach) h+='<h3 class="sec">🎯 Kế hoạch sáng</h3><div class="card"><div class="meta">'+n.kehoach+'</div></div>';
-    if(!h) h='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
+    if(!h) h+='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
     else if(n.updated) h+='<div class="sub" id="newsFoot">🟢 Tin mới nhất: <b id="newsFresh">vừa xong</b> ('+n.updated+')</div>';
     box.innerHTML=h;tickNewsFresh();
   }catch(e){
     box.innerHTML='<div class="sub">Tin sáng mai em cập nhật lúc ~6:30 PT.</div>';
   }
+}
+
+// ---- ĐIỂM VÀO NGÀY GAP + CÁ MẬP ĐANG GOM (gap.json / shark.json, fail-soft: lỗi là ẩn, bảng vẫn chạy) ----
+function escHtml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function gapStatus(g,q){
+  if(!q) return '<span class="badge b-warn2">⏳ CHỜ MỐC</span>';
+  var P=q.price;
+  if(P<=g.stop) return '<span class="badge b-bad">🔴 HỦY — thủng cắt</span>';
+  if(Math.abs(P-g.entry)/g.entry<=0.005) return '<span class="badge b-ok blink">🟢 MUA ĐƯỢC</span>';
+  if(g.type==="LẤY LẠI MỐC"){ if(P>=g.entry) return '<span class="badge b-ok blink">🟢 MUA ĐƯỢC</span>'; }
+  else if(q.dayLow&&q.dayLow<=g.entry) return '<span class="badge b-ok blink">🟢 MUA ĐƯỢC</span>';
+  return '<span class="badge b-warn2">⏳ CHỜ MỐC</span>';
+}
+function gapR(g){
+  if(g.tgt==null||g.entry<=g.stop) return "";
+  return ' · Chốt $'+fmt(g.tgt)+' → Ăn '+((g.tgt-g.entry)/(g.entry-g.stop)).toFixed(1)+' R';
+}
+async function gapSection(M){
+  try{
+    var r=await fetch("gap.json?t="+Date.now());
+    if(!r.ok) return "";
+    var j=await r.json();
+    if(!j.items||!j.items.length) return "";
+    var h='<h3 class="sec">🎯 ĐIỂM VÀO NGÀY GAP</h3>';
+    if(j.updated) h+='<div class="sub">Cập nhật '+escHtml(j.updated)+' — mốc tính từ giá mở cửa, không phải vùng gốc</div>';
+    j.items.forEach(function(g){
+      var q=M[g.t];
+      var lbl=g.type==="VỀ VÙNG"?"VỀ VÙNG":g.type==="HỒI VỀ MỐC"?"HỒI VỀ MỐC":"LẤY LẠI MỐC";
+      h+='<div class="card"><div><b>'+g.t+'</b> <span class="tag">'+lbl+'</span> '+gapStatus(g,q)+'</div>'
+        +'<div class="meta">Vào <b>$'+fmt(g.entry)+'</b> · Cắt <b>$'+fmt(g.stop)+'</b>'+gapR(g)
+        +(q?' · Giá live <b>$'+fmt(q.price)+'</b>':'')+'</div></div>';
+    });
+    return h;
+  }catch(e){ return ""; }
+}
+async function sharkStrip(){
+  try{
+    var r=await fetch("shark.json?t="+Date.now());
+    if(!r.ok) return "";
+    var j=await r.json();
+    if(!j.items||!j.items.length) return "";
+    var h='<h3 class="sec">🦈 CÁ MẬP ĐANG GOM</h3>';
+    j.items.forEach(function(it){
+      var lv=it.type==="trigger"?"trigger $"+fmt(it.trigger):"vùng $"+fmt(it.lo)+"–$"+fmt(it.hi);
+      var note=String(it.note||"");
+      if(note.length>160) note=note.slice(0,160)+"…";
+      h+='<div class="card"><div><b>'+it.t+'</b> <span class="tag">'+lv+'</span> <span class="tag">Cắt $'+fmt(it.stop)+'</span></div>'
+        +'<div class="meta">'+escHtml(note)+'</div></div>';
+    });
+    return h;
+  }catch(e){ return ""; }
 }
 
 async function render(){
@@ -364,15 +417,17 @@ async function render(){
     cards.sort(function(a,b){return a.s-b.s;});
     var entries=[];
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop&&P<=z.hi&&(P-z.stop)/z.stop>=0.02)entries.push(z.t);});
-    var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+"</div>":"";
+    var estrip=entries.length?'<div class="banner blink" style="background:#3a2f10;border:1px solid #f5c518;text-align:center;font-weight:800;font-size:15px">⚡ VÀO LỆNH: '+entries.join(" · ")+'</div>':"";
     var sapcat=[];
     ZONES.forEach(function(z){var q=M[z.t];if(!q||z.sold)return;var P=q.price;if(P>z.stop){var d=(P-z.stop)/z.stop*100;if(d<2)sapcat.push({t:z.t,d:d});}});
     sapcat.sort(function(a,b){return a.d-b.d;});
-    var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+"</div>":"";
+    var scstrip=sapcat.length?'<div class="banner b-warn blink" style="text-align:center;font-weight:800;font-size:15px">⚠️ SẮP CẮT: '+sapcat.map(function(s){return s.t+" còn cách cắt "+s.d.toFixed(1)+"%";}).join(" · ")+'</div>':"";
     var ups=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c>0;}).sort(function(a,b){return b.c-a.c;}).slice(0,3);
     var dns=ZONES.map(function(z){var q=M[z.t];return q?{t:z.t,c:chg(q)}:null;}).filter(function(x){return x&&x.c<0;}).sort(function(a,b){return a.c-b.c;}).slice(0,3);
-    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+"</div>":"");
-    document.getElementById("sec-shark").innerHTML=hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
+    var hotstrip=(ups.length?'<div class="banner blink" style="background:#052e16;border:1px solid #22c55e;text-align:center;font-weight:800;font-size:15px">🚀 TĂNG MẠNH NHẤT: '+ups.map(function(h){return h.t+" +"+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"")+(dns.length?'<div class="banner blink" style="background:#2a1503;border:1px solid #f59e0b;text-align:center;font-weight:800;font-size:15px">🔻 GIẢM MẠNH NHẤT: '+dns.map(function(h){return h.t+" "+h.c.toFixed(1)+"%";}).join(" · ")+'</div>':"");
+    var gapSec=await gapSection(M);
+    var shkStrip=await sharkStrip();
+    document.getElementById("sec-shark").innerHTML=gapSec+shkStrip+hotstrip+scstrip+estrip+cards.map(function(x){return x.html;}).join("");
     loadNews();
 
     // SCANNER — top bounce toàn thị trường
