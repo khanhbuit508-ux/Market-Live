@@ -1,0 +1,23 @@
+{
+ "updated": "28/10 08:16 PT",
+ "items": [
+  {"t": "TSLA", "type": "VỀ VÙNG", "entry": 365, "stop": 345, "tgt": 400},
+  {"t": "NVDA", "type": "VỀ VÙNG", "entry": 216, "stop": 205, "tgt": 243},
+  {"t": "AAPL", "type": "VỀ VÙNG", "entry": 331, "stop": 319, "tgt": 360},
+  {"t": "MSFT", "type": "VỀ VÙNG", "entry": 500, "stop": 487, "tgt": 560},
+  {"t": "PLTR", "type": "VỀ VÙNG", "entry": 170, "stop": 157, "tgt": 200},
+  {"t": "AMZN", "type": "VỀ VÙNG", "entry": 248, "stop": 237, "tgt": 280},
+  {"t": "CRM", "type": "VỀ VÙNG", "entry": 218, "stop": 204, "tgt": 260},
+  {"t": "TWLO", "type": "VỀ VÙNG", "entry": 245, "stop": 222, "tgt": 300},
+  {"t": "OKTA", "type": "VỀ VÙNG", "entry": 195, "stop": 179, "tgt": 225},
+  {"t": "FTNT", "type": "VỀ VÙNG", "entry": 170, "stop": 159, "tgt": 204},
+  {"t": "DDOG", "type": "VỀ VÙNG", "entry": 255, "stop": 237, "tgt": 300},
+  {"t": "SWKS", "type": "VỀ VÙNG", "entry": 82, "stop": 72, "tgt": 107},
+  {"t": "ADPT", "type": "VỀ VÙNG", "entry": 25.5, "stop": 23.5, "tgt": 31},
+  {"t": "GD", "type": "VỀ VÙNG", "entry": 335, "stop": 321, "tgt": 402},
+  {"t": "RTX", "type": "VỀ VÙNG", "entry": 187, "stop": 173, "tgt": 223},
+  {"t": "LMT", "type": "VỀ VÙNG", "entry": 520, "stop": 493, "tgt": 624},
+  {"t": "BIIB", "type": "VỀ VÙNG", "entry": 235, "stop": 220, "tgt": 300},
+  {"t": "FFIV", "type": "LẤY LẠI MỐC", "entry": 396, "stop": 371.09, "tgt": null}
+ ]
+}
