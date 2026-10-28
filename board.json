@@ -1,6 +1,11 @@
 {
  "removed": [
   {
+   "date": "28/10",
+   "t": "FFIV",
+   "why": "thủng stop $396 (giá live $375.67, thấp nhất $374.46)"
+  },
+  {
    "date": "22/10",
    "t": "MRVL",
    "why": "thủng stop $224 (giá live $223.82, thấp nhất $222.94)"
@@ -207,14 +212,7 @@
    "stop": 220,
    "t": "BIIB",
    "tgt": 300
-  },
-  {
-   "hi": 420,
-   "lo": 407,
-   "stop": 396,
-   "t": "FFIV",
-   "tgt": 504
   }
  ],
- "updated": "28/10 6:43 PT"
+ "updated": "28/10 7:43 PT"
 }
