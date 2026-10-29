@@ -1,6 +1,11 @@
 {
  "removed": [
   {
+   "t": "FTNT",
+   "why": "thủng stop $159 (giá live $127.23)",
+   "date": "29/10"
+  },
+  {
    "date": "28/10",
    "t": "FFIV",
    "why": "thủng stop $396 (giá live $375.67, thấp nhất $374.46)"
@@ -158,13 +163,6 @@
    "tgt": 225
   },
   {
-   "hi": 170,
-   "lo": 166,
-   "stop": 159,
-   "t": "FTNT",
-   "tgt": 204
-  },
-  {
    "hi": 255,
    "lo": 245,
    "stop": 237,
@@ -214,5 +212,5 @@
    "tgt": 300
   }
  ],
- "updated": "29/10 3:30 PT"
+ "updated": "29/10 6:45 PT"
 }
