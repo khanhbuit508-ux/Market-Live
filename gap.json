@@ -2,13 +2,6 @@
  "updated": "29/10 6:00 PT",
  "items": [
   {
-   "t": "TSLA",
-   "type": "HỒI VỀ MỐC",
-   "entry": 404.22,
-   "stop": 345,
-   "tgt": 400
-  },
-  {
    "t": "AAPL",
    "type": "HỒI VỀ MỐC",
    "entry": 343.83,
