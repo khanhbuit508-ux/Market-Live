@@ -1,8 +1,27 @@
 {
- "updated": "28/10/2026",
+ "updated": "29/10/2026",
  "items": [
-  {"t": "DDOG", "type": "trigger", "trigger": 265, "stop": 237, "note": "Đóng 27/10 $280.82 (+0.21%); pre-market 28/10 ~$280.50 (−0.1%) — vẫn trên mức kích hoạt $265 (~5.8%). Bằng chứng gom còn nguyên: UBS nâng target $280→$320 (27/10, Buy), Oppenheimer $300→$330, Mizuho $330, Bernstein $350. Cắt lỗ $237. Earnings 04/11."},
-  {"t": "NVDA", "type": "trigger", "trigger": 228, "stop": 205, "note": "Pre-market 28/10 ~$219.53 (+0.73%) — trên miệng vùng mua $212–216 (~1.6%). Bằng chứng gom còn THẤP (chưa có phiên lệnh lớn mua ròng thứ 2). Gió thuận: SK Hynix bùng kéo nhóm chip nhớ/AI. Lấy lại $228 + volume ≥1,3× = xác nhận trend."},
-  {"t": "BIIB", "type": "zone", "lo": 228, "hi": 235, "stop": 220, "note": "Q3 sáng 28/10 VƯỢT MẠNH: EPS $2.62 vs kỳ vọng $1.99, doanh thu $2.8B vs $2.63B, nâng đáy triển vọng FY26 lên $12.20–13.00. Ngoài giờ ~$255.55 (+1.1%) — vẫn trên mức kích hoạt $241 (~6%) và trên xa vùng chờ $228–235 (~8.7%), không đuổi. Cụm 4 nhà nâng lên $270–310 được báo cáo củng cố. Cắt lỗ đóng cửa dưới $220."}
+  {
+   "t": "DDOG",
+   "type": "trigger",
+   "trigger": 265,
+   "stop": 237,
+   "note": "Đóng 28/10 $278.41 (-0.86%); chưa có giá pre-market mới sáng 29/10 — vẫn trên mức kích hoạt $265 (~5%). Bằng chứng gom còn nguyên: UBS $320, Oppenheimer $330, Mizuho $330, Bernstein $350; ARK mua thêm 5.110 cp ngày 29/10. Cắt lỗ $237. Earnings 04/11."
+  },
+  {
+   "t": "NVDA",
+   "type": "trigger",
+   "trigger": 228,
+   "stop": 205,
+   "note": "Pre-market 29/10 ~$214.00 (-0.64%) — NẰM TRONG vùng mua $212-216. Bằng chứng gom còn THẤP (chưa có phiên lệnh lớn mua ròng thứ 2). Lấy lại $228 + volume >=1,3x = xác nhận trend. Cắt lỗ $205."
+  },
+  {
+   "t": "BIIB",
+   "type": "zone",
+   "lo": 228,
+   "hi": 235,
+   "stop": 220,
+   "note": "Đóng 28/10 $244.05 (-3.43%); sau giờ đi ngang — trên vùng chờ $228-235 (~3.8% trên miệng vùng), KHÔNG đuổi. Q3 vượt mạnh (EPS $2.62 vs $1.99; doanh thu $2.8B) + JPMorgan Overweight, target $300. Cắt lỗ đóng cửa dưới $220."
+  }
  ]
 }
