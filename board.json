@@ -1,6 +1,16 @@
 {
  "removed": [
   {
+   "t": "AMZN",
+   "why": "thủng stop $237 (mở cửa/pre-market ~$226–229 xuyên stop; giá live $237.20 hồi sát stop)",
+   "date": "30/10"
+  },
+  {
+   "t": "TWLO",
+   "why": "thủng stop $222 (giá live $187.87, −15.4%)",
+   "date": "30/10"
+  },
+  {
    "t": "FTNT",
    "why": "thủng stop $159 (giá live $127.23)",
    "date": "29/10"
@@ -128,13 +138,6 @@
    "tgt": 200
   },
   {
-   "hi": 248,
-   "lo": 245,
-   "stop": 237,
-   "t": "AMZN",
-   "tgt": 280
-  },
-  {
    "hi": 218,
    "lo": 211,
    "stop": 204,
@@ -147,13 +150,6 @@
    "stop": 179,
    "t": "MRNA",
    "tgt": 240
-  },
-  {
-   "hi": 245,
-   "lo": 230,
-   "stop": 222,
-   "t": "TWLO",
-   "tgt": 300
   },
   {
    "hi": 195,
@@ -212,5 +208,5 @@
    "tgt": 300
   }
  ],
- "updated": "30/10 3:30 PT"
+ "updated": "30/10 6:45 PT"
 }
