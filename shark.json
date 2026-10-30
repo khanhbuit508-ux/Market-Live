@@ -1,19 +1,19 @@
 {
- "updated": "29/10/2026",
+ "updated": "30/10/2026",
  "items": [
   {
    "t": "DDOG",
    "type": "trigger",
    "trigger": 265,
    "stop": 237,
-   "note": "Đóng 28/10 $278.41 (-0.86%); chưa có giá pre-market mới sáng 29/10 — vẫn trên mức kích hoạt $265 (~5%). Bằng chứng gom còn nguyên: UBS $320, Oppenheimer $330, Mizuho $330, Bernstein $350; ARK mua thêm 5.110 cp ngày 29/10. Cắt lỗ $237. Earnings 04/11."
+   "note": "Pre-market 30/10 ~$257,68 (-3,1% so voi dong $265,84) - MAT muc kich hoat $265 trong pre-market (ban theo nhip tech chung). Bang chung gom con nguyen: cum nang target UBS $320, Oppenheimer $330, Mizuho $330, Bernstein $350, Wells Fargo $325; ARK mua them 5.110 cp ngay 29/10; TD Cowen thay tang truong tren guidance. Trang thai: lay lai $265 + volume moi xac nhan. Cat lo $237. Earnings 04/11 (truoc mo cua - da xac nhan web)."
   },
   {
    "t": "NVDA",
    "type": "trigger",
    "trigger": 228,
    "stop": 205,
-   "note": "Pre-market 29/10 ~$214.00 (-0.64%) — NẰM TRONG vùng mua $212-216. Bằng chứng gom còn THẤP (chưa có phiên lệnh lớn mua ròng thứ 2). Lấy lại $228 + volume >=1,3x = xác nhận trend. Cắt lỗ $205."
+   "note": "Pre-market 30/10 ~$208,35 (-2,5% so voi dong $213,66) - GAP XUONG DUOI vung mua $212-216 theo nhip ban chip sau INTC (AMD -8,6%, AVGO -3,8% PM). Bang chung gom con THAP (chua co phien lenh lon mua rong thu 2); tin Megaspeed/Nvidia bac bo la luc them. Trang thai: duoi vung -> KHONG vao theo vung cu; con tren cat lo $205. Lay lai $228 + vol >=1,3x = xac nhan trend."
   },
   {
    "t": "BIIB",
@@ -21,7 +21,7 @@
    "lo": 228,
    "hi": 235,
    "stop": 220,
-   "note": "Đóng 28/10 $244.05 (-3.43%); sau giờ đi ngang — trên vùng chờ $228-235 (~3.8% trên miệng vùng), KHÔNG đuổi. Q3 vượt mạnh (EPS $2.62 vs $1.99; doanh thu $2.8B) + JPMorgan Overweight, target $300. Cắt lỗ đóng cửa dưới $220."
+   "note": "Dong 29/10 $249,65 (+2,29%), pre-market ~$252-253 (+1%) - cum nang hang tiep tuc: UBS target $270 -> $300 (Buy), RBC $256 -> $272 (Outperform), Canaccord $248 -> $272 (Buy). Gia ~7% tren mieng vung cho $228-235 - KHONG duoi. Trang thai: cho chinh ve $228-235 moi vao. Cat lo dong cua duoi $220."
   }
  ]
 }
