@@ -1,1 +1,109 @@
-{"items":[{"entry":348.91,"stop":319,"t":"AAPL","tgt":360,"type":"HỒI VỀ MỐC"},{"entry":530.14,"stop":487,"t":"MSFT","tgt":560,"type":"HỒI VỀ MỐC"},{"entry":196.42,"stop":157,"t":"PLTR","tgt":200,"type":"HỒI VỀ MỐC"},{"entry":230.9,"stop":204,"t":"CRM","tgt":260,"type":"HỒI VỀ MỐC"},{"entry":221.86,"stop":179,"t":"OKTA","tgt":225,"type":"HỒI VỀ MỐC"},{"entry":255,"stop":237,"t":"DDOG","tgt":300,"type":"VỀ VÙNG"},{"entry":89.43,"stop":72,"t":"SWKS","tgt":107,"type":"HỒI VỀ MỐC"},{"entry":28.17,"stop":23.5,"t":"ADPT","tgt":31,"type":"HỒI VỀ MỐC"},{"entry":370.82,"stop":321,"t":"GD","tgt":402,"type":"HỒI VỀ MỐC"},{"entry":199.4,"stop":173,"t":"RTX","tgt":223,"type":"HỒI VỀ MỐC"},{"entry":249.65,"stop":220,"t":"BIIB","tgt":300,"type":"HỒI VỀ MỐC"}],"updated":"30/10 3:30 PT (sơ bộ)"}
+{
+ "updated": "30/10 6:00 PT",
+ "items": [
+  {
+   "t": "AAPL",
+   "type": "HỒI VỀ MỐC",
+   "entry": 348.91,
+   "stop": 319,
+   "tgt": 360,
+   "pm_src": "PM"
+  },
+  {
+   "t": "MSFT",
+   "type": "HỒI VỀ MỐC",
+   "entry": 530.14,
+   "stop": 487,
+   "tgt": 560,
+   "pm_src": "PM"
+  },
+  {
+   "t": "PLTR",
+   "type": "HỒI VỀ MỐC",
+   "entry": 196.42,
+   "stop": 157,
+   "tgt": 200,
+   "pm_src": "CLOSE-REF"
+  },
+  {
+   "t": "AMZN",
+   "type": "LẤY LẠI MỐC",
+   "entry": 237,
+   "stop": 225.08,
+   "tgt": null,
+   "note": "stale zone"
+  },
+  {
+   "t": "CRM",
+   "type": "HỒI VỀ MỐC",
+   "entry": 230.9,
+   "stop": 204,
+   "tgt": 260,
+   "pm_src": "PM"
+  },
+  {
+   "t": "TWLO",
+   "type": "LẤY LẠI MỐC",
+   "entry": 222,
+   "stop": 197.0,
+   "tgt": null,
+   "note": "stale zone"
+  },
+  {
+   "t": "OKTA",
+   "type": "HỒI VỀ MỐC",
+   "entry": 221.86,
+   "stop": 179,
+   "tgt": 225,
+   "pm_src": "PM"
+  },
+  {
+   "t": "DDOG",
+   "type": "VỀ VÙNG",
+   "entry": 255,
+   "stop": 237,
+   "tgt": 300,
+   "pm_src": "PM"
+  },
+  {
+   "t": "SWKS",
+   "type": "HỒI VỀ MỐC",
+   "entry": 89.43,
+   "stop": 72,
+   "tgt": 107,
+   "pm_src": "CLOSE-REF"
+  },
+  {
+   "t": "ADPT",
+   "type": "HỒI VỀ MỐC",
+   "entry": 28.17,
+   "stop": 23.5,
+   "tgt": 31,
+   "pm_src": "CLOSE-REF"
+  },
+  {
+   "t": "GD",
+   "type": "HỒI VỀ MỐC",
+   "entry": 370.82,
+   "stop": 321,
+   "tgt": 402,
+   "pm_src": "CLOSE-REF"
+  },
+  {
+   "t": "RTX",
+   "type": "HỒI VỀ MỐC",
+   "entry": 199.4,
+   "stop": 173,
+   "tgt": 223,
+   "pm_src": "CLOSE-REF"
+  },
+  {
+   "t": "BIIB",
+   "type": "HỒI VỀ MỐC",
+   "entry": 252.5,
+   "stop": 220,
+   "tgt": 300,
+   "pm_src": "PM"
+  }
+ ]
+}
