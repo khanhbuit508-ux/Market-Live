@@ -2,16 +2,16 @@
  "cudem": "🌙 Futures ĐÊM QUA xanh nhẹ sau bán tháo thứ Sáu: Nasdaq 100 +0,68~0,89% (~28.730–28.770), S&P 500 +0,37~0,54% (~7.640–7.654), Dow +0,36~0,61% (~52.100–52.230).<br>🛢️ Dầu GIẢM MẠNH: WTI −4,2% về ~$99,8, Brent −4,3% ~$108,7 — Mỹ và Iran ra dấu hiệu hướng giải pháp ngoại giao, tốt cho tâm lý toàn thị trường.<br>🌏 Châu Á bật, lợi suất 10 năm ổn định ~4,91%.<br>📊 Tối nay tâm điểm: AAPL + PLTR báo cáo SAU đóng cửa; ngày mai bầu cử giữa kỳ Mỹ — thị trường có thể rung lắc.",
  "kehoach": "🎯 Nhóm dẫn hôm nay: bán dẫn HỒI kỹ thuật (DRAM +4% PM, SOXX +2%, NVDA +1% PM, AMD +2,4% PM) + quốc phòng giữ đà (GD vượt Q3 thứ Sáu).<br>🎯 AAPL ~$344,09 (đi ngang): KHÔNG VÀO trước báo cáo tối nay; về $330–331 → VÀO, cắt $319; thủng $319 → BÁN.<br>🎯 PLTR $187,60 (+1,89%): options định giá ±13,32%, KHÔNG mở vị thế mới hôm nay; dump về $163–170 → VÀO, cắt $157.<br>🎯 OKTA ~$213–215 (+2,4~3%, gap theo tin vào S&P 500): trên xa vùng mua — KHÔNG đuổi; về $185–195 → VÀO, cắt $179.<br>🎯 BIIB ~$252,55: Argus nâng Hold→Buy target $280 qua cuối tuần, Q3 VƯỢT; chờ chỉnh về $228–235, cắt $220.<br>📅 6:45 PT: S&P Global PMI · 7:00 PT: ISM Manufacturing PMI (kỳ vọng 54,5).<br>⚠️ 5 mã thủng cắt lỗ (DDOG, NVDA, TWLO, FPS, PRLB): đã BÁN theo kỷ luật — tuyệt đối KHÔNG mua lại.",
  "tin": [
+  "🚨 (scan 8:26) SMMT $14,86 (−7,3%) — THỦNG CẮT LỖ $15 LẦN ĐẦU HÔM NAY: BÁN NGAY theo kỷ luật (vùng mua $15,50–17); mã đầu cơ nhỏ, không bắt dao rơi",
+  "🟢 (scan 8:26) TXG $65,77 (−6,19%) — RƠI VÀO VÙNG MUA $65–70 lần đầu hôm nay; cắt lỗ $60; 10x Genomics vẫn dưới áp lực sau gap down thứ Sáu",
+  "📉 (scan 8:26) TWST $136,69 (−10,53%) — VƯỢT −5% lần đầu hôm nay, tiếp đà bán tháo thứ Sáu; chưa về vùng mua $127–135, cắt lỗ $121",
+  "📈 (scan 8:26) VNCE $11,79 (+10,50%) — BÙNG vượt +5% lần đầu hôm nay, chạy lên trên vùng mua $10,30–11; không đuổi",
   "🟢 (scan 7:26) Chỉ số VƯỢT +1% lần đầu hôm nay: Dow 52.412 (+1,19%), Nasdaq 100 28.716,6 (+1,08%) — S&P 500 +0,99% sát dưới mốc; thị trường xanh toàn diện sau bán tháo thứ Sáu",
   "🟢 (scan 7:26) AMZN +5,19% về $252,84 — VƯỢT +5% lần đầu hôm nay; Phillip Securities nâng lên Buy, target $330 sáng nay; đã quét qua vùng mua $245–248 giờ đầu — không đuổi",
   "📊 (scan 7:26) ISM Manufacturing PMI tháng 10 = 55,5 — VƯỢT kỳ vọng 54,5 (đơn hàng mới 55,5, việc làm 52,4); S&P Global PMI 54,9 (thấp hơn sơ bộ 56,0, vẫn mở rộng)",
   "🔴 (scan 6:41) OKTA −7,8% về $192 — RƠI VÀO VÙNG MUA $185–195 (cắt lỗ $179); pre-market còn +3% theo tin vào S&P 500, mở cửa đảo chiều xả mạnh, chưa rõ catalyst mới",
   "🍏 Tối nay SAU ĐÓNG CỬA: AAPL báo cáo — lần đầu dưới CEO John Ternus, doanh thu kỳ vọng ~$113,3–113,6B, options ±4,25%; cảnh báo gap sau báo cáo (nguồn: tin sáng)",
-  "🛡️ Tối nay SAU ĐÓNG CỬA: PLTR báo cáo — doanh thu kỳ vọng $2,2B +85%, EPS $0,41 +94%; JPM khởi động Buy target $262; options ±13,32% — không mở vị thế mới hôm nay (nguồn: tin sáng)",
-  "🦈 OKTA VÀO S&P 500 trước mở cửa Thứ Tư 04/11 (thay Kenvue) — các quỹ lớn buộc phải mua vào; pre-market +2,4~3% (nguồn: tin sáng)",
-  "🗳️ Bầu cử giữa kỳ NGÀY MAI Thứ Ba 03/11 — thị trường có thể rung lắc mạnh (nguồn: tin sáng)",
-  "⚠️ 5 mã thủng cắt lỗ: DDOG (thủng $237), NVDA (thủng $205), TWLO, FPS (thứ Sáu), PRLB (thứ Năm) — đã BÁN theo kỷ luật, tuyệt đối không mua lại (nguồn: tin sáng)",
-  "💼 Sáng nay trước mở cửa: EL +3,2% sau beat, IDXX +4,68% sau beat + nâng guidance; CHKP −6,65% sau hụt; GILD vượt Q3 tối thứ Sáu (nguồn: tin sáng)"
+  "🛡️ Tối nay SAU ĐÓNG CỬA: PLTR báo cáo — doanh thu kỳ vọng $2,2B +85%, EPS $0,41 +94%; JPM khởi động Buy target $262; options ±13,32% — không mở vị thế mới hôm nay (nguồn: tin sáng)"
  ],
- "updated": "11/02 7:31 PT"
+ "updated": "11/02 8:29 PT"
 }
