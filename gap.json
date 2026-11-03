@@ -1,13 +1,1 @@
-{
- "updated": "03/11 3:30 PT (sơ bộ)",
- "items": [
-  {"t": "MSFT", "type": "VỀ VÙNG", "entry": 500, "stop": 487, "tgt": 560, "note": "tham chiếu = giá đóng hôm qua $507,12 (chưa có PM); R ≈ 4,6"},
-  {"t": "CRM", "type": "HỒI VỀ MỐC", "entry": 226.18, "stop": 204, "tgt": 260, "note": "tham chiếu = giá đóng hôm qua; R ≈ 1,5"},
-  {"t": "SWKS", "type": "HỒI VỀ MỐC", "entry": 85.17, "stop": 72, "tgt": 107, "note": "tham chiếu = giá đóng hôm qua; R ≈ 1,7"},
-  {"t": "GD", "type": "HỒI VỀ MỐC", "entry": 373.46, "stop": 321, "tgt": 402, "note": "tham chiếu = giá đóng hôm qua; R ≈ 0,5"},
-  {"t": "RTX", "type": "HỒI VỀ MỐC", "entry": 202.79, "stop": 173, "tgt": 223, "note": "tham chiếu = giá đóng hôm qua; R ≈ 0,7"},
-  {"t": "BIIB", "type": "HỒI VỀ MỐC", "entry": 249.01, "stop": 220, "tgt": 300, "note": "tham chiếu = giá đóng hôm qua; R ≈ 1,8"},
-  {"t": "VNCE", "type": "HỒI VỀ MỐC", "entry": 12.0, "stop": 9.7, "tgt": 13, "note": "tham chiếu = giá đóng hôm qua (+12,46% thứ Hai); R ≈ 0,4"},
-  {"t": "GSAT", "type": "VỀ VÙNG", "entry": 81, "stop": 77, "tgt": 90, "note": "tham chiếu = giá đóng hôm qua $82,94 (chưa có PM); R ≈ 2,3"}
- ]
-}
+{"items":[{"entry":500,"pm_src":"PM","stop":487,"t":"MSFT","tgt":560,"type":"VỀ VÙNG"},{"entry":218,"pm_src":"PM","stop":204,"t":"CRM","tgt":260,"type":"VỀ VÙNG"},{"entry":85.18,"pm_src":"CLOSE-REF","stop":72,"t":"SWKS","tgt":107,"type":"HỒI VỀ MỐC"},{"entry":373.46,"pm_src":"CLOSE-REF","stop":321,"t":"GD","tgt":402,"type":"HỒI VỀ MỐC"},{"entry":202.79,"pm_src":"CLOSE-REF","stop":173,"t":"RTX","tgt":223,"type":"HỒI VỀ MỐC"},{"entry":249.01,"pm_src":"CLOSE-REF","stop":220,"t":"BIIB","tgt":300,"type":"HỒI VỀ MỐC"},{"entry":81,"pm_src":"CLOSE-REF","stop":77,"t":"GSAT","tgt":90,"type":"VỀ VÙNG"}],"updated":"3/11 6:00 PT"}
