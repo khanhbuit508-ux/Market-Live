@@ -1,77 +1,68 @@
 {
- "updated": "11/04 3:30 PT (sơ bộ)",
+ "updated": "04/11 6:00 PT",
  "items": [
   {
    "t": "TSLA",
    "type": "HỒI VỀ MỐC",
-   "entry": 398.51,
+   "entry": 398.5,
    "stop": 345,
-   "tgt": 400,
-   "pm_src": "PM"
+   "tgt": 400
   },
   {
    "t": "AAPL",
    "type": "VỀ VÙNG",
    "entry": 331,
    "stop": 319,
-   "tgt": 360,
-   "pm_src": "PM"
+   "tgt": 360
   },
   {
    "t": "MSFT",
    "type": "HỒI VỀ MỐC",
    "entry": 520.99,
    "stop": 487,
-   "tgt": 560,
-   "pm_src": "PM"
-  },
-  {
-   "t": "PLTR",
-   "type": "VỀ VÙNG",
-   "entry": 170,
-   "stop": 157,
-   "tgt": 200,
-   "pm_src": "PM"
+   "tgt": 560
   },
   {
    "t": "CRM",
    "type": "HỒI VỀ MỐC",
    "entry": 222.2,
    "stop": 204,
-   "tgt": 260,
-   "pm_src": "PM"
+   "tgt": 260
+  },
+  {
+   "t": "SWKS",
+   "type": "LẤY LẠI MỐC",
+   "entry": 72,
+   "stop": 70.58,
+   "tgt": null
   },
   {
    "t": "GD",
    "type": "HỒI VỀ MỐC",
-   "entry": 374.5,
+   "entry": 373.46,
    "stop": 321,
-   "tgt": 402,
-   "pm_src": "PM"
+   "tgt": 402
   },
   {
    "t": "RTX",
    "type": "HỒI VỀ MỐC",
-   "entry": 203.82,
+   "entry": 202.79,
    "stop": 173,
-   "tgt": 223,
-   "pm_src": "PM"
+   "tgt": 223
   },
   {
    "t": "BIIB",
    "type": "HỒI VỀ MỐC",
-   "entry": 248.93,
+   "entry": 249.01,
    "stop": 220,
-   "tgt": 300,
-   "pm_src": "CLOSE-REF"
+   "tgt": 300
   },
   {
    "t": "GSAT",
-   "type": "HỒI VỀ MỐC",
-   "entry": 83.77,
+   "type": "VỀ VÙNG",
+   "entry": 81,
    "stop": 77,
-   "tgt": 90,
-   "pm_src": "CLOSE-REF"
+   "tgt": 90
   }
  ]
 }
