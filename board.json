@@ -1,44 +1,44 @@
 {
  "removed": [
   {
+   "date": "04/11",
    "t": "SWKS",
-   "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54",
-   "date": "04/11"
+   "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54"
   },
   {
+   "date": "02/11",
    "t": "SMMT",
-   "why": "thủng stop $15 (giá live ~$14.86, alert KHẨN scan 8:26)",
-   "date": "02/11"
+   "why": "thủng stop $15 (giá live ~$14.86, alert KHẨN scan 8:26)"
   },
   {
+   "date": "30/10",
    "t": "MRNA",
-   "why": "vùng mua $188–192 hết hiệu lực (hủy 26/10), không còn vùng mới",
-   "date": "30/10"
+   "why": "vùng mua $188–192 hết hiệu lực (hủy 26/10), không còn vùng mới"
   },
   {
+   "date": "30/10",
    "t": "NVDA",
-   "why": "thủng stop $205 (giá live ~$204.7, đáy $204.41, alert scan 9:26)",
-   "date": "30/10"
+   "why": "thủng stop $205 (giá live ~$204.7, đáy $204.41, alert scan 9:26)"
   },
   {
+   "date": "30/10",
    "t": "DDOG",
-   "why": "thủng stop $237 (giá live ~$233.5, alert scan 8:26)",
-   "date": "30/10"
+   "why": "thủng stop $237 (giá live ~$233.5, alert scan 8:26)"
   },
   {
+   "date": "30/10",
    "t": "AMZN",
-   "why": "thủng stop $237 (mở cửa/pre-market ~$226–229 xuyên stop; giá live $237.20 hồi sát stop)",
-   "date": "30/10"
+   "why": "thủng stop $237 (mở cửa/pre-market ~$226–229 xuyên stop; giá live $237.20 hồi sát stop)"
   },
   {
+   "date": "30/10",
    "t": "TWLO",
-   "why": "thủng stop $222 (giá live $187.87, −15.4%)",
-   "date": "30/10"
+   "why": "thủng stop $222 (giá live $187.87, −15.4%)"
   },
   {
+   "date": "29/10",
    "t": "FTNT",
-   "why": "thủng stop $159 (giá live $127.23)",
-   "date": "29/10"
+   "why": "thủng stop $159 (giá live $127.23)"
   },
   {
    "date": "28/10",
@@ -205,33 +205,33 @@
    "tgt": 300
   },
   {
-   "t": "VNCE",
-   "lo": 10.3,
    "hi": 11,
+   "lo": 10.3,
    "stop": 9.7,
+   "t": "VNCE",
    "tgt": 13
   },
   {
-   "t": "GSAT",
-   "lo": 80,
    "hi": 81,
+   "lo": 80,
    "stop": 77,
+   "t": "GSAT",
    "tgt": 90
   },
   {
-   "t": "TECH",
-   "lo": 70,
    "hi": 72,
+   "lo": 70,
    "stop": 67.5,
+   "t": "TECH",
    "tgt": 86
   },
   {
-   "t": "SPCX",
-   "lo": 135,
    "hi": 140,
+   "lo": 135,
    "stop": 129,
+   "t": "SPCX",
    "tgt": 168
   }
  ],
- "updated": "04/11 11:42 PT"
+ "updated": "04/11 12:45 PT"
 }
