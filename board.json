@@ -1,6 +1,11 @@
 {
  "removed": [
   {
+   "t": "SWKS",
+   "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54",
+   "date": "04/11"
+  },
+  {
    "t": "SMMT",
    "why": "thủng stop $15 (giá live ~$14.86, alert KHẨN scan 8:26)",
    "date": "02/11"
@@ -165,13 +170,6 @@
    "tgt": 225
   },
   {
-   "hi": 82,
-   "lo": 76,
-   "stop": 72,
-   "t": "SWKS",
-   "tgt": 107
-  },
-  {
    "hi": 25.5,
    "lo": 24.5,
    "stop": 23.5,
@@ -219,7 +217,21 @@
    "hi": 81,
    "stop": 77,
    "tgt": 90
+  },
+  {
+   "t": "TECH",
+   "lo": 70,
+   "hi": 72,
+   "stop": 67.5,
+   "tgt": 86
+  },
+  {
+   "t": "SPCX",
+   "lo": 135,
+   "hi": 140,
+   "stop": 129,
+   "tgt": 168
   }
  ],
- "updated": "04/11 3:30 PT"
+ "updated": "04/11 6:45 PT"
 }
