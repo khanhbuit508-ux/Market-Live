@@ -1,234 +1,232 @@
 {
- "removed": [
-  {
-   "date": "05/11",
-   "t": "PLTR",
-   "why": "thủng stop $157 (giá live $156.13, đáy phiên $154.74, Finnhub phiên regular) — alert KHẨN scan 7:11"
-  },
-  {
-   "date": "05/11",
-   "t": "ILMN",
-   "why": "thủng stop $212 (giá live $211.995, đáy phiên $210.82, Finnhub phiên regular) — vừa thêm lượt 6:45 theo giá đóng 04/11 $226.54, mở cửa rớt xuyên stop"
-  },
-  {
-   "date": "05/11",
-   "t": "OKTA",
-   "why": "thủng stop $179 (giá live $174.41, đáy phiên $172.79, Finnhub phiên regular)"
-  },
-  {
-   "date": "05/11",
-   "t": "SPCX",
-   "why": "thủng stop $129 (giá live $128.73, đáy phiên $128.04, Finnhub phiên regular)"
-  },
-  {
-   "date": "05/11",
-   "t": "TECH",
-   "why": "vùng mua $70–72 hết hiệu lực — Merck mua lại $73/cp tiền mặt, giá kẹp trần $73, VIP 05/11 cảnh báo không mua (giá live $72.78)"
-  },
-  {
-   "date": "04/11",
-   "t": "SWKS",
-   "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54"
-  },
-  {
-   "date": "02/11",
-   "t": "SMMT",
-   "why": "thủng stop $15 (giá live ~$14.86, alert KHẨN scan 8:26)"
-  },
-  {
-   "date": "30/10",
-   "t": "MRNA",
-   "why": "vùng mua $188–192 hết hiệu lực (hủy 26/10), không còn vùng mới"
-  },
-  {
-   "date": "30/10",
-   "t": "NVDA",
-   "why": "thủng stop $205 (giá live ~$204.7, đáy $204.41, alert scan 9:26)"
-  },
-  {
-   "date": "30/10",
-   "t": "DDOG",
-   "why": "thủng stop $237 (giá live ~$233.5, alert scan 8:26)"
-  },
-  {
-   "date": "30/10",
-   "t": "AMZN",
-   "why": "thủng stop $237 (mở cửa/pre-market ~$226–229 xuyên stop; giá live $237.20 hồi sát stop)"
-  },
-  {
-   "date": "30/10",
-   "t": "TWLO",
-   "why": "thủng stop $222 (giá live $187.87, −15.4%)"
-  },
-  {
-   "date": "29/10",
-   "t": "FTNT",
-   "why": "thủng stop $159 (giá live $127.23)"
-  },
-  {
-   "date": "28/10",
-   "t": "FFIV",
-   "why": "thủng stop $396 (giá live $375.67, thấp nhất $374.46)"
-  },
-  {
-   "date": "22/10",
-   "t": "MRVL",
-   "why": "thủng stop $224 (giá live $223.82, thấp nhất $222.94)"
-  },
-  {
-   "date": "22/10",
-   "t": "APH",
-   "why": "thủng stop $77.5 (giá live $75.87, thấp nhất $75.77)"
-  },
-  {
-   "date": "22/10",
-   "t": "GOOGL",
-   "why": "thủng cắt lỗ $330 (day low $329.51, pre-market $328.9)"
-  },
-  {
-   "date": "22/10",
-   "t": "META",
-   "why": "thủng stop $665 (giá live $649.22, thấp nhất $649.22)"
-  },
-  {
-   "date": "22/10",
-   "t": "HWM",
-   "why": "thủng stop $203 (giá live $200.50, thấp nhất $200.37)"
-  },
-  {
-   "date": "20/10",
-   "t": "XMTR",
-   "why": "thủng stop $91 (giá live $90.10, mở cửa $90.40, thấp nhất $89.97)"
-  },
-  {
-   "date": "16/10",
-   "t": "KLAC",
-   "why": "thủng cắt $177 ngày 16/10 (mở cửa $174.46, thủng cả phiên)"
-  },
-  {
-   "date": "16/10",
-   "t": "ALAB",
-   "why": "thủng cắt $300 ngày 16/10 ($288.61)"
-  },
-  {
-   "date": "14/10",
-   "t": "MU",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "AMD",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "COIN",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "TSM",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "AMAT",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "QCOM",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "14/10",
-   "t": "HOOD",
-   "why": "đã bán 14/10"
-  },
-  {
-   "date": "12/10",
-   "t": "SNDK",
-   "why": "đã bán 12/10"
-  }
- ],
- "tickers": [
-  {
-   "hi": 365,
-   "lo": 355,
-   "stop": 345,
-   "t": "TSLA",
-   "tgt": 400
-  },
-  {
-   "hi": 331,
-   "lo": 330,
-   "stop": 319,
-   "t": "AAPL",
-   "tgt": 360
-  },
-  {
-   "hi": 500,
-   "lo": 500,
-   "stop": 487,
-   "t": "MSFT",
-   "tgt": 560
-  },
-  {
-   "hi": 218,
-   "lo": 211,
-   "stop": 204,
-   "t": "CRM",
-   "tgt": 260
-  },
-  {
-   "hi": 25.5,
-   "lo": 24.5,
-   "stop": 23.5,
-   "t": "ADPT",
-   "tgt": 31
-  },
-  {
-   "hi": 335,
-   "lo": 330,
-   "stop": 321,
-   "t": "GD",
-   "tgt": 402
-  },
-  {
-   "hi": 187,
-   "lo": 180,
-   "stop": 173,
-   "t": "RTX",
-   "tgt": 223
-  },
-  {
-   "hi": 520,
-   "lo": 505,
-   "stop": 493,
-   "t": "LMT",
-   "tgt": 624
-  },
-  {
-   "hi": 235,
-   "lo": 228,
-   "stop": 220,
-   "t": "BIIB",
-   "tgt": 300
-  },
-  {
-   "hi": 11,
-   "lo": 10.3,
-   "stop": 9.7,
-   "t": "VNCE",
-   "tgt": 13
-  },
-  {
-   "hi": 81,
-   "lo": 80,
-   "stop": 77,
-   "t": "GSAT",
-   "tgt": 90
-  }
- ],
- "updated": "05/11 07:44 PT"
+  "removed": [
+    {
+      "date": "05/11",
+      "t": "TSLA",
+      "why": "thủng stop $345 (giá live $341.05 lúc 07:56, đáy phiên $340.54, Finnhub phiên regular) — alert KHẨN scan 7:56"
+    },
+    {
+      "date": "05/11",
+      "t": "PLTR",
+      "why": "thủng stop $157 (giá live $156.13, đáy phiên $154.74, Finnhub phiên regular) — alert KHẨN scan 7:11"
+    },
+    {
+      "date": "05/11",
+      "t": "ILMN",
+      "why": "thủng stop $212 (giá live $211.995, đáy phiên $210.82, Finnhub phiên regular) — vừa thêm lượt 6:45 theo giá đóng 04/11 $226.54, mở cửa rớt xuyên stop"
+    },
+    {
+      "date": "05/11",
+      "t": "OKTA",
+      "why": "thủng stop $179 (giá live $174.41, đáy phiên $172.79, Finnhub phiên regular)"
+    },
+    {
+      "date": "05/11",
+      "t": "SPCX",
+      "why": "thủng stop $129 (giá live $128.73, đáy phiên $128.04, Finnhub phiên regular)"
+    },
+    {
+      "date": "05/11",
+      "t": "TECH",
+      "why": "vùng mua $70–72 hết hiệu lực — Merck mua lại $73/cp tiền mặt, giá kẹp trần $73, VIP 05/11 cảnh báo không mua (giá live $72.78)"
+    },
+    {
+      "date": "04/11",
+      "t": "SWKS",
+      "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54"
+    },
+    {
+      "date": "02/11",
+      "t": "SMMT",
+      "why": "thủng stop $15 (giá live ~$14.86, alert KHẨN scan 8:26)"
+    },
+    {
+      "date": "30/10",
+      "t": "MRNA",
+      "why": "vùng mua $188–192 hết hiệu lực (hủy 26/10), không còn vùng mới"
+    },
+    {
+      "date": "30/10",
+      "t": "NVDA",
+      "why": "thủng stop $205 (giá live ~$204.7, đáy $204.41, alert scan 9:26)"
+    },
+    {
+      "date": "30/10",
+      "t": "DDOG",
+      "why": "thủng stop $237 (giá live ~$233.5, alert scan 8:26)"
+    },
+    {
+      "date": "30/10",
+      "t": "AMZN",
+      "why": "thủng stop $237 (mở cửa/pre-market ~$226–229 xuyên stop; giá live $237.20 hồi sát stop)"
+    },
+    {
+      "date": "30/10",
+      "t": "TWLO",
+      "why": "thủng stop $222 (giá live $187.87, −15.4%)"
+    },
+    {
+      "date": "29/10",
+      "t": "FTNT",
+      "why": "thủng stop $159 (giá live $127.23)"
+    },
+    {
+      "date": "28/10",
+      "t": "FFIV",
+      "why": "thủng stop $396 (giá live $375.67, thấp nhất $374.46)"
+    },
+    {
+      "date": "22/10",
+      "t": "MRVL",
+      "why": "thủng stop $224 (giá live $223.82, thấp nhất $222.94)"
+    },
+    {
+      "date": "22/10",
+      "t": "APH",
+      "why": "thủng stop $77.5 (giá live $75.87, thấp nhất $75.77)"
+    },
+    {
+      "date": "22/10",
+      "t": "GOOGL",
+      "why": "thủng cắt lỗ $330 (day low $329.51, pre-market $328.9)"
+    },
+    {
+      "date": "22/10",
+      "t": "META",
+      "why": "thủng stop $665 (giá live $649.22, thấp nhất $649.22)"
+    },
+    {
+      "date": "22/10",
+      "t": "HWM",
+      "why": "thủng stop $203 (giá live $200.50, thấp nhất $200.37)"
+    },
+    {
+      "date": "20/10",
+      "t": "XMTR",
+      "why": "thủng stop $91 (giá live $90.10, mở cửa $90.40, thấp nhất $89.97)"
+    },
+    {
+      "date": "16/10",
+      "t": "KLAC",
+      "why": "thủng cắt $177 ngày 16/10 (mở cửa $174.46, thủng cả phiên)"
+    },
+    {
+      "date": "16/10",
+      "t": "ALAB",
+      "why": "thủng cắt $300 ngày 16/10 ($288.61)"
+    },
+    {
+      "date": "14/10",
+      "t": "MU",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "AMD",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "COIN",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "TSM",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "AMAT",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "QCOM",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "14/10",
+      "t": "HOOD",
+      "why": "đã bán 14/10"
+    },
+    {
+      "date": "12/10",
+      "t": "SNDK",
+      "why": "đã bán 12/10"
+    }
+  ],
+  "tickers": [
+    {
+      "hi": 331,
+      "lo": 330,
+      "stop": 319,
+      "t": "AAPL",
+      "tgt": 360
+    },
+    {
+      "hi": 500,
+      "lo": 500,
+      "stop": 487,
+      "t": "MSFT",
+      "tgt": 560
+    },
+    {
+      "hi": 218,
+      "lo": 211,
+      "stop": 204,
+      "t": "CRM",
+      "tgt": 260
+    },
+    {
+      "hi": 25.5,
+      "lo": 24.5,
+      "stop": 23.5,
+      "t": "ADPT",
+      "tgt": 31
+    },
+    {
+      "hi": 335,
+      "lo": 330,
+      "stop": 321,
+      "t": "GD",
+      "tgt": 402
+    },
+    {
+      "hi": 187,
+      "lo": 180,
+      "stop": 173,
+      "t": "RTX",
+      "tgt": 223
+    },
+    {
+      "hi": 520,
+      "lo": 505,
+      "stop": 493,
+      "t": "LMT",
+      "tgt": 624
+    },
+    {
+      "hi": 235,
+      "lo": 228,
+      "stop": 220,
+      "t": "BIIB",
+      "tgt": 300
+    },
+    {
+      "hi": 11,
+      "lo": 10.3,
+      "stop": 9.7,
+      "t": "VNCE",
+      "tgt": 13
+    },
+    {
+      "hi": 81,
+      "lo": 80,
+      "stop": 77,
+      "t": "GSAT",
+      "tgt": 90
+    }
+  ],
+  "updated": "05/11 08:46 PT"
 }
