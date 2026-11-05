@@ -1,13 +1,1 @@
-{
- "items": [
-  {
-   "hi": 235,
-   "lo": 228,
-   "note": "Dong 3/11 $249.01 (-1.82%), chua co gia pre-market moi sang 4/11. Cum nang hang sau Q3 vuot 28/10 con nguyen: Argus Hold->Buy $280 (1/11), UBS $300, Baird $290, Needham $290, Truist $260 Strong Buy, TD Cowen $260 Strong Buy; dong thuan Moderate Buy (22/33). Dinh 52 tuan $258.78 (28/10). Gia tren mieng vung cho $228-235 ~6% - KHONG duoi; cho chinh ve $228-235 moi vao. Cat lo dong cua duoi $220. Insider 0 mua/6 thang - chac chan TRUNG BINH. CTAD 16-19/11 du lieu lecanemab 5 nam. DDOG da loai 2/11 (thung stop $237 ngay 30/10). NVDA da loai 2/11 (thung stop $205 ngay 30/10).",
-   "stop": 220,
-   "t": "BIIB",
-   "type": "zone"
-  }
- ],
- "updated": "04/11/2026"
-}
+{"items":[{"hi":235,"lo":228,"note":"Dong 4/11 $254.46 (+2,22%), pre-market ~$255,50-257,00 (+0,4-1,0%). Cum nang hang sau Q3 vuot 28/10 con nguyen, them moi: Guggenheim nang target $280->$300 (2/11), HC Wainwright $251->$270 (2/11); Argus Hold->Buy $280, UBS $300, Baird $290, Needham $290, RBC $272, Canaccord $272; dong thuan Moderate Buy, target trung binh ~$252. Dinh 52 tuan $258.78 (28/10). Gia tren mieng vung cho $228-235 ~9% - KHONG duoi; cho chinh ve $228-235 moi vao. Cat lo dong cua duoi $220. Insider 0 mua/6 thang - chac chan TRUNG BINH. CTAD 16-19/11 du lieu lecanemab 5 nam. DDOG da loai 2/11 (thung stop $237 ngay 30/10). NVDA da loai 2/11 (thung stop $205 ngay 30/10).","stop":220,"t":"BIIB","type":"zone"}],"updated":"05/11/2026"}
