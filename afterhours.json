@@ -1,0 +1,29 @@
+{
+  "updated": "05/11 15:01 PT",
+  "run": "15:00",
+  "items": [
+    {
+      "t": "TEAM",
+      "close": 183.29,
+      "ah_price": 151.0,
+      "ah_pct": -17.62,
+      "event": "earnings_beat_but_sold_off",
+      "class": "VƯỢT_KỲ_VỌNG_CAO",
+      "note": "Q1 FY2027 VƯỢT: adj EPS $1,65 vs $1,43 kỳ vọng; doanh thu $1,772B (+24% y/y) vs $1,71B. Guide Q2 $1,825-1,835B nhỉnh trên kỳ vọng $1,82B, cloud +27% — NHƯNG dự báo tăng trưởng subscription ARR chậm lại còn ~18,5% cuối năm tài khóa (từ 22,5% vừa báo). Sau giờ -17,62% ~$151,00 (giá sau giờ, còn chạy; nguồn: CNBC ExtendedMktQuote 17:59 ET). ĐÃ BÁN theo kỷ luật (thủng cắt $158) — chỉ ghi nhận, KHÔNG bắt lại. VƯỢT_KỲ_VỌNG_CAO → chờ, không đuổi."
+    },
+    {
+      "t": "TXG",
+      "close": 58.06,
+      "ah_price": 51.65,
+      "ah_pct": -11.04,
+      "event": "earnings_beat",
+      "class": "CƠ_HỘI_HIẾM",
+      "note": "Q3 2026 VƯỢT CẢ HAI: EPS -$0,15 vs -$0,27 kỳ vọng; doanh thu $150,67M vs $147,96M; nâng guide cả năm lên $625-635M (từ $610-630M). NHƯNG sau giờ -11,04% ~$51,65 (giá sau giờ, còn chạy; nguồn: CNBC ExtendedMktQuote 17:36 ET; IBD ghi nhận có lúc về $50,81). ĐÃ BÁN HÔM NAY (thủng cắt lỗ $60, đóng $58,06) — cờ CƠ_HỘI_HIẾM chỉ để soi sáng mai (giá mở cửa có giữ không, analyst nói gì), KHÔNG tạo tín hiệu mua mới, KHÔNG bắt dao rơi trong đêm."
+    }
+  ],
+  "stale_zones": [],
+  "alerted": [
+    "TEAM",
+    "TXG"
+  ]
+}
