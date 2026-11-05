@@ -2,6 +2,11 @@
  "removed": [
   {
    "date": "05/11",
+   "t": "PLTR",
+   "why": "thủng stop $157 (giá live $156.13, đáy phiên $154.74, Finnhub phiên regular) — alert KHẨN scan 7:11"
+  },
+  {
+   "date": "05/11",
    "t": "ILMN",
    "why": "thủng stop $212 (giá live $211.995, đáy phiên $210.82, Finnhub phiên regular) — vừa thêm lượt 6:45 theo giá đóng 04/11 $226.54, mở cửa rớt xuyên stop"
   },
@@ -169,13 +174,6 @@
    "tgt": 560
   },
   {
-   "hi": 170,
-   "lo": 163,
-   "stop": 157,
-   "t": "PLTR",
-   "tgt": 200
-  },
-  {
    "hi": 218,
    "lo": 211,
    "stop": 204,
@@ -232,5 +230,5 @@
    "tgt": 90
   }
  ],
- "updated": "05/11 07:05 PT"
+ "updated": "05/11 07:44 PT"
 }
