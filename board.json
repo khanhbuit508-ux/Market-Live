@@ -1,6 +1,21 @@
 {
  "removed": [
   {
+   "date": "05/11",
+   "t": "OKTA",
+   "why": "thủng stop $179 (giá live $174.41, đáy phiên $172.79, Finnhub phiên regular)"
+  },
+  {
+   "date": "05/11",
+   "t": "SPCX",
+   "why": "thủng stop $129 (giá live $128.73, đáy phiên $128.04, Finnhub phiên regular)"
+  },
+  {
+   "date": "05/11",
+   "t": "TECH",
+   "why": "vùng mua $70–72 hết hiệu lực — Merck mua lại $73/cp tiền mặt, giá kẹp trần $73, VIP 05/11 cảnh báo không mua (giá live $72.78)"
+  },
+  {
    "date": "04/11",
    "t": "SWKS",
    "why": "vùng mua $76–82 hết hiệu lực sau earnings 03/11 (sau giờ -17,35% về $70,58 xuyên cắt $72, 3 hãng hạ hạng); giá live ~$75,54"
@@ -163,13 +178,6 @@
    "tgt": 260
   },
   {
-   "hi": 195,
-   "lo": 185,
-   "stop": 179,
-   "t": "OKTA",
-   "tgt": 225
-  },
-  {
    "hi": 25.5,
    "lo": 24.5,
    "stop": 23.5,
@@ -200,7 +208,7 @@
   {
    "hi": 235,
    "lo": 228,
-   "stop": 220,
+   "stop": 212,
    "t": "BIIB",
    "tgt": 300
   },
@@ -219,19 +227,12 @@
    "tgt": 90
   },
   {
-   "hi": 72,
-   "lo": 70,
-   "stop": 67.5,
-   "t": "TECH",
-   "tgt": 86
-  },
-  {
-   "hi": 140,
-   "lo": 135,
-   "stop": 129,
-   "t": "SPCX",
-   "tgt": 168
+   "hi": 230,
+   "lo": 220,
+   "stop": 212,
+   "t": "ILMN",
+   "tgt": 276
   }
  ],
- "updated": "05/11 3:30 PT"
+ "updated": "05/11 06:44 PT"
 }
