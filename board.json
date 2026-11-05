@@ -2,6 +2,11 @@
  "removed": [
   {
    "date": "05/11",
+   "t": "ILMN",
+   "why": "thủng stop $212 (giá live $211.995, đáy phiên $210.82, Finnhub phiên regular) — vừa thêm lượt 6:45 theo giá đóng 04/11 $226.54, mở cửa rớt xuyên stop"
+  },
+  {
+   "date": "05/11",
    "t": "OKTA",
    "why": "thủng stop $179 (giá live $174.41, đáy phiên $172.79, Finnhub phiên regular)"
   },
@@ -225,14 +230,7 @@
    "stop": 77,
    "t": "GSAT",
    "tgt": 90
-  },
-  {
-   "hi": 230,
-   "lo": 220,
-   "stop": 212,
-   "t": "ILMN",
-   "tgt": 276
   }
  ],
- "updated": "05/11 06:44 PT"
+ "updated": "05/11 07:05 PT"
 }
