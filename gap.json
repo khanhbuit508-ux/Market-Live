@@ -1,10 +1,10 @@
 {
- "updated": "06/11 3:30 PT (sơ bộ)",
+ "updated": "06/11 6:05 PT",
  "items": [
   {
    "t": "AAPL",
-   "type": "HỒI VỀ MỐC",
-   "entry": 344.17,
+   "type": "VỀ VÙNG",
+   "entry": 331,
    "stop": 319,
    "tgt": 360
   },
@@ -45,8 +45,8 @@
   },
   {
    "t": "BIIB",
-   "type": "VỀ VÙNG",
-   "entry": 235,
+   "type": "HỒI VỀ MỐC",
+   "entry": 243.93,
    "stop": 220,
    "tgt": 300
   },
