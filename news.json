@@ -1,17 +1,17 @@
 {
- "updated": "09/11 3:30 PT",
- "tin": [
-  "🕐 (sau giờ) Bảng yên sau giờ thứ Sáu: AAPL +0,08% ($342,65), MSFT +0,15% ($531,40), GRAL +0,85% ($122,47); ADPT −1,68% ($27,51) — không mã nào biến động ≥8%, không vùng mua nào hết hạn. (Nguồn: afterhours.json 06/11 17:15 PT)",
-  "🇺🇸 Futures Mỹ HỒI sáng thứ Hai: Dow +0,73%, S&P +0,40%, Nasdaq +0,21% lúc 5:10 ET — bắt đáy sau tuần rơi mạnh nhất kể từ tháng 4/2025; NVDA −4,5% pre-market kéo Nasdaq lag. (Nguồn: Reuters)",
-  "🌏 Châu Á đóng cửa HỒI MẠNH: Nikkei +2,33% lên 58.775,50; Topix +2,97%; Taiex +4,9%; Thượng Hải +0,32% lên 3.660,79; Kospi ĐẢO CHIỀU cuối phiên −0,81% về 5.018,85; Hang Seng −0,13% về 24.448,95. PPI Trung Quốc tháng 10 +5,7% — cao nhất hơn 4 năm. (Nguồn: WSJ, TradingView)",
-  "🔥 NVDA −4,5% pre-market: Hội đồng mở ĐIỀU TRA ĐỘC LẬP về CEO Jensen Huang sau tin ông bị một chiến dịch tình báo nước ngoài nhắm tới; các chip khác cũng đỏ — INTC, MRVL, QCOM −0,5% đến −1,21% pre-market. NVDA báo cáo Q3 thứ Ba 17/11 sau đóng cửa. (Nguồn: Reuters, CNN)",
-  "🇪🇺 Châu Âu mở cửa ĐI NGANG: Stoxx 600 ~phẳng 648,88 rồi +0,3%; FTSE +0,2–0,3%, DAX +0,3%; Banco BPM +9,4% (Credit Agricole đề xuất sáp nhập tạo ngân hàng lớn thứ 3 Ý), UniCredit +3,6% (lợi nhuận Q3 +24% vượt kỳ vọng). (Nguồn: Reuters, WSJ)",
-  "💰 Berkshire Hathaway: tiền mặt kỷ lục $377,4 TỶ; mua lại cổ phiếu $9,6 tỷ trong Q3 (từ $4,5 tỷ Q2); lợi nhuận hoạt động Q3 $12,7 tỷ (−5,8% so với cùng kỳ). (Nguồn: Berkshire Q3)",
-  "🛢️ Dầu GIẢM, vàng lên, Bitcoin đỏ: Brent ~$97 (−1,3%), WTI ~$90,17 sau khi Trump nói tấn công Iran mới khó xảy ra; vàng ~$4.100–4.130; Bitcoin ~$74.586 (−1,9%). (Nguồn: Dow Jones, Finnhub)",
-  "💼 Earnings hôm nay (trước mở cửa): KKR, Constellation Energy (CEG) — mã năng lượng hưởng lợi từ cơn sốt AI. (Nguồn: Reuters)",
-  "📊 Tuần này: CPI tháng 10 ra THỨ BA 10/11 — sự kiện vĩ mô lớn nhất tuần (sau việc làm tháng 10 nóng +165.000, xác suất Fed tăng lãi tháng 12 ~76%); PPI thứ Sáu 13/11; CSCO thứ Năm 12/11 sau đóng cửa; SoftBank + CoreWeave thứ Ba 10/11. (Nguồn: Barron's, TipRanks)",
-  "🦈 BIIB (trên bảng, chờ chỉnh $228–235, cắt đóng cửa dưới $220): cụm nâng hạng sau Q3 vượt còn nguyên (Guggenheim target $300); dữ liệu lecanemab 5 năm tại hội nghị CTAD 16–19/11 — sự kiện lớn nhất của mã trên bảng tuần sau. (Nguồn: shark-watch.json)"
- ],
- "cudem": "🔥 NVDA −4,5% pre-market vì Hội đồng điều tra CEO Jensen Huang — Nasdaq futures chỉ +0,21% trong khi Dow +0,73%; châu Á hồi mạnh (Nikkei +2,33%) nhưng Kospi đảo chiều −0,81% cuối phiên.",
- "kehoach": "Kế hoạch sơ bộ hôm nay: canh CRM (đang TRONG vùng $211–218, pre-market $216) + GRAL (trong vùng $120–127, sát cắt $113) và 9 mốc gap sơ bộ; sự kiện lớn: CPI tháng 10 ra thứ Ba 10/11. Bảng chuẩn bị 6:00 sẽ cập nhật lại với giá pre-market thật."
+  "updated": "11/09 6:13 PT",
+  "tin": [
+    "🔥 AMD +4% pre-market (~$467): Oppenheimer nâng hạng lên Outperform (từ Neutral), target $600 (+34% so với đóng cửa thứ Sáu $449) — chip nhớ hồi mạnh sau tuần bán tháo. (Nguồn: scan 6:11)",
+    "📰 NVDA: CEO Jensen Huang gửi thư xin lỗi nhân viên, thừa nhận ngoại tình và hợp tác đầy đủ với cuộc điều tra của hội đồng quản trị; ông vẫn giữ ghế CEO, hội đồng nói chưa có dấu hiệu an ninh quốc gia hay bí mật công ty bị lộ. (Nguồn: scan 6:11)",
+    "🕐 (sau giờ) Bảng yên sau giờ thứ Sáu: AAPL +0,08% ($342,65), MSFT +0,15% ($531,40), GRAL +0,85% ($122,47); ADPT −1,68% ($27,51) — không mã nào biến động ≥8%, không vùng mua nào hết hạn. (Nguồn: afterhours.json 06/11 17:15 PT)",
+    "🇺🇸 Futures Mỹ HỒI sáng thứ Hai: Dow +0,73%, S&P +0,40%, Nasdaq +0,21% lúc 5:10 ET — bắt đáy sau tuần rơi mạnh nhất kể từ tháng 4/2025; NVDA −4,5% pre-market kéo Nasdaq lag. (Nguồn: Reuters)",
+    "🌏 Châu Á đóng cửa HỒI MẠNH: Nikkei +2,33% lên 58.775,50; Topix +2,97%; Taiex +4,9%; Thượng Hải +0,32% lên 3.660,79; Kospi ĐẢO CHIỀU cuối phiên −0,81% về 5.018,85; Hang Seng −0,13% về 24.448,95. PPI Trung Quốc tháng 10 +5,7% — cao nhất hơn 4 năm. (Nguồn: WSJ, TradingView)",
+    "🔥 NVDA −4,5% pre-market: Hội đồng mở ĐIỀU TRA ĐỘC LẬP về CEO Jensen Huang sau tin ông bị một chiến dịch tình báo nước ngoài nhắm tới; các chip khác cũng đỏ — INTC, MRVL, QCOM −0,5% đến −1,21% pre-market. NVDA báo cáo Q3 thứ Ba 17/11 sau đóng cửa. (Nguồn: Reuters, CNN)",
+    "🇪🇺 Châu Âu mở cửa ĐI NGANG: Stoxx 600 ~phẳng 648,88 rồi +0,3%; FTSE +0,2–0,3%, DAX +0,3%; Banco BPM +9,4% (Credit Agricole đề xuất sáp nhập tạo ngân hàng lớn thứ 3 Ý), UniCredit +3,6% (lợi nhuận Q3 +24% vượt kỳ vọng). (Nguồn: Reuters, WSJ)",
+    "💰 Berkshire Hathaway: tiền mặt kỷ lục $377,4 TỶ; mua lại cổ phiếu $9,6 tỷ trong Q3 (từ $4,5 tỷ Q2); lợi nhuận hoạt động Q3 $12,7 tỷ (−5,8% so với cùng kỳ). (Nguồn: Berkshire Q3)",
+    "🛢️ Dầu GIẢM, vàng lên, Bitcoin đỏ: Brent ~$97 (−1,3%), WTI ~$90,17 sau khi Trump nói tấn công Iran mới khó xảy ra; vàng ~$4.100–4.130; Bitcoin ~$74.586 (−1,9%). (Nguồn: Dow Jones, Finnhub)",
+    "💼 Earnings hôm nay (trước mở cửa): KKR, Constellation Energy (CEG) — mã năng lượng hưởng lợi từ cơn sốt AI. (Nguồn: Reuters)"
+  ],
+  "cudem": "🔥 NVDA −4,5% pre-market vì Hội đồng điều tra CEO Jensen Huang — Nasdaq futures chỉ +0,21% trong khi Dow +0,73%; châu Á hồi mạnh (Nikkei +2,33%) nhưng Kospi đảo chiều −0,81% cuối phiên.",
+  "kehoach": "Kế hoạch sơ bộ hôm nay: canh CRM (đang TRONG vùng $211–218, pre-market $216) + GRAL (trong vùng $120–127, sát cắt $113) và 9 mốc gap sơ bộ; sự kiện lớn: CPI tháng 10 ra thứ Ba 10/11. Bảng chuẩn bị 6:00 sẽ cập nhật lại với giá pre-market thật."
 }
