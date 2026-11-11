@@ -1,1 +1,82 @@
-{"items":[{"entry":350.69,"stop":319,"t":"AAPL","tgt":360,"type":"HỒI VỀ MỐC"},{"entry":545.18,"stop":487,"t":"MSFT","tgt":560,"type":"HỒI VỀ MỐC"},{"entry":30.26,"stop":23.5,"t":"ADPT","tgt":31,"type":"HỒI VỀ MỐC"},{"entry":362.07,"stop":321,"t":"GD","tgt":402,"type":"HỒI VỀ MỐC"},{"entry":196.31,"stop":173,"t":"RTX","tgt":223,"type":"HỒI VỀ MỐC"},{"entry":588.19,"stop":493,"t":"LMT","tgt":624,"type":"HỒI VỀ MỐC"},{"entry":254.87,"stop":220,"t":"BIIB","tgt":300,"type":"HỒI VỀ MỐC"},{"entry":85.78,"stop":77,"t":"GSAT","tgt":90,"type":"HỒI VỀ MỐC"},{"entry":127,"stop":113,"t":"GRAL","tgt":152,"type":"VỀ VÙNG"},{"entry":410.0,"stop":315,"t":"APP","tgt":420,"type":"HỒI VỀ MỐC"}],"updated":"10/11 6:05 PT"}
+{
+ "updated": "11/11 3:30 PT (sơ bộ)",
+ "items": [
+  {
+   "entry": 348.51,
+   "stop": 319,
+   "t": "AAPL",
+   "tgt": 360,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 533.16,
+   "stop": 487,
+   "t": "MSFT",
+   "tgt": 560,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 29.36,
+   "stop": 23.5,
+   "t": "ADPT",
+   "tgt": 31,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 367.44,
+   "stop": 321,
+   "t": "GD",
+   "tgt": 402,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 200.27,
+   "stop": 173,
+   "t": "RTX",
+   "tgt": 223,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 603.12,
+   "stop": 493,
+   "t": "LMT",
+   "tgt": 624,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 253.25,
+   "stop": 220,
+   "t": "BIIB",
+   "tgt": 300,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 12.94,
+   "stop": 9.7,
+   "t": "VNCE",
+   "tgt": 13,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 86.39,
+   "stop": 77,
+   "t": "GSAT",
+   "tgt": 90,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 395.51,
+   "stop": 315,
+   "t": "APP",
+   "tgt": 420,
+   "type": "HỒI VỀ MỐC"
+  },
+  {
+   "entry": 82,
+   "stop": 72,
+   "t": "SWKS",
+   "tgt": 98,
+   "type": "VỀ VÙNG"
+  }
+ ]
+}
