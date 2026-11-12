@@ -83,7 +83,7 @@
   {
    "date": "22/10",
    "t": "APH",
-   "why": "thủng stop $77.5 (giá live $75.87, thấp nhất $75.77)"
+   "why": "thủng cắt $77.5 (giá live $75.87, thấp nhất $75.77)"
   },
   {
    "date": "22/10",
@@ -249,5 +249,5 @@
    "tgt": 98
   }
  ],
- "updated": "12/11 6:45 PT"
+ "updated": "12/11 07:45 PT"
 }
