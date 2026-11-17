@@ -1,6 +1,16 @@
 {
  "removed": [
   {
+   "date": "17/11",
+   "t": "GRAL",
+   "why": "thủng stop $113 (đóng 16/11 $105,60, -8,88%; giá live $108,26 lúc 06:41 PT vẫn dưới $113) — vùng mua cũ $120-127 hết hiệu lực (prep 6:05 + VIP 17/11)"
+  },
+  {
+   "date": "17/11",
+   "t": "AVGO",
+   "why": "thủng cắt $335 phiên 16/11 (đóng $333,40, -3,92%) — vùng mua cũ $345-355 hết hiệu lực; giá live $339,29 lúc 06:41 PT hồi trên $335 nhưng không còn vùng mới"
+  },
+  {
    "date": "05/11",
    "t": "TSLA",
    "why": "thủng stop $345 (giá live $341.05 lúc 07:56, đáy phiên $340.54, Finnhub phiên regular) — alert KHẨN scan 7:56"
@@ -228,13 +238,6 @@
    "tgt": 90
   },
   {
-   "hi": 127,
-   "lo": 120,
-   "stop": 113,
-   "t": "GRAL",
-   "tgt": 152
-  },
-  {
    "hi": 350,
    "lo": 330,
    "stop": 315,
@@ -247,14 +250,7 @@
    "stop": 72,
    "t": "SWKS",
    "tgt": 98
-  },
-  {
-   "hi": 355,
-   "lo": 345,
-   "stop": 335,
-   "t": "AVGO",
-   "tgt": 426
   }
  ],
- "updated": "17/11 3:30 PT"
+ "updated": "17/11 6:45 PT"
 }
