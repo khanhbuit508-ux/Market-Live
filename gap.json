@@ -1,87 +1,73 @@
 {
- "updated": "13/11 6:05 PT",
+ "updated": "17/11 3:30 PT (sơ bộ)",
  "items": [
   {
    "t": "AAPL",
    "type": "HỒI VỀ MỐC",
-   "entry": 354.88,
+   "entry": 352.78,
    "stop": 319,
    "tgt": 360
   },
   {
    "t": "MSFT",
-   "type": "VỀ VÙNG",
-   "entry": 500,
+   "type": "HỒI VỀ MỐC",
+   "entry": 517.99,
    "stop": 487,
    "tgt": 560
   },
   {
-   "t": "CRM",
-   "type": "VỀ VÙNG",
-   "entry": 218,
-   "stop": 204,
-   "tgt": 260
-  },
-  {
    "t": "ADPT",
    "type": "HỒI VỀ MỐC",
-   "entry": 29.48,
+   "entry": 27.87,
    "stop": 23.5,
    "tgt": 31
   },
   {
    "t": "GD",
    "type": "HỒI VỀ MỐC",
-   "entry": 363.07,
+   "entry": 359.69,
    "stop": 321,
    "tgt": 402
   },
   {
    "t": "RTX",
    "type": "HỒI VỀ MỐC",
-   "entry": 198.36,
+   "entry": 194.89,
    "stop": 173,
    "tgt": 223
   },
   {
    "t": "LMT",
    "type": "HỒI VỀ MỐC",
-   "entry": 604.09,
+   "entry": 585.21,
    "stop": 493,
    "tgt": 624
   },
   {
    "t": "BIIB",
    "type": "HỒI VỀ MỐC",
-   "entry": 250.48,
+   "entry": 251.65,
    "stop": 220,
    "tgt": 300
   },
   {
-   "t": "VNCE",
-   "type": "HỒI VỀ MỐC",
-   "entry": 12.91,
-   "stop": 9.7,
-   "tgt": 13
-  },
-  {
    "t": "GSAT",
    "type": "HỒI VỀ MỐC",
-   "entry": 86.24,
+   "entry": 85.96,
    "stop": 77,
    "tgt": 90
   },
   {
    "t": "APP",
    "type": "HỒI VỀ MỐC",
-   "entry": 393.68,
+   "entry": 415.22,
    "stop": 315,
    "tgt": 420
   },
   {
    "t": "SWKS",
    "type": "HỒI VỀ MỐC",
-   "entry": 90.03,
+   "entry": 86.5,
    "stop": 72,
    "tgt": 98
   }
