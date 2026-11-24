@@ -1,1 +1,13 @@
-{"items":[{"hi":235,"lo":228,"note":"PM 19/11 ~$250,55 (-0,34%, Finnhub 08:40 ET), dong 18/11 $251,41 (+0,25%), sau gio nhung ve $244,01 (khoi luong mong ~27,8K) roi hoi lai. TIN MOI: du lieu thuc te LEADER 3 nam da cong bo sang 18/11 tai CTAD (Leqembi giam 76% tien trien Alzheimer vua/nang, 560 benh nhan, 13 trung tam); diranersen Phase 2 lam cham suy giam 38% sau 2 nam NHUNG BMO luu y chua dat y nghia thong ke (muc tieu chinh truot). Gia KHONG nhay sau tin - bang chung gom chua bi pha, nhung chua co dong luc moi. Cum nang hang sau Q3 vuot 28/10 con nguyen: Piper Sandler Overweight, target $245->$305 (9/11); Guggenheim $280->$300 (2/11), HC Wainwright $251->$270 (2/11); Needham $256->$290, UBS $300, Baird $250->$290, Argus Hold->Buy $280, RBC $272; dong thuan Moderate Buy, target trung binh ~$254,41 (MarketBeat). LUU Y: mua put bat thuong 18/11 (Defense World) - nhieu kha nang hedge truoc LEADER. Gia tren vung cho $228-235 ~6,6% - KHONG duoi; cho chinh ve $228-235 moi vao. Cat lo dong cua duoi $220. Muc tieu $300. Insider 0 mua/6 thang - chac chan TRUNG BINH. Tren moc kich hoat $241 ~4,0%, chua chay xa >10%. OKTA da loai 6/11 (thung cat $179). DDOG da loai 2/11 (thung stop $237 ngay 30/10). NVDA da loai 2/11 (thung stop $205 ngay 30/10).","stop":220,"t":"BIIB","type":"zone"}],"updated":"19/11/2026"}
+{
+ "updated": "24/11/2026",
+ "items": [
+  {
+   "t": "BIIB",
+   "type": "zone",
+   "lo": 228,
+   "hi": 235,
+   "stop": 220,
+   "note": "PM 24/11: $259,70 (+1,16% vs dong $256,71, Finnhub 08:40 ET) - sat dinh 52 tuan $261 (09/11). KHONG co tin analyst/insider moi qua dem (moi nhat Mizuho 20/11 $241->$271, HC Wainwright 19/11 $270; cum Piper $305, Guggenheim $300, Needham $290, Baird $290; dong thuan Moderate Buy, target TB ~$255,45). Gia tren vung $228-235 ~10,5%, tren moc kich hoat $241 ~7,8% - chua chay xa >10% ($265,10) nen GIU. Cho chinh ve $228-235 moi vao, KHONG duoi o ~$260. Cat lo dong cua duoi $220. Muc tieu $300. Muc chac chan TRUNG BINH. OKTA da loai 6/11 (thung cat $179). DDOG da loai 2/11 (thung stop $237 ngay 30/10). NVDA da loai 2/11 (thung stop $205 ngay 30/10)."
+  }
+ ]
+}
