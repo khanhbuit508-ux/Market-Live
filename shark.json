@@ -1,13 +1,5 @@
 {
- "updated": "24/11/2026",
- "items": [
-  {
-   "t": "BIIB",
-   "type": "zone",
-   "lo": 228,
-   "hi": 235,
-   "stop": 220,
-   "note": "PM 24/11: $259,70 (+1,16% vs dong $256,71, Finnhub 08:40 ET) - sat dinh 52 tuan $261 (09/11). KHONG co tin analyst/insider moi qua dem (moi nhat Mizuho 20/11 $241->$271, HC Wainwright 19/11 $270; cum Piper $305, Guggenheim $300, Needham $290, Baird $290; dong thuan Moderate Buy, target TB ~$255,45). Gia tren vung $228-235 ~10,5%, tren moc kich hoat $241 ~7,8% - chua chay xa >10% ($265,10) nen GIU. Cho chinh ve $228-235 moi vao, KHONG duoi o ~$260. Cat lo dong cua duoi $220. Muc tieu $300. Muc chac chan TRUNG BINH. OKTA da loai 6/11 (thung cat $179). DDOG da loai 2/11 (thung stop $237 ngay 30/10). NVDA da loai 2/11 (thung stop $205 ngay 30/10)."
-  }
- ]
+ "updated": "25/11/2026",
+ "items": [],
+ "note": "25/11: BIIB LOAI khoi danh sach chinh — da kich hoat ($241, tu 20/10) va chay xa >10%: dong 24/11 $269,11 (+11,7%), pre-market $266,67 (+10,6%). Bang chung gom KHONG bi pha (dinh 52 tuan moi $269,89; Mizuho $271 23/11; HC Wainwright Buy $270 24/11; Empowered Funds +1.297% Q3 13F) nhung setup 'chuan bi bung no' da hoan thanh. BIIB van tren bang, vung mua $228-235, cat dong cua duoi $220, muc tieu $300 — chi vao khi chinh ve vung. DDOG da loai 02/11 (thung stop $237 ngay 30/10). NVDA da loai 02/11 (thung stop $205 ngay 30/10). OKTA da loai 06/11 (thung cat $179). Sang nay chua co ma moi qua du 3 cua loc gat."
 }
